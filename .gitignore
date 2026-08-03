@@ -1,3 +1,9 @@
+# Dependencies & build
+node_modules
+dist
+dist-ssr
+*.local
+
 # Logs
 logs
 *.log
@@ -7,17 +13,12 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
 # Secrets / env (never commit tokens)
 .env
 .env.*
 !.env.example
 
-# Local archives / leftover nests from unification
+# Local archives / leftover nests
 _archive/
 mvk-personal-main/
 mykola-portfolio-hub-main/
@@ -26,7 +27,7 @@ portfolio/
 # Vercel
 .vercel
 
-# Editor directories and files
+# Editor
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -36,3 +37,7 @@ portfolio/
 *.njsproj
 *.sln
 *.sw?
+
+# OS / temp
+Thumbs.db
+*.tsbuildinfo

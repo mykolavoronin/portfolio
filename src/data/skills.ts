@@ -9,7 +9,7 @@ export const skillGroups = [
   },
   {
     title: "Tooling",
-    items: ["Git / GitHub", "Vercel", "Cloudflare", "Figma", "Cursor", "Linear", "Raycast"],
+    items: ["Git / GitHub", "Vercel", "Cloudflare", "Figma", "Linear", "Raycast"],
   },
   {
     title: "Practice",
@@ -19,7 +19,6 @@ export const skillGroups = [
       "Accessibility (a11y)",
       "SEO & local SEO",
       "Internationalization",
-      "AI-assisted workflows",
     ],
   },
   {
@@ -40,7 +39,6 @@ export const homeStack = [
   "React",
   "TypeScript",
   "Tailwind CSS",
-  "AI Tooling",
   "UI / UX Design",
   "Deployment & CI/CD",
   "System Administration",

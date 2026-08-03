@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion, type HTMLMotionProps } from "motion/react";
 import {
+  chipItem,
   fadeOnly,
   fadeUp,
   hasSeenIntro,
   heroContainer,
   heroItem,
   markIntroSeen,
+  springUi,
+  staggerChips,
   staggerContainer,
   staggerFast,
   tweenFast,
@@ -17,7 +20,7 @@ type RevealProps = HTMLMotionProps<"div"> & {
   fadeOnlyMode?: boolean;
 };
 
-/** In-view reveal. Content stays accessible; reduced motion → opacity only. */
+/** In-view reveal. Reduced motion → opacity only. */
 export function Reveal({ children, className, fadeOnlyMode = false, ...props }: RevealProps) {
   const reduce = useReducedMotion();
   const variants = reduce || fadeOnlyMode ? fadeOnly : fadeUp;
@@ -27,7 +30,7 @@ export function Reveal({ children, className, fadeOnlyMode = false, ...props }: 
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "0px 0px -5% 0px", amount: 0.12 }}
+      viewport={{ once: true, margin: "0px 0px -6% 0px", amount: 0.1 }}
       variants={variants}
       {...props}
     >
@@ -40,15 +43,17 @@ export function Stagger({
   children,
   className,
   fast = false,
+  chips = false,
   ...props
-}: HTMLMotionProps<"div"> & { fast?: boolean }) {
+}: HTMLMotionProps<"div"> & { fast?: boolean; chips?: boolean }) {
+  const variants = chips ? staggerChips : fast ? staggerFast : staggerContainer;
   return (
     <motion.div
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "0px 0px -4% 0px", amount: 0.1 }}
-      variants={fast ? staggerFast : staggerContainer}
+      viewport={{ once: true, margin: "0px 0px -4% 0px", amount: 0.08 }}
+      variants={variants}
       {...props}
     >
       {children}
@@ -60,12 +65,20 @@ export function RevealItem({
   children,
   className,
   as: Tag = "div",
+  chip = false,
   ...props
-}: HTMLMotionProps<"div"> & { as?: "div" | "li" | "article" | "span" }) {
+}: HTMLMotionProps<"div"> & {
+  as?: "div" | "li" | "article" | "span";
+  chip?: boolean;
+}) {
   const reduce = useReducedMotion();
   const Component = motion[Tag];
   return (
-    <Component className={className} variants={reduce ? fadeOnly : fadeUp} {...props}>
+    <Component
+      className={className}
+      variants={reduce ? fadeOnly : chip ? chipItem : fadeUp}
+      {...props}
+    >
       {children}
     </Component>
   );
@@ -118,11 +131,33 @@ export function PageEnter({ children, className }: { children: React.ReactNode; 
   return (
     <motion.div
       className={cn(className)}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 8 }}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={reduce ? { duration: 0.2 } : tweenFast}
+      transition={reduce ? { duration: 0.18 } : springUi}
     >
       {children}
     </motion.div>
   );
 }
+
+/** Interactive card with press + hover lift (gated for fine pointers via CSS). */
+export function MotionCard({
+  children,
+  className,
+  ...props
+}: HTMLMotionProps<"div">) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      whileHover={reduce ? undefined : { y: -2 }}
+      whileTap={reduce ? undefined : { scale: 0.985 }}
+      transition={springUi}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export { tweenFast, springUi };

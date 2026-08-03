@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { Outlet, Link, useLocation, NavLink } from "react-router-dom";
+import { Outlet, Link, NavLink, useLocation } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Logo } from "@/components/Logo";
+import { ScrollManager } from "@/components/ScrollManager";
 import signature from "@/assets/signature.png";
 import { cn } from "@/lib/utils";
 import { site } from "@/data/site";
 
 const navLinks = [
   { to: "/about", label: "About" },
-  { to: "/services", label: "Services" },
   { to: "/skills", label: "Skills" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -18,12 +18,7 @@ const SCROLL_THRESHOLD = 12;
 export function Layout() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    if (!location.hash) {
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    }
-  }, [location.pathname, location.hash]);
+  const isCard = location.pathname === "/card";
 
   useEffect(() => {
     let ticking = false;
@@ -45,8 +40,48 @@ export function Layout() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* Digital card: lock to viewport so the card adapts to screen height */
+  if (isCard) {
+    return (
+      <div className="h-dvh max-h-dvh overflow-hidden bg-background flex flex-col">
+        <ScrollManager />
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
+        <header
+          className={cn(
+            "shrink-0 z-40 flex items-center justify-between",
+            "px-3 min-[380px]:px-4 sm:px-5",
+            "pt-[max(0.5rem,env(safe-area-inset-top))] sm:pt-3",
+            "pb-1",
+          )}
+        >
+          <Link
+            to="/"
+            className={cn(
+              "flex items-center gap-1.5 min-[380px]:gap-2 rounded-full border border-border/50 bg-background/80 backdrop-blur-md",
+              "pl-1 pr-2.5 min-[380px]:pl-1.5 min-[380px]:pr-3 py-1 min-[380px]:py-1.5",
+              "text-[11px] min-[380px]:text-xs font-medium text-muted-foreground",
+              "hover:text-foreground transition-colors shadow-sm",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            )}
+            aria-label={`${site.name} — Home`}
+          >
+            <Logo className="h-5 w-5 min-[380px]:h-6 min-[380px]:w-6" />
+            <span>Portfolio</span>
+          </Link>
+          <ThemeToggle />
+        </header>
+        <main id="main" className="flex-1 min-h-0 flex flex-col">
+          <Outlet />
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-dvh bg-background flex flex-col">
+      <ScrollManager />
       <a href="#main" className="skip-link">
         Skip to content
       </a>
@@ -60,7 +95,6 @@ export function Layout() {
         className={cn(
           "sticky top-0 z-40 pointer-events-none",
           "transition-[padding] duration-350 ease-[cubic-bezier(0.19,1,0.22,1)]",
-          /* Slightly more inset when floating — reads as width shrink */
           scrolled ? "pt-2.5 sm:pt-3 px-4 sm:px-6" : "pt-3 sm:pt-4 px-3 sm:px-4",
         )}
       >
@@ -73,17 +107,14 @@ export function Layout() {
               "transition-[max-width,padding,box-shadow,border-color,background-color,backdrop-filter] duration-350 ease-[cubic-bezier(0.19,1,0.22,1)]",
               scrolled
                 ? [
-                    /* Narrower floating pill — height almost unchanged */
                     "max-w-[min(100%,520px)] sm:max-w-[540px]",
                     "border border-border/60",
                     "bg-background/85 backdrop-blur-xl supports-[backdrop-filter]:bg-background/75",
                     "shadow-[0_1px_2px_rgb(0_0_0/0.04),0_10px_28px_-10px_rgb(0_0_0/0.14)]",
                     "dark:shadow-[0_1px_2px_rgb(0_0_0/0.35),0_12px_32px_-10px_rgb(0_0_0/0.55)]",
-                    /* Tiny vertical compress only */
                     "pl-1.5 pr-1.5 sm:pl-2 sm:pr-1.5 py-[5px] sm:py-1.5",
                   ]
                 : [
-                    /* Longer pill — same vertical rhythm, hairline outline */
                     "max-w-[min(100%,720px)] sm:max-w-[740px]",
                     "border border-border/35 dark:border-border/45",
                     "shadow-none",
@@ -144,36 +175,41 @@ export function Layout() {
         <Outlet />
       </main>
 
-      <footer className="mt-16 sm:mt-24 border-t border-border/40 safe-pb">
-        <div className="site-shell py-10 sm:py-12 flex flex-col gap-7">
-          <nav className="flex flex-wrap gap-0.5 -mx-1" aria-label="Footer">
-            {navLinks.map((link) => (
-              <Link key={link.to} to={link.to} className="nav-pill">
-                {link.label}
-              </Link>
-            ))}
-            <Link to="/recommendations" className="nav-pill">
-              Reading
-            </Link>
-            <a href={site.github} target="_blank" rel="noreferrer" className="nav-pill">
-              GitHub
-            </a>
-          </nav>
+      <footer className="mt-auto border-t border-border/40 safe-pb">
+        <div
+          className={cn(
+            "site-shell",
+            "pt-10 pb-10 sm:pt-12 sm:pb-14",
+            "flex flex-col-reverse sm:flex-row",
+            "items-stretch sm:items-end",
+            "justify-between",
+            "gap-6 sm:gap-8",
+          )}
+        >
+          {/* Copyright — bottom on mobile, left on desktop */}
+          <p className="text-sm text-muted-foreground sm:pb-1">
+            <span className="tabular-nums">© {new Date().getFullYear()}</span>
+            <span className="mx-1.5 text-border" aria-hidden>
+              ·
+            </span>
+            <span>{site.name}</span>
+          </p>
 
-          <div className="flex flex-col-reverse sm:flex-row items-start sm:items-end justify-between gap-6 px-1">
-            <div className="flex flex-col gap-1 text-sm text-muted-foreground">
-              <p>
-                © {new Date().getFullYear()} {site.name}
-              </p>
-              <p className="font-serif-italic text-[15px] text-foreground/70">Crafted with care.</p>
-            </div>
+          {/* Signature — top on mobile (visual mark), right on desktop */}
+          <div className="flex sm:justify-end">
             <img
               src={signature}
               alt=""
               loading="lazy"
               width={1536}
               height={1024}
-              className="h-12 sm:h-16 w-auto select-none opacity-65 dark:invert dark:opacity-75 pointer-events-none"
+              className={cn(
+                "h-[4.5rem] sm:h-20 md:h-[5.5rem] w-auto",
+                "max-w-[12.5rem] sm:max-w-[15rem]",
+                "object-contain object-left sm:object-right",
+                "select-none pointer-events-none",
+                "opacity-70 dark:invert dark:opacity-80",
+              )}
               draggable={false}
               aria-hidden
             />

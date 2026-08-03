@@ -5,78 +5,11 @@ export type Service = {
   short: string;
   description: string;
   features?: string[];
-  category: "ai" | "build" | "advisory";
+  category: "build" | "advisory";
   tiers?: { name: string; price: string; description: string; features: string[] }[];
 };
 
 export const services: Service[] = [
-  {
-    slug: "ai-workflow-integration",
-    title: "AI Workflow Integration",
-    price: "From $80/hr",
-    category: "ai",
-    short: "Embed LLMs and copilots into your team's day-to-day, wired to your context.",
-    description:
-      "Embed LLMs and AI copilots into your team's day-to-day — research, writing, support, ops. Tools chosen, wired up and trained on your context.",
-    features: [
-      "Tool selection and model routing for each job",
-      "Context wiring (docs, repos, knowledge bases)",
-      "Team onboarding and prompt playbooks",
-      "Guardrails and usage guidelines",
-    ],
-  },
-  {
-    slug: "ai-usage-optimization",
-    title: "AI Usage Optimization",
-    price: "Audit + retainer",
-    category: "ai",
-    short: "Cut AI spend, raise quality, and pick the right model for each job.",
-    description:
-      "Audit how your team and product use AI today. Cut spend, raise quality, and pick the right model for each job — with guardrails that stick.",
-  },
-  {
-    slug: "ai-product-development",
-    title: "AI Product Development",
-    price: "Project",
-    category: "ai",
-    short: "Design and ship AI-native features — chat, search, agents, automation.",
-    description:
-      "Design and build AI-native features end-to-end — chat, search, agents, automation. Production-grade architecture, evaluation and observability.",
-  },
-  {
-    slug: "ai-site-rescue",
-    title: "AI-built Site Rescue",
-    price: "From $80/hr",
-    category: "build",
-    short: "Refactor and harden sites built with Lovable, v0, Bolt or Cursor.",
-    description:
-      "Did you ship a site with Lovable, v0, Bolt or Cursor? I refactor, harden and accelerate it — clean architecture, real performance, no spaghetti.",
-  },
-  {
-    slug: "coding-setup",
-    title: "AI & Coding Setup",
-    price: "$50/hr",
-    category: "ai",
-    short: "Cursor, Copilot, and modern AI coding workflows set up for you.",
-    description:
-      "Feeling left behind by the AI coding wave? A focused remote session to set up Cursor, Copilot, agents, and a hyper-productive environment you actually own.",
-    features: [
-      "Cursor and VS Code extensions setup and personalization",
-      "LLM prompts, system instructions, and agent configurations",
-      "Git, terminal, and local development environment customization",
-      "Integrating AI efficiently without losing ownership of your code",
-      "Onboarding and training for modern AI-assisted workflows",
-    ],
-  },
-  {
-    slug: "prompt-agent-engineering",
-    title: "Prompt & Agent Engineering",
-    price: "$80/hr",
-    category: "ai",
-    short: "Reliable prompts, tools, and multi-step agents with evaluation suites.",
-    description:
-      "Design reliable prompts, tools and multi-step agents. Evaluation suites included so quality stays measurable as you iterate.",
-  },
   {
     slug: "personal-consultation",
     title: "Personal Consultation",
@@ -183,17 +116,32 @@ export const services: Service[] = [
       "Turn Figma or Sketch designs into clean, accessible, scalable React components and pages.",
   },
   {
+    slug: "site-rescue",
+    title: "Site Rescue",
+    price: "From $80/hr",
+    category: "build",
+    short: "Refactor and harden fragile sites into clean, maintainable code.",
+    description:
+      "Ship happened fast and the codebase got messy? I refactor, harden, and accelerate it — clean architecture, real performance, no spaghetti.",
+    features: [
+      "Architecture cleanup and dependency hygiene",
+      "Performance and accessibility fixes",
+      "TypeScript / React / Next.js modernization",
+      "Deploy pipeline and environment stability",
+    ],
+  },
+  {
     slug: "technical-advisory",
     title: "Technical Advisory",
     price: "Monthly retainer",
     category: "advisory",
     short: "Fractional engineering partner for founders.",
     description:
-      "Fractional engineering partner for founders — stack choices, AI strategy, hiring sanity-checks and weekly architecture reviews.",
+      "Fractional engineering partner for founders — stack choices, hiring sanity-checks, and weekly architecture reviews.",
   },
 ];
 
-/** Compact list for home (order & subset can differ from full catalog) */
+/** Compact list for home */
 export const homeServices = services.map((s) => ({
   title: s.title,
   price: s.price,

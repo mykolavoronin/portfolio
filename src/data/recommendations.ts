@@ -26,7 +26,7 @@ export const books = [
 ] as const;
 
 export const tools = [
-  { name: "VS Code + Cursor", note: "Daily editor — fast, extensible, AI-native." },
+  { name: "VS Code", note: "Daily editor — fast and extensible." },
   { name: "Figma", note: "Where every interface starts." },
   { name: "Linear", note: "Product management without the drag." },
   { name: "Raycast", note: "Spotlight, but actually useful." },

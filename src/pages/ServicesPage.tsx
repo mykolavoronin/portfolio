@@ -1,93 +1,61 @@
-import { ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Seo } from "@/components/Seo";
 import { services } from "@/data/services";
 import { site } from "@/data/site";
-import { PageEnter, Stagger, RevealItem } from "@/components/Motion";
+import { PageEnter, Reveal, Stagger, RevealItem } from "@/components/Motion";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export default function ServicesPage() {
-  const servicesJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: "Mykola Voronin — Software Engineering & AI Services",
-    url: `${site.siteUrl}/services`,
-    areaServed: "Worldwide",
-    provider: {
-      "@type": "Person",
-      name: site.name,
-      url: site.siteUrl,
-    },
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Services",
-      itemListElement: services.map((s) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: s.title,
-          description: s.description,
-        },
-        priceSpecification: { "@type": "PriceSpecification", price: s.price },
-      })),
-    },
-  };
-
   return (
     <PageEnter className="site-shell pt-8 pb-16">
       <Seo
-        title="Services — Mykola Voronin"
-        description="AI workflow integration, AI product development, site rescue and technical advisory by Mykola Voronin — a Barcelona-based software engineer."
+        title={`Services — ${site.name}`}
+        description="Web development, deployment, and advisory."
         path="/services"
-        jsonLd={servicesJsonLd}
       />
       <div>
-        <header className="mb-10">
+        <header className="page-header">
           <p className="section-label">Services</p>
           <h1 className="text-fluid-3xl font-semibold tracking-tight">
-            Services —{" "}
-            <span className="font-serif-italic font-normal text-muted-foreground">quiet craft, loud results.</span>
+            Services
           </h1>
-          <p className="mt-4 text-fluid-base text-muted-foreground leading-relaxed">
-            A short menu of things I do well. Pricing is a starting point — every engagement is scoped to your goals.
-          </p>
-          <p className="mt-4 text-sm text-muted-foreground">
-            <span className="font-serif-italic text-foreground">{site.availability.label}</span> while I focus on
-            school. Still happy to chat about future work.
-          </p>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            <Badge variant="muted">{site.availability.label}</Badge>
+          </div>
         </header>
 
-        <Stagger className="divide-y divide-border/60 border-y border-border/60">
+        <Stagger className="space-y-2" fast>
           {services.map((s) => (
-            <RevealItem key={s.slug} as="article" className="py-6">
-              <Link to={`/services/${s.slug}`} className="group block">
-                <div className="flex items-baseline justify-between gap-4 mb-1.5">
-                  <h2 className="text-base font-semibold text-foreground group-hover:underline underline-offset-4">
-                    {s.title}
-                  </h2>
-                  <span className="text-xs text-muted-foreground shrink-0 flex items-center gap-1">
-                    {s.price}
-                    <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-0.5 transition-all group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0" />
+            <RevealItem key={s.slug}>
+              <Link
+                to={`/services/${s.slug}`}
+                className="pressable pressable-soft flex items-center justify-between gap-3 rounded-2xl border border-border/65 bg-card px-4 py-3.5 shadow-sm hover:border-foreground/12 transition-colors"
+              >
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold tracking-tight">{s.title}</span>
+                  <span className="block text-xs text-muted-foreground mt-0.5 line-clamp-1">
+                    {s.short}
                   </span>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">{s.description}</p>
+                </span>
+                <Badge variant="outline" className="tabular-nums shrink-0">
+                  {s.price}
+                </Badge>
               </Link>
             </RevealItem>
           ))}
         </Stagger>
 
-        <div className="mt-10 flex flex-wrap gap-2.5">
-          <Button variant="outline" size="default" asChild>
+        <Reveal className="mt-10 flex flex-wrap gap-2">
+          <Button variant="outline" asChild>
             <a href={site.linkedin} target="_blank" rel="noreferrer">
               LinkedIn
             </a>
           </Button>
-          <Button variant="outline" size="default" asChild>
-            <a href={site.github} target="_blank" rel="noreferrer">
-              GitHub
-            </a>
+          <Button variant="outline" asChild>
+            <Link to="/contact">Contact</Link>
           </Button>
-        </div>
+        </Reveal>
       </div>
     </PageEnter>
   );

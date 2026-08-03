@@ -34,13 +34,6 @@ export function Logo({ className, title = "Mykola Voronin" }: LogoProps) {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle
-        cx="34.5"
-        cy="34.5"
-        r="5.5"
-        className="fill-amber-500 stroke-background"
-        strokeWidth="2"
-      />
     </svg>
   );
 }

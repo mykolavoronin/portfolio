@@ -3,9 +3,10 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
+import { haptic, type HapticKind } from "@/lib/haptics";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-[transform,background-color,border-color,box-shadow,color,opacity] duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-[0.96]",
+  "pressable inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -18,17 +19,15 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost:
-          "hover:bg-muted hover:text-foreground",
+          "hover:bg-muted hover:text-foreground pressable-soft",
         link:
-          "text-secondary underline-offset-4 hover:underline active:scale-100",
+          "text-secondary underline-offset-4 hover:underline !transform-none",
         hero:
-          "bg-primary text-primary-foreground font-semibold shadow-lg hover:shadow-xl hover:bg-primary/90",
+          "bg-primary text-primary-foreground font-semibold shadow-lg hover:shadow-xl hover:bg-primary/90 pressable-firm",
         "hero-outline":
           "border-2 border-foreground/20 bg-transparent text-foreground font-semibold hover:bg-foreground/5 hover:border-foreground/30",
-        glass:
-          "glass-panel text-foreground font-medium hover:bg-card/80",
         accent:
-          "bg-secondary text-secondary-foreground font-semibold shadow-lg hover:shadow-xl hover:bg-secondary/90",
+          "bg-secondary text-secondary-foreground font-semibold shadow-lg hover:shadow-xl hover:bg-secondary/90 pressable-firm",
       },
       size: {
         default: "h-10 min-h-10 px-5 py-2",
@@ -49,13 +48,43 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  /** Device vibration on touch. `false` disables. Default light. */
+  haptic?: HapticKind | false;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      haptic: hapticKind = "light",
+      onPointerDown,
+      ...props
+    },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : "button";
-    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
-  }
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => {
+          if (
+            hapticKind !== false &&
+            e.button === 0 &&
+            e.pointerType !== "mouse" &&
+            variant !== "link"
+          ) {
+            haptic(hapticKind);
+          }
+          onPointerDown?.(e);
+        }}
+        {...props}
+      />
+    );
+  },
 );
 Button.displayName = "Button";
 

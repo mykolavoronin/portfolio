@@ -1,39 +1,27 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] sm:text-xs font-medium tracking-tight transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
   {
     variants: {
       variant: {
-        default:
-          "border-transparent bg-primary/10 text-primary",
-        secondary:
-          "border-transparent bg-secondary/10 text-secondary",
-        destructive:
-          "border-transparent bg-destructive/10 text-destructive",
-        outline:
-          "border-border text-foreground",
-        muted:
-          "border-transparent bg-muted text-muted-foreground",
-        language:
-          "border-primary/20 bg-primary/5 text-primary hover:bg-primary/10 transition-colors",
-        code:
-          "border-secondary/20 bg-secondary/5 text-secondary hover:bg-secondary/10 transition-colors",
-        skill:
-          "border-border bg-card text-foreground hover:bg-muted transition-colors",
-        tag:
-          "border-transparent bg-muted text-muted-foreground hover:bg-muted/80 cursor-pointer transition-all",
-        "tag-active":
-          "border-primary/30 bg-primary/10 text-primary hover:bg-primary/15 cursor-pointer transition-all",
+        default: "border-transparent bg-foreground text-background",
+        secondary: "border-border/70 bg-card text-foreground shadow-sm",
+        outline: "border-border/70 bg-transparent text-muted-foreground",
+        muted: "border-transparent bg-muted text-muted-foreground",
+        soft: "border-border/50 bg-card/80 text-foreground/85 shadow-sm",
+        success:
+          "border-emerald-500/20 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300",
+        warn: "border-amber-500/20 bg-amber-500/10 text-amber-900 dark:text-amber-300",
+        info: "border-sky-500/20 bg-sky-500/10 text-sky-900 dark:text-sky-300",
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "soft",
     },
-  }
+  },
 );
 
 export interface BadgeProps
