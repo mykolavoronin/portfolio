@@ -7,8 +7,6 @@ import { VercelInsights } from "@/components/VercelInsights";
 import { Layout } from "@/components/Layout";
 import HomePage from "./pages/HomePage";
 
-const ServicesPage = lazy(() => import("./pages/ServicesPage"));
-const ServicePage = lazy(() => import("./pages/ServicePage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const SkillsPage = lazy(() => import("./pages/SkillsPage"));
 const RecommendationsPage = lazy(() => import("./pages/RecommendationsPage"));
@@ -28,8 +26,6 @@ const App = () => (
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<HomePage />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/services/:slug" element={<ServicePage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/skills" element={<SkillsPage />} />
               <Route path="/recommendations" element={<RecommendationsPage />} />

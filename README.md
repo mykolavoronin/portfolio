@@ -49,7 +49,7 @@ vercel.json             SPA rewrites
 
 ## Content
 
-Edit `src/data/*` — projects, experience, education, services, site identity.
+Edit `src/data/*` — projects, experience, education, site identity.
 
 ## License
 

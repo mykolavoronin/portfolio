@@ -7,7 +7,6 @@
 - [Home](/): Overview, featured projects, current work and contact.
 - [About](/about): Short story — background, principles and how Mykola works.
 - [IT Academy](/education/it-academy): Certified Cybersecurity Analyst itinerary at IT Academy by Barcelona Activa.
-- [Services](/services): Portfolio building, deployment, site rescue, design-to-code, and technical advisory.
 - [Skills](/skills): Languages, frameworks, tools and practice areas.
 - [Recommendations](/recommendations): Books, tools and writers that shaped Mykola's craft.
 - [Contact](/contact): LinkedIn, GitHub, and digital business card.

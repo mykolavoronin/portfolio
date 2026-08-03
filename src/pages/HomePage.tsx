@@ -19,7 +19,6 @@ import { clientGroups, getProjectsByClient, type Project } from "@/data/projects
 import { experience } from "@/data/experience";
 import { education } from "@/data/education";
 import { certifications } from "@/data/certifications";
-import { homeServices } from "@/data/services";
 import { homeStack, spokenLanguages } from "@/data/skills";
 import { site } from "@/data/site";
 import { Seo } from "@/components/Seo";
@@ -458,39 +457,6 @@ export default function HomePage() {
             ))}
           </Stagger>
         </Reveal>
-      </section>
-
-      {/* Services — compact */}
-      <section id="services" className="site-shell section-block">
-        <Reveal>
-          <div className="flex items-baseline justify-between gap-4 mb-3">
-            <h2 className="section-label mb-0">Services</h2>
-            <Link
-              to="/services"
-              className="text-xs text-muted-foreground hover:text-foreground inline-flex items-center gap-1 transition-colors"
-            >
-              All <ArrowUpRight className="h-3 w-3" />
-            </Link>
-          </div>
-          <Badge variant="muted" className="mb-4">
-            {site.availability.label}
-          </Badge>
-        </Reveal>
-        <Stagger className="grid grid-cols-1 sm:grid-cols-2 gap-2" fast>
-          {homeServices.slice(0, 4).map((s) => (
-            <RevealItem key={s.slug}>
-              <Link
-                to={`/services/${s.slug}`}
-                className="surface-card group flex items-center justify-between gap-3 !py-3.5"
-              >
-                <span className="text-sm font-semibold tracking-tight">{s.title}</span>
-                <Badge variant="outline" className="tabular-nums shrink-0">
-                  {s.price}
-                </Badge>
-              </Link>
-            </RevealItem>
-          ))}
-        </Stagger>
       </section>
 
       {/* Contact */}
