@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { FinePointerCursor } from "@/components/FinePointerCursor";
+import { VercelInsights } from "@/components/VercelInsights";
 import { Layout } from "@/components/Layout";
 import HomePage from "./pages/HomePage";
 
@@ -30,6 +31,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <VercelInsights />
             <Suspense fallback={null}>
               <Routes>
                 <Route element={<Layout />}>

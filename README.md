@@ -69,9 +69,37 @@ vercel --prod
 
 Set `MOTION_TOKEN` in the Vercel dashboard (or `vercel env add MOTION_TOKEN`) before building.
 
+## Vercel Analytics & Speed Insights
+
+Packages: `@vercel/analytics`, `@vercel/speed-insights` (wired in `src/components/VercelInsights.tsx`).
+
+After deploy, enable them in the Vercel dashboard:
+
+1. Project → **Analytics** → Enable  
+2. Project → **Speed Insights** → Enable  
+
+No extra env vars are required for these.
+
 ## SPA routing
 
 `vercel.json` rewrites client routes to `index.html` so deep links like `/projects/eka-balance` work after refresh.
+
+## Vite vs Next.js for this portfolio
+
+**Stay on Vite** for this site unless you hit a hard SEO/SSR need.
+
+| | **Vite (current)** | **Next.js** |
+|---|---|---|
+| Fit | Marketing/portfolio SPA | Content sites that need SSR/SSG by default |
+| Deploy | Simple static `dist/` | Full framework on Vercel |
+| SEO | Good enough with `Seo`, sitemap, meta (you already have this) | Stronger out of the box (SSR, OG images API) |
+| Images | Manual / CDN | `next/image` optimization |
+| DX for this codebase | Already built & polished | Full rewrite of routing, data, deploy |
+| Analytics | Works the same | Works the same |
+
+**Recommendation:** keep **Vite**. This portfolio is mostly static pages, client motion, and case studies — Vite is faster to ship and already production-ready. Consider Next.js later only if you want a blog/CMS, server OG images, or internationalized SSR.
+
+## SPA routing
 
 ## Project layout
 
