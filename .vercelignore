@@ -1,0 +1,13 @@
+# Keep Vercel uploads small and clean
+_archive
+mvk-personal-main
+portfolio
+node_modules
+dist
+.git
+*.log
+.env
+.env.*
+!.env.example
+bun.lockb
+.DS_Store

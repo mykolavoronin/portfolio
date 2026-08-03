@@ -1,0 +1,19 @@
+# Mykola Voronin
+
+> Software engineer in Barcelona building clean, fast, considered web products with React, Next.js and TypeScript.
+
+## Pages
+
+- [Home](/): Overview, featured projects, current work and contact.
+- [About](/about): Short story — background, principles and how Mykola works.
+- [Services](/services): AI workflow integration, coding setup, portfolio building, site rescue and technical advisory (each service has a detail page).
+- [Skills](/skills): Languages, frameworks, tools and practice areas.
+- [Recommendations](/recommendations): Books, tools and writers that shaped Mykola's craft.
+- [Contact](/contact): Email, LinkedIn and GitHub.
+
+## Projects
+
+- [Kucherov Studio](/projects/kucherov-studio): Web infrastructure and client work for Kucherov Studio.
+- [EKA Balance](/projects/eka-balance): Web infrastructure for EKA Balance.
+- [Agenyz](/projects/agenyz): Client project delivered for EKA Balance.
+- [masaje.barcelona](/projects/masaje-barcelona): Client project delivered for EKA Balance.
