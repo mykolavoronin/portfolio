@@ -39,11 +39,17 @@ Without this, `npm install` fails with **401** on `@motionplus/*`.
 ### 3. Import the project
 
 1. [vercel.com/new](https://vercel.com/new) → import this repo  
-2. Framework: **Vite** (auto-detected from `vercel.json`)  
-3. Build command: `npm run build`  
-4. Output directory: `dist`  
-5. Root directory: **.** (repo root)  
-6. Deploy
+2. Framework Preset: **Vite** → **apply defaults** (leave Build / Output / Install as auto)  
+3. Root Directory: **.** (repo root)  
+4. Add `MOTION_TOKEN`, then Deploy  
+
+Vercel Vite defaults:
+
+| Setting | Default |
+|---|---|
+| Build Command | `vite build` / `npm run build` |
+| Output Directory | `dist` |
+| Install Command | `npm install` |
 
 ### 4. Custom domain (optional)
 
