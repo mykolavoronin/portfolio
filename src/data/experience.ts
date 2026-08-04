@@ -29,7 +29,7 @@ export const experience: Experience[] = [
     projectSlug: "eka-balance",
     externalHref: "https://ekabalance.com/",
     points: [
-      "Multi-domain stack: hub, VIP, Business, Agenyz, masaje.barcelona.",
+      "Multi-domain stack: hub, Agenyz, masaje.barcelona.",
       "Booking, SEO, i18n, and day-to-day IT.",
     ],
   },

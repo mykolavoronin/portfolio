@@ -179,7 +179,7 @@ export default function HomePage() {
                 </Link>
                 <span className="text-muted-foreground/90">
                   {" "}
-                  (hub, VIP, Business, Agenyz, masaje.barcelona). Studying systems and cybersecurity
+                  (hub, Agenyz, masaje.barcelona). Studying systems and cybersecurity
                   alongside client work.
                 </span>
               </p>

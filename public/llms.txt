@@ -16,7 +16,5 @@
 
 - [Kucherov Studio](/projects/kucherov-studio): Web infrastructure and client work for Kucherov Studio.
 - [EKA Balance](/projects/eka-balance): Primary hub for EKA Balance.
-- [EKA VIP](/projects/eka-vip): Private wellness vertical (vip.ekabalance.com).
-- [EKA Business](/projects/eka-business): Workplace wellbeing (business.ekabalance.com).
 - [Agenyz](/projects/agenyz): Supplement storefront for EKA Balance.
 - [masaje.barcelona](/projects/masaje-barcelona): Local massage micro-site for EKA Balance.
