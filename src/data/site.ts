@@ -33,6 +33,6 @@ export const principles = [
 
 export const aboutParagraphs = [
   "Software engineer in Barcelona. I build calm, fast web products and care about the details.",
-  "Client work: Kucherov Studio and EKA Balance (hub, VIP, Business, Agenyz, masaje.barcelona).",
+  "Client work: Kucherov Studio and EKA Balance (hub, Agenyz, masaje.barcelona).",
   "Studying systems and cybersecurity — Scrimba full-stack, CFGS CASIX at Politècnics, IT Academy analyst path.",
 ] as const;

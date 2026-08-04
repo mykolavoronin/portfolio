@@ -3,14 +3,10 @@ import {
   Leaf,
   Search,
   MapPin,
-  Crown,
-  Building2,
   type LucideIcon,
 } from "lucide-react";
 import kucherov from "@/assets/projects/kucherov.png";
 import ekabalance from "@/assets/projects/ekabalance.png";
-import ekaVip from "@/assets/projects/eka-vip.png";
-import ekaBusiness from "@/assets/projects/eka-business.png";
 import agenyz from "@/assets/projects/agenyz.png";
 import masaje from "@/assets/projects/masaje.png";
 
@@ -141,11 +137,11 @@ export const projects: Project[] = [
     highlights: [
       "1500+ sessions delivered, 96% satisfied clients — surfaced as trust signals.",
       "Multi-language support across the full booking journey.",
-      "Hub for the wider EKA stack: VIP, Business, Agenyz, and masaje.barcelona.",
+      "Hub for the wider EKA stack: Agenyz and masaje.barcelona.",
     ],
     overview: [
       "EKA Balance is a Barcelona-based somatic wellness practice offering kinesiology, structural and energetic body work. The main site has to explain a sophisticated method and get the right person to book the right session.",
-      "I own the multi-domain web infrastructure for the practice: this primary hub, vip.ekabalance.com, business.ekabalance.com, the Agenyz storefront, and masaje.barcelona — plus booking, localization, and day-to-day IT.",
+      "I own the multi-domain web infrastructure for the practice: this primary hub, the Agenyz storefront, and masaje.barcelona — plus booking, localization, and day-to-day IT.",
     ],
     challenge:
       "A practice with a decade of clinical depth needed a clear digital home that ranked locally, converted across languages, and stayed consistent across every property under the EKA umbrella.",
@@ -169,16 +165,6 @@ export const projects: Project[] = [
     ],
     relatedSites: [
       {
-        name: "EKA VIP",
-        url: "https://vip.ekabalance.com",
-        description: "Private wellness — residences, travel, and membership care.",
-      },
-      {
-        name: "EKA Business",
-        url: "https://business.ekabalance.com",
-        description: "Workplace wellbeing programmes for teams under pressure.",
-      },
-      {
         name: "Agenyz",
         url: "https://agenyz.es",
         description: "Specialist supplement storefront with guided product discovery.",
@@ -188,84 +174,6 @@ export const projects: Project[] = [
         url: "https://masaje.barcelona",
         description: "Single-CTA micro-site for local massage intent.",
       },
-    ],
-  },
-  {
-    slug: "eka-vip",
-    title: "EKA VIP",
-    tagline: "Private sessions, arranged with Elena.",
-    description: "Private care — residences, travel, memberships.",
-    href: "https://vip.ekabalance.com/",
-    icon: Crown,
-    cover: ekaVip,
-    year: "2024 — Present",
-    role: "Engineer · Product",
-    status: "Live",
-    client: "EKA Balance",
-    clientId: "eka-balance",
-    industry: "Private Wellness · Concierge",
-    location: "Barcelona · Travel",
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion", "Vercel"],
-    highlights: [
-      "Inquiry-first booking with fit review before any quote.",
-      "Membership tiers: Essential Continuity, Executive Private Care, Bespoke Household / Retreat.",
-      "Travel and residence formats — villas, hotel suites, retreats, performance recovery.",
-    ],
-    overview: [
-      "EKA VIP is the private-care vertical of EKA Balance: bodywork, movement recovery, and a steady care rhythm at home, in a hotel suite, during a retreat, or around a demanding travel window.",
-      "I built the site around request → fit review → bespoke recommendation → confirmed care — so private clients and households get clarity without a public rate card.",
-    ],
-    challenge:
-      "Private and high-touch care cannot look like a generic booking calendar. The site had to feel exclusive, explain formats clearly, and route serious inquiries without oversharing pricing or capacity.",
-    approach: [
-      "Hero and narrative that lead with privacy, fit check, and arranged care — not mass booking.",
-      "Membership and format sections structured for scanability (one-off, half-day, travel, continuity).",
-      "Clear inquiry path (email / WhatsApp) with expectations set for response times and what is not included.",
-      "Visual system aligned with the main EKA brand while reading as a distinct VIP surface.",
-    ],
-    outcome: [
-      "A dedicated VIP funnel separate from the public practice site.",
-      "Formats and membership tiers that sales conversations can point to.",
-      "Consistent multi-domain branding under the EKA Balance infrastructure.",
-    ],
-  },
-  {
-    slug: "eka-business",
-    title: "EKA Business",
-    tagline: "Your team is still shipping. Their bodies are not.",
-    description: "Workplace wellbeing for teams under pressure.",
-    href: "https://business.ekabalance.com/",
-    icon: Building2,
-    cover: ekaBusiness,
-    year: "2024 — Present",
-    role: "Engineer · Product",
-    status: "Live",
-    client: "EKA Balance",
-    clientId: "eka-balance",
-    industry: "Corporate Wellbeing",
-    location: "Barcelona · Remote",
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
-    highlights: [
-      "B2B landing for HR, ops, and executives under deadline pressure.",
-      "Service entry points: corporate kinesiology, Feldenkrais for teams, workplace massage.",
-      "Discovery-call CTA and programme comparison paths for sales.",
-    ],
-    overview: [
-      "EKA Business is the workplace wellbeing vertical of EKA Balance — on-site or remote formats designed around real calendars, rooms, and sprints rather than one-off wellness theatre.",
-      "I built a clear B2B surface: problem framing for stressed teams, service cards, philosophy, social proof, FAQs, and a short path to a fit call.",
-    ],
-    challenge:
-      "Corporate wellness sites often bury the offer in buzzwords. This one needed to speak to deadline load, desk tension, and team systems — and convert busy buyers into discovery calls.",
-    approach: [
-      "Sharp headline and value props for teams that still ship while bodies lag.",
-      "How-we-work steps that separate stress load, bodywork, team systems, and measurable indicators.",
-      "Service cards as focused entry points with deeper programme pages.",
-      "Contact and WhatsApp paths for proposal requests, scoped for Barcelona and distributed teams.",
-    ],
-    outcome: [
-      "A dedicated business funnel alongside the consumer practice site.",
-      "Clearer sales narrative for packages vs. single on-site days.",
-      "Same multi-domain stack and brand system as the rest of EKA.",
     ],
   },
   {
@@ -291,7 +199,7 @@ export const projects: Project[] = [
     ],
     overview: [
       "Agenyz is EKA Balance's specialist-grade supplement storefront — European-sourced, high-bioavailability ingredients with a catalogue that can overwhelm first-time visitors.",
-      "I built the storefront, goal-based browsing, and a guided Smart Search that turns vague intent into a tailored recommendation — same client stack as ekabalance.com, VIP, Business, and masaje.barcelona.",
+      "I built the storefront, goal-based browsing, and a guided Smart Search that turns vague intent into a tailored recommendation — same client stack as ekabalance.com and masaje.barcelona.",
     ],
     challenge:
       "A 30+ SKU specialist catalogue is overwhelming. Generic e-commerce navigation buries the right product behind too many choices.",

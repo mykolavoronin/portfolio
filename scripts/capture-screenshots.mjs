@@ -20,8 +20,6 @@ const CHROME =
 const targets = [
   { file: "kucherov.png", url: "https://kucherov.studio/" },
   { file: "ekabalance.png", url: "https://ekabalance.com/" },
-  { file: "eka-vip.png", url: "https://vip.ekabalance.com/" },
-  { file: "eka-business.png", url: "https://business.ekabalance.com/" },
   { file: "agenyz.png", url: "https://agenyz.es/" },
   { file: "masaje.png", url: "https://masaje.barcelona/" },
 ];
