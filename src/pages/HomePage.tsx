@@ -54,7 +54,6 @@ function StudyBeat({ group }: { group: StudyGroup }) {
 
       <ul className="org-items">
         {items.map((item) => {
-          const highlights = item.notes?.slice(0, 2) ?? [];
           const extraHref = item.href && item.href !== group.href && item.href !== group.pagePath;
           return (
             <li key={`${group.id}-${item.title}`}>
@@ -70,13 +69,6 @@ function StudyBeat({ group }: { group: StudyGroup }) {
                   item.title
                 )}
               </div>
-              {highlights.length > 0 ? (
-                <ul className="story-highlights">
-                  {highlights.map((line) => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
-              ) : null}
               <div className="story-links">
                 <span className="inline-flex items-center text-xs text-muted-foreground tabular-nums">
                   {item.period}
