@@ -32,8 +32,7 @@ export const principles = [
 ] as const;
 
 export const aboutParagraphs = [
-  "Student in Barcelona. I work with Kucherov Studio and EKA Balance, and I care about the details.",
-  "Day to day I work with Kucherov Studio and EKA Balance — the studio site, the wellness hub, and the smaller properties around it.",
+  "Student in Barcelona. I work with Kucherov Studio and EKA Balance — the studio site, the wellness hub, and the smaller properties around them.",
   "I like understanding how things are put together: phones, software, the quiet craft in a well-made object.",
 ] as const;
 
@@ -45,9 +44,5 @@ export const hobbies = [
   {
     title: "Technology",
     detail: "Phones, Apple hardware, and the tools I use every day. I like objects that feel finished.",
-  },
-  {
-    title: "Not games",
-    detail: "Video games aren’t my thing. I’d rather read, tinker, or walk the city.",
   },
 ] as const;

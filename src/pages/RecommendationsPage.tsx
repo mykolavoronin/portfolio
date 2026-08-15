@@ -11,7 +11,7 @@ export default function RecommendationsPage() {
     <PageEnter className="site-shell page-pad">
       <Seo
         title={`Recommendations — Books, tools & writers · ${site.name}`}
-        description="Books, tools and writers that shape how Mykola Voronin designs and builds software."
+        description="Books, tools and writers Mykola Voronin keeps coming back to."
         path="/recommendations"
       />
       <div>

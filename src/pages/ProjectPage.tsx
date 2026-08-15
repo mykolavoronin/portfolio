@@ -50,11 +50,10 @@ export default function ProjectPage() {
 
           <h1 className="text-fluid-3xl font-semibold tracking-tight leading-[1.1]">
             {project.title}
-            <span className="font-serif-italic font-normal text-muted-foreground">
-              {" "}
-              — {project.tagline}
-            </span>
           </h1>
+          <p className="mt-2 font-serif-italic text-[1.05rem] sm:text-xl text-muted-foreground leading-snug">
+            {project.tagline}
+          </p>
 
           <p className="mt-3 text-sm sm:text-[15px] text-muted-foreground max-w-lg leading-relaxed">
             {project.description}

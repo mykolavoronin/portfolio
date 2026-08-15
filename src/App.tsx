@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { VercelInsights } from "@/components/VercelInsights";
 import { Layout } from "@/components/Layout";
 import { showSkills } from "@/data/skills";
+import { showServices } from "@/data/services";
 import HomePage from "./pages/HomePage";
 
 const AboutPage = lazy(() => import("./pages/AboutPage"));
@@ -12,7 +13,6 @@ const SkillsPage = lazy(() => import("./pages/SkillsPage"));
 const RecommendationsPage = lazy(() => import("./pages/RecommendationsPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const ProjectPage = lazy(() => import("./pages/ProjectPage"));
-const ItAcademyPage = lazy(() => import("./pages/ItAcademyPage"));
 const CardPage = lazy(() => import("./pages/CardPage"));
 const ServicesPage = lazy(() => import("./pages/ServicesPage"));
 const ServicePage = lazy(() => import("./pages/ServicePage"));
@@ -32,10 +32,9 @@ const App = () => (
               <Route path="/recommendations" element={<RecommendationsPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/projects/:slug" element={<ProjectPage />} />
-              <Route path="/education/it-academy" element={<ItAcademyPage />} />
               <Route path="/card" element={<CardPage />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/services/:slug" element={<ServicePage />} />
+              {showServices ? <Route path="/services" element={<ServicesPage />} /> : null}
+              {showServices ? <Route path="/services/:slug" element={<ServicePage />} /> : null}
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

@@ -156,7 +156,7 @@ export default function HomePage() {
       </section>
 
       <section id="working" className="site-shell story-section">
-        <StoryHeading tag="Work">I'm working here right now.</StoryHeading>
+        <StoryHeading tag="Work">I'm working here.</StoryHeading>
         {working.map((job) => {
           const brand = brandFor(job.projectSlug);
           const projects = job.projectSlug ? getProjectsByClient(job.projectSlug) : [];

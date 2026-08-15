@@ -2,13 +2,12 @@ import { MapPin, Github, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Seo } from "@/components/Seo";
 import { LocalTime } from "@/components/LocalTime";
-import { aboutParagraphs, hobbies, principles, site } from "@/data/site";
+import { aboutParagraphs, hobbies, site } from "@/data/site";
 import { experience } from "@/data/experience";
 import { clientGroups } from "@/data/projects";
 import { spokenLanguages } from "@/data/skills";
 import { StudyGroups } from "@/components/StudyGroups";
 import { PageEnter, Reveal, Stagger, RevealItem, StoryHeading } from "@/components/Motion";
-import { OccasionNote } from "@/components/SeasonalDress";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -36,7 +35,6 @@ export default function AboutPage() {
               <LocalTime showIcon={false} showCity={false} />
             </Badge>
           </div>
-          <OccasionNote />
         </header>
 
         <Reveal className="surface p-5 sm:p-6 space-y-3 text-sm sm:text-[15px] text-foreground/90 leading-relaxed">
@@ -80,19 +78,6 @@ export default function AboutPage() {
               </li>
             ))}
           </ul>
-        </Reveal>
-
-        <Reveal className="mt-16 sm:mt-20">
-          <StoryHeading tag="Principles" className="story-head-static">
-            How I work.
-          </StoryHeading>
-          <Stagger className="flex flex-wrap gap-1.5" chips>
-            {principles.map((p) => (
-              <RevealItem key={p} as="span" chip>
-                <Badge variant="soft">{p}</Badge>
-              </RevealItem>
-            ))}
-          </Stagger>
         </Reveal>
 
         <Reveal className="mt-16 sm:mt-20">

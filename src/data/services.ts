@@ -1,3 +1,6 @@
+/** Flip to true to list /services on the public site. */
+export const showServices = false;
+
 export type Service = {
   slug: string;
   title: string;

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Contact, Github, Linkedin, MapPin, ArrowRight, QrCode } from "lucide-react";
+import { Github, Linkedin, MapPin, ArrowRight, QrCode } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Seo } from "@/components/Seo";
 import { LocalTime } from "@/components/LocalTime";
@@ -38,13 +38,7 @@ export default function ContactPage() {
             <span className="font-serif-italic font-normal text-muted-foreground">here.</span>
           </h1>
           <p className="mt-4 text-fluid-base text-muted-foreground leading-relaxed max-w-xl">
-            Best places to reach me are LinkedIn and GitHub. Prefer a scan-friendly card? Open the digital
-            business card — save to contacts or share a QR.
-          </p>
-          <p className="mt-3 text-sm text-muted-foreground">
-            <span className="font-serif-italic text-foreground">{site.availability.label}</span>
-            {" — "}
-            {site.availability.detail}
+            LinkedIn or GitHub. The card is there if you want a QR or a contact file.
           </p>
         </header>
 
@@ -91,12 +85,6 @@ export default function ContactPage() {
               <Github className="h-4 w-4" />
               GitHub
             </a>
-          </Button>
-          <Button variant="outline" asChild>
-            <Link to="/card">
-              <Contact className="h-4 w-4" />
-              Business card
-            </Link>
           </Button>
         </Reveal>
 

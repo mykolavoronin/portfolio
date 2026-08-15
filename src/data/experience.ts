@@ -17,8 +17,8 @@ export const experience: Experience[] = [
     projectSlug: "kucherov-studio",
     externalHref: "https://kucherov.studio/",
     points: [
-      "Studio site end-to-end — Next.js, TypeScript, Motion.",
-      "95+ Lighthouse · Vercel release pipeline.",
+      "Studio site — Next.js, TypeScript, Motion.",
+      "Release pipeline on Vercel.",
     ],
   },
   {
