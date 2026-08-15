@@ -1,6 +1,5 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowUpRight, ArrowRight, MapPin, Layers } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,15 +9,13 @@ import {
   projects,
 } from "@/data/projects";
 import { Seo } from "@/components/Seo";
-import { PageEnter, Reveal, Stagger, RevealItem } from "@/components/Motion";
-import { springUi } from "@/lib/motion";
+import { PageEnter, Reveal, Stagger, RevealItem, StoryHeading } from "@/components/Motion";
 import { cn } from "@/lib/utils";
 import NotFound from "@/pages/NotFound";
 
 export default function ProjectPage() {
   const { slug } = useParams();
   const project = slug ? getProject(slug) : undefined;
-  const reduce = useReducedMotion();
 
   if (!project) return <NotFound />;
 
@@ -30,7 +27,7 @@ export default function ProjectPage() {
 
   return (
     <PageEnter>
-      <article className="pb-16">
+      <article className="pb-20 sm:pb-28">
         <Seo
           title={`${project.title} — ${project.client} · Mykola Voronin`}
           description={project.description}
@@ -39,7 +36,7 @@ export default function ProjectPage() {
           type="article"
         />
 
-        <section className="site-shell pt-8 sm:pt-10 pb-6">
+        <section className="site-shell pt-10 sm:pt-14 pb-8">
           <div className="flex flex-wrap items-center gap-1.5 mb-4">
             <Badge variant="soft">
               <Icon className="h-3 w-3" strokeWidth={1.75} />
@@ -65,7 +62,7 @@ export default function ProjectPage() {
 
           <div className="mt-5 flex flex-wrap items-center gap-2">
             <Button asChild>
-              <a href={project.href} target="_blank" rel="noreferrer">
+              <a href={project.href} target="_blank" rel="noopener noreferrer">
                 Visit site
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
@@ -79,16 +76,13 @@ export default function ProjectPage() {
         </section>
 
         <Reveal className="site-shell pb-8">
-          <motion.a
+          <a
             href={project.href}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className={cn(
-              "group relative block overflow-hidden rounded-2xl border border-border/70 bg-muted/30",
-              "shadow-[0_1px_2px_rgb(0_0_0/0.04),0_16px_40px_-14px_rgb(0_0_0/0.12)]",
+              "group relative block overflow-hidden rounded-2xl border border-border/70 bg-muted/30 shadow-md",
             )}
-            whileHover={reduce ? undefined : { y: -2 }}
-            transition={springUi}
           >
             <div className="flex items-center gap-1.5 border-b border-border/50 bg-card/90 backdrop-blur px-3 py-2">
               <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
@@ -101,14 +95,19 @@ export default function ProjectPage() {
             <img
               src={project.cover}
               alt={`${project.title} screenshot`}
+              width={1440}
+              height={900}
               loading="lazy"
-              className="media-frame w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+              decoding="async"
+              className="media-frame w-full h-auto block"
             />
-          </motion.a>
+          </a>
         </Reveal>
 
         <Reveal className="site-shell py-8">
-          <h2 className="section-label">Highlights</h2>
+          <StoryHeading tag="Highlights" className="story-head-static">
+            What matters.
+          </StoryHeading>
           <ul className="space-y-2">
             {project.highlights.map((h) => (
               <li
@@ -123,7 +122,9 @@ export default function ProjectPage() {
         </Reveal>
 
         <Reveal className="site-shell py-8">
-          <h2 className="section-label">Overview</h2>
+          <StoryHeading tag="Overview" className="story-head-static">
+            The story.
+          </StoryHeading>
           <div className="space-y-3">
             {project.overview.slice(0, 2).map((p) => (
               <p key={p} className="text-sm sm:text-[15px] text-foreground/90 leading-relaxed">
@@ -134,7 +135,9 @@ export default function ProjectPage() {
         </Reveal>
 
         <Reveal className="site-shell py-8">
-          <h2 className="section-label">Stack</h2>
+          <StoryHeading tag="Stack" className="story-head-static">
+            Built with.
+          </StoryHeading>
           <Stagger className="flex flex-wrap gap-1.5" chips>
             {project.stack.map((s) => (
               <RevealItem key={s} as="span" chip>
@@ -149,7 +152,9 @@ export default function ProjectPage() {
 
         {siblings.length > 0 && (
           <Reveal className="site-shell py-8">
-            <h2 className="section-label">Also for {project.client}</h2>
+            <StoryHeading tag="Related" className="story-head-static">
+              Also for {project.client}.
+            </StoryHeading>
             {client ? (
               <p className="text-xs text-muted-foreground mb-3 -mt-1">{client.blurb}</p>
             ) : null}
@@ -158,7 +163,7 @@ export default function ProjectPage() {
                 <li key={s.slug}>
                   <Link
                     to={`/projects/${s.slug}`}
-                    className="pressable pressable-soft group flex gap-3 rounded-2xl border border-border/65 bg-card p-2.5 shadow-sm hover:border-foreground/12 transition-colors"
+                    className="pressable pressable-soft group flex gap-3 surface p-2.5 hover:border-foreground/12 transition-colors"
                   >
                     <img
                       src={s.cover}
@@ -185,7 +190,7 @@ export default function ProjectPage() {
         <section className="site-shell pt-6">
           <Link
             to={`/projects/${next.slug}`}
-            className="pressable pressable-soft group flex items-center justify-between gap-4 rounded-2xl border border-border/65 bg-card p-4 shadow-sm hover:border-foreground/12 transition-colors"
+            className="pressable pressable-soft group flex items-center justify-between gap-4 surface p-4 hover:border-foreground/12 transition-colors"
           >
             <div className="min-w-0">
               <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">Next</p>
@@ -194,7 +199,7 @@ export default function ProjectPage() {
                 <Badge variant="muted">{next.client}</Badge>
               </div>
             </div>
-            <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0 group-hover:translate-x-0.5 transition-transform" />
+            <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
           </Link>
         </section>
       </article>

@@ -3,10 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("portfolio-theme");
+          var theme = stored || "light";
+          var resolved =
+            theme === "system"
+              ? window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light"
+              : theme;
+          document.documentElement.classList.add(resolved);
+        } catch (e) {}
+      })();
+    </script>
     <meta name="theme-color" content="#f7f5f2" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)" />
-    <title>Mykola Voronin — Software Engineer in Barcelona</title>
-    <meta name="description" content="Mykola Voronin is a software engineer in Barcelona building clean, fast web products with React, Next.js and TypeScript." />
+    <title>Mykola Voronin — Student in Barcelona</title>
+    <meta name="description" content="Mykola Voronin — student in Barcelona." />
     <meta name="author" content="Mykola Voronin" />
     <meta name="keywords" content="Mykola Voronin, software engineer Barcelona, React developer, Next.js, TypeScript, web developer Barcelona, freelance developer" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -14,22 +29,20 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&display=swap" rel="stylesheet" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Mykola Voronin" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://mykolavoronin.com/" />
-    <meta property="og:title" content="Mykola Voronin — Software Engineer in Barcelona" />
-    <meta property="og:description" content="Software engineer in Barcelona building clean, fast web products with React, Next.js and TypeScript." />
+    <meta property="og:title" content="Mykola Voronin — Student in Barcelona" />
+    <meta property="og:description" content="Mykola Voronin — student in Barcelona." />
     <meta property="og:image" content="https://mykolavoronin.com/og-image.jpg" />
-    <meta property="og:image:alt" content="Mykola Voronin — Software Engineer in Barcelona" />
+    <meta property="og:image:alt" content="Mykola Voronin — Student in Barcelona" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Mykola Voronin — Software Engineer in Barcelona" />
-    <meta name="twitter:description" content="Software engineer in Barcelona building clean, fast web products with React, Next.js and TypeScript." />
+    <meta name="twitter:title" content="Mykola Voronin — Student in Barcelona" />
+    <meta name="twitter:description" content="Mykola Voronin — student in Barcelona." />
     <meta name="twitter:image" content="https://mykolavoronin.com/og-image.jpg" />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -47,8 +60,8 @@
             "@id": "https://mykolavoronin.com/#person",
             "name": "Mykola Voronin",
             "url": "https://mykolavoronin.com/",
-            "jobTitle": "Software Engineer",
-            "description": "Software engineer in Barcelona building clean, fast web products with React, Next.js and TypeScript.",
+            "jobTitle": "Student",
+            "description": "Student in Barcelona.",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Barcelona",

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 export default function ServicesPage() {
   return (
-    <PageEnter className="site-shell pt-8 pb-16">
+    <PageEnter className="site-shell page-pad">
       <Seo
         title={`Services — ${site.name}`}
         description="Web development, deployment, and advisory."
@@ -16,7 +16,7 @@ export default function ServicesPage() {
       />
       <div>
         <header className="page-header">
-          <p className="section-label">Services</p>
+          <p className="story-tag">Services</p>
           <h1 className="text-fluid-3xl font-semibold tracking-tight">
             Services
           </h1>
@@ -30,7 +30,7 @@ export default function ServicesPage() {
             <RevealItem key={s.slug}>
               <Link
                 to={`/services/${s.slug}`}
-                className="pressable pressable-soft flex items-center justify-between gap-3 rounded-2xl border border-border/65 bg-card px-4 py-3.5 shadow-sm hover:border-foreground/12 transition-colors"
+                className="pressable pressable-soft flex items-center justify-between gap-3 surface px-4 py-3.5 hover:border-foreground/12 transition-colors"
               >
                 <span className="min-w-0">
                   <span className="block text-sm font-semibold tracking-tight">{s.title}</span>
@@ -48,7 +48,7 @@ export default function ServicesPage() {
 
         <Reveal className="mt-10 flex flex-wrap gap-2">
           <Button variant="outline" asChild>
-            <a href={site.linkedin} target="_blank" rel="noreferrer">
+            <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
               LinkedIn
             </a>
           </Button>

@@ -1,3 +1,13 @@
+import flagUa from "@/assets/flags/ua.png";
+import flagEs from "@/assets/flags/es.png";
+import flagCt from "@/assets/flags/ct.png";
+import flagRu from "@/assets/flags/ru.png";
+import flagGb from "@/assets/flags/gb.png";
+import flagDe from "@/assets/flags/de.png";
+
+/** Flip to true to show the home stack block, /skills page, and nav link. */
+export const showSkills = false;
+
 export const skillGroups = [
   {
     title: "Languages",
@@ -45,10 +55,10 @@ export const homeStack = [
 ] as const;
 
 export const spokenLanguages = [
-  { name: "Ukrainian", level: "Native" },
-  { name: "Spanish", level: "Native" },
-  { name: "Catalan", level: "Native" },
-  { name: "Russian", level: "Native" },
-  { name: "English", level: "Proficient" },
-  { name: "German", level: "Basic" },
+  { name: "Ukrainian", level: "Native", flag: flagUa },
+  { name: "Spanish", level: "Native", flag: flagEs },
+  { name: "Catalan", level: "Native", flag: flagCt },
+  { name: "Russian", level: "Native", flag: flagRu },
+  { name: "English", level: "Proficient", flag: flagGb },
+  { name: "German", level: "Basic", flag: flagDe },
 ] as const;

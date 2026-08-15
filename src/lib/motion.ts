@@ -6,34 +6,44 @@ export const easeOutExpo: [number, number, number, number] = [0.19, 1, 0.22, 1];
 /** UI state swaps — snappy, no bounce */
 export const springUi: Transition = {
   type: "spring",
-  duration: 0.35,
+  duration: 0.3,
   bounce: 0,
 };
 
 /** Soft entrances */
 export const springSoft: Transition = {
   type: "spring",
-  duration: 0.45,
+  duration: 0.4,
   bounce: 0,
 };
 
 export const tweenOut: Transition = {
-  duration: 0.4,
+  duration: 0.3,
   ease: easeOutExpo,
 };
 
 export const tweenFast: Transition = {
-  duration: 0.28,
+  duration: 0.22,
   ease: easeOutExpo,
 };
 
 /** Subtle rise — short travel so mobile stays snappy */
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 8 },
+  hidden: { opacity: 0, y: 6 },
   visible: {
     opacity: 1,
     y: 0,
     transition: springSoft,
+  },
+};
+
+/** Story headings — a little more travel, still no bounce */
+export const storyTitle: Variants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", duration: 0.5, bounce: 0 },
   },
 };
 
@@ -56,7 +66,7 @@ export const heroContainer: Variants = {
 };
 
 export const heroItem: Variants = {
-  hidden: { opacity: 0, y: 10 },
+  hidden: { opacity: 0, y: 6 },
   visible: {
     opacity: 1,
     y: 0,
@@ -96,11 +106,10 @@ export const staggerChips: Variants = {
 };
 
 export const chipItem: Variants = {
-  hidden: { opacity: 0, scale: 0.96 },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    scale: 1,
-    transition: springUi,
+    transition: { duration: 0.2, ease: "easeOut" },
   },
 };
 

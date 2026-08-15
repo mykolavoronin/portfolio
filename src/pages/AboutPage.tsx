@@ -2,26 +2,19 @@ import { MapPin, Github, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Seo } from "@/components/Seo";
 import { LocalTime } from "@/components/LocalTime";
-import { aboutParagraphs, principles, site } from "@/data/site";
+import { aboutParagraphs, hobbies, principles, site } from "@/data/site";
 import { experience } from "@/data/experience";
-import { education } from "@/data/education";
-import { certifications } from "@/data/certifications";
-import { ExpandableAcronym } from "@/components/ExpandableAcronym";
-import { PageEnter, Reveal, Stagger, RevealItem } from "@/components/Motion";
+import { clientGroups } from "@/data/projects";
+import { spokenLanguages } from "@/data/skills";
+import { StudyGroups } from "@/components/StudyGroups";
+import { PageEnter, Reveal, Stagger, RevealItem, StoryHeading } from "@/components/Motion";
+import { OccasionNote } from "@/components/SeasonalDress";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-
-function statusVariant(status?: string): "success" | "warn" | "info" | "muted" {
-  if (status === "Completed" || status === "Issued") return "success";
-  if (status === "In progress") return "warn";
-  if (status === "Upcoming") return "info";
-  return "muted";
-}
 
 export default function AboutPage() {
   return (
-    <PageEnter className="site-shell pt-8 pb-16">
+    <PageEnter className="site-shell page-pad">
       <Seo
         title={`About — ${site.name}`}
         description={site.seoDescription}
@@ -29,7 +22,7 @@ export default function AboutPage() {
       />
       <div>
         <header className="page-header">
-          <p className="section-label">About</p>
+          <p className="story-tag">About</p>
           <h1 className="text-fluid-3xl font-semibold tracking-tight">
             About{" "}
             <span className="font-serif-italic font-normal text-muted-foreground">Mykola.</span>
@@ -43,16 +36,56 @@ export default function AboutPage() {
               <LocalTime showIcon={false} showCity={false} />
             </Badge>
           </div>
+          <OccasionNote />
         </header>
 
-        <Reveal className="rounded-2xl border border-border/65 bg-card p-5 shadow-sm space-y-3 text-sm sm:text-[15px] text-foreground/90 leading-relaxed">
+        <Reveal className="surface p-5 sm:p-6 space-y-3 text-sm sm:text-[15px] text-foreground/90 leading-relaxed">
           {aboutParagraphs.map((p) => (
             <p key={p}>{p}</p>
           ))}
         </Reveal>
 
-        <Reveal className="mt-12">
-          <h2 className="section-label">Principles</h2>
+        <Reveal className="mt-16 sm:mt-20">
+          <StoryHeading tag="Languages" className="story-head-static">
+            I speak these.
+          </StoryHeading>
+          <ul className="surface divide-y divide-border/50 overflow-hidden">
+            {spokenLanguages.map((lang) => (
+              <li key={lang.name} className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3">
+                <span className="inline-flex items-center gap-2.5 min-w-0">
+                  <img
+                    src={lang.flag}
+                    alt=""
+                    width={20}
+                    height={14}
+                    className="lang-flag"
+                  />
+                  <span className="text-sm font-medium text-foreground">{lang.name}</span>
+                </span>
+                <span className="text-xs text-muted-foreground shrink-0">{lang.level}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+
+        <Reveal className="mt-16 sm:mt-20">
+          <StoryHeading tag="Life" className="story-head-static">
+            Outside the work.
+          </StoryHeading>
+          <ul className="space-y-2.5">
+            {hobbies.map((h) => (
+              <li key={h.title} className="surface p-4 sm:p-5">
+                <p className="text-sm font-semibold tracking-tight">{h.title}</p>
+                <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{h.detail}</p>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+
+        <Reveal className="mt-16 sm:mt-20">
+          <StoryHeading tag="Principles" className="story-head-static">
+            How I work.
+          </StoryHeading>
           <Stagger className="flex flex-wrap gap-1.5" chips>
             {principles.map((p) => (
               <RevealItem key={p} as="span" chip>
@@ -62,121 +95,73 @@ export default function AboutPage() {
           </Stagger>
         </Reveal>
 
-        <Reveal className="mt-12">
-          <h2 className="section-label">Experience</h2>
-          <Stagger className="space-y-3" fast>
-            {experience.map((job) => (
-              <RevealItem
-                key={job.company}
-                as="article"
-                className="rounded-2xl border border-border/65 bg-card p-4 shadow-sm"
-              >
-                <div className="flex flex-wrap gap-1.5">
-                  <Badge variant="muted" className="tabular-nums">
-                    {job.period}
-                  </Badge>
-                  <Badge variant="outline">{job.location}</Badge>
-                </div>
-                <p className="mt-2 text-sm font-semibold">
-                  {job.projectSlug ? (
-                    <Link to={`/projects/${job.projectSlug}`} className="hover:text-foreground/75">
-                      {job.company}
-                    </Link>
-                  ) : (
-                    job.company
-                  )}
-                </p>
-                <p className="text-sm text-muted-foreground">{job.role}</p>
-              </RevealItem>
-            ))}
+        <Reveal className="mt-16 sm:mt-20">
+          <StoryHeading tag="Work" className="story-head-static">
+            I'm working here.
+          </StoryHeading>
+          <Stagger className="space-y-2.5" fast>
+            {experience.map((job) => {
+              const brand = clientGroups.find((g) => g.id === job.projectSlug);
+              return (
+                <RevealItem
+                  key={job.company}
+                  as="article"
+                  className="surface p-4 sm:p-5"
+                >
+                  <div className="org-head">
+                    {brand ? (
+                      <img src={brand.icon} alt="" width={36} height={36} className="brand-mark" />
+                    ) : null}
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+                        <p className="text-sm font-semibold tracking-tight">
+                          {job.projectSlug ? (
+                            <Link to={`/projects/${job.projectSlug}`} className="hover:text-foreground/75">
+                              {job.company}
+                            </Link>
+                          ) : (
+                            job.company
+                          )}
+                        </p>
+                        <span className="text-xs text-muted-foreground tabular-nums">{job.period}</span>
+                      </div>
+                      <p className="mt-0.5 text-sm text-muted-foreground">
+                        {job.role}
+                        <span className="text-border mx-1.5" aria-hidden>
+                          ·
+                        </span>
+                        {job.location}
+                      </p>
+                    </div>
+                  </div>
+                </RevealItem>
+              );
+            })}
           </Stagger>
         </Reveal>
 
-        <Reveal className="mt-12">
-          <h2 className="section-label">Education</h2>
-          <ul className="space-y-2.5">
-            {education.map((ed) => (
-              <li
-                key={ed.school}
-                className={cn(
-                  "rounded-2xl border border-border/65 bg-card p-4 shadow-sm",
-                  ed.programExpand && "group/edu",
-                )}
-              >
-                <div className="flex flex-wrap gap-1.5">
-                  <Badge variant="muted" className="tabular-nums">
-                    {ed.period}
-                  </Badge>
-                  {ed.status ? <Badge variant={statusVariant(ed.status)}>{ed.status}</Badge> : null}
-                </div>
-                <p className="mt-2 text-sm font-semibold">
-                  {ed.pagePath ? (
-                    <Link to={ed.pagePath}>{ed.school}</Link>
-                  ) : (
-                    ed.school
-                  )}
-                </p>
-                {ed.programExpand ? (
-                  <ExpandableAcronym
-                    prefix={ed.programExpand.prefix}
-                    short={ed.programExpand.short}
-                    full={ed.programExpand.full}
-                    groupName="edu"
-                  />
-                ) : (
-                  <p className="text-sm text-muted-foreground">{ed.program}</p>
-                )}
-              </li>
-            ))}
-          </ul>
+        <Reveal className="mt-16 sm:mt-20">
+          <StoryHeading tag="Education" className="story-head-static">
+            I've studied here.
+          </StoryHeading>
+          <StudyGroups variant="surface" />
         </Reveal>
 
-        <Reveal className="mt-12">
-          <h2 className="section-label">Certifications</h2>
-          <ul className="space-y-2.5">
-            {certifications.map((cert) => (
-              <li
-                key={`${cert.issuer}-${cert.title}`}
-                className="rounded-2xl border border-border/65 bg-card p-4 shadow-sm"
-              >
-                <div className="flex flex-wrap gap-1.5">
-                  <Badge variant="muted" className="tabular-nums">
-                    {cert.period}
-                  </Badge>
-                  {cert.status ? (
-                    <Badge variant={statusVariant(cert.status)}>{cert.status}</Badge>
-                  ) : null}
-                </div>
-                <p className="mt-2 text-sm font-semibold">
-                  {cert.href ? (
-                    <a href={cert.href} target="_blank" rel="noreferrer">
-                      {cert.title}
-                    </a>
-                  ) : (
-                    cert.title
-                  )}
-                </p>
-                <p className="text-sm text-muted-foreground">{cert.issuer}</p>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-
-        <Reveal className="mt-10 flex flex-wrap gap-2">
+        <Reveal className="mt-16 sm:mt-20 flex flex-wrap gap-2">
           <Button variant="outline" asChild>
-            <a href={site.linkedin} target="_blank" rel="noreferrer">
+            <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
               <Linkedin className="h-4 w-4" />
               LinkedIn
             </a>
           </Button>
           <Button variant="outline" asChild>
-            <a href={site.github} target="_blank" rel="noreferrer">
+            <a href={site.github} target="_blank" rel="noopener noreferrer">
               <Github className="h-4 w-4" />
               GitHub
             </a>
           </Button>
           <Button variant="outline" asChild>
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact">Find me</Link>
           </Button>
         </Reveal>
       </div>

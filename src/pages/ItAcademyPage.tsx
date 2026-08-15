@@ -2,18 +2,23 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, Check, MapPin } from "lucide-react";
 import { Seo } from "@/components/Seo";
 import { PageEnter, Reveal, Stagger, RevealItem } from "@/components/Motion";
+import itAcademyIcon from "@/assets/brands/it-academy.png";
 import { itAcademy } from "@/data/itAcademy";
 import { site } from "@/data/site";
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <h2 className="section-label">{children}</h2>;
+  return (
+    <h2 className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground mb-4">
+      {children}
+    </h2>
+  );
 }
 
 export default function ItAcademyPage() {
   const a = itAcademy;
 
   return (
-    <PageEnter className="site-shell pt-8 pb-16">
+    <PageEnter className="site-shell page-pad">
       <Seo
         title={`${a.name} · ${a.programEn} — ${site.name}`}
         description={a.seoDescription}
@@ -49,7 +54,10 @@ export default function ItAcademyPage() {
         </Link>
 
         <header className="mb-10">
-          <p className="section-label">Education</p>
+          <div className="org-head mb-4">
+            <img src={itAcademyIcon} alt="" width={36} height={36} className="brand-mark" />
+            <p className="story-tag mb-0">Education</p>
+          </div>
           <h1 className="text-fluid-3xl font-semibold tracking-tight leading-[1.12]">
             {a.name}.{" "}
             <span className="font-serif-italic font-normal text-muted-foreground">
@@ -75,7 +83,7 @@ export default function ItAcademyPage() {
             <a
               href={a.href}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-xs font-medium text-foreground hover:text-foreground/70 transition-colors"
             >
               Official site
@@ -90,7 +98,7 @@ export default function ItAcademyPage() {
             {a.stats.map((s) => (
               <div
                 key={s.label}
-                className="rounded-2xl border border-border/70 bg-card px-4 py-4 sm:py-5 text-center shadow-sm"
+                className="surface px-4 py-4 sm:py-5 text-center"
               >
                 <p className="text-xl sm:text-2xl font-semibold tracking-tight tabular-nums">{s.value}</p>
                 <p className="mt-1 text-[11px] sm:text-xs text-muted-foreground">{s.label}</p>
@@ -142,7 +150,7 @@ export default function ItAcademyPage() {
         <Stagger className="space-y-4 mb-12">
           {a.phases.map((phase) => (
             <RevealItem key={phase.id}>
-              <article className="rounded-2xl border border-border/70 bg-card/80 p-5 sm:p-6 shadow-sm">
+              <article className="surface p-5 sm:p-6">
                 <div className="flex flex-wrap items-baseline justify-between gap-2 gap-y-1">
                   <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
                     {phase.phase}
@@ -239,7 +247,7 @@ export default function ItAcademyPage() {
           <Stagger className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3" fast>
             {a.support.map((s) => (
               <RevealItem key={s.title}>
-                <div className="h-full rounded-2xl border border-border/70 bg-card p-4 sm:p-5 shadow-sm">
+                <div className="h-full surface p-4 sm:p-5">
                   <h3 className="text-sm font-semibold tracking-tight">{s.title}</h3>
                   <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{s.body}</p>
                 </div>
@@ -250,7 +258,7 @@ export default function ItAcademyPage() {
 
         {/* Footer CTA */}
         <Reveal>
-          <div className="rounded-2xl border border-border/70 bg-card p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+          <div className="surface p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <p className="text-sm font-medium text-foreground">Learn more from the source</p>
               <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
@@ -261,7 +269,7 @@ export default function ItAcademyPage() {
               <a
                 href={a.href}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-1.5 rounded-full bg-foreground text-background px-4 py-2 text-xs font-medium hover:opacity-90 transition-opacity min-h-10"
               >
                 Cibernarium
@@ -270,7 +278,7 @@ export default function ItAcademyPage() {
               <a
                 href={a.academyHref}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-1.5 rounded-full border border-border/70 bg-background px-4 py-2 text-xs font-medium text-foreground hover:bg-muted/50 transition-colors min-h-10"
               >
                 Barcelona Activa

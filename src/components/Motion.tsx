@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { motion, useReducedMotion, type HTMLMotionProps } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useReducedMotion, type HTMLMotionProps } from "motion/react";
 import {
   chipItem,
   fadeOnly,
@@ -8,10 +8,12 @@ import {
   heroContainer,
   heroItem,
   markIntroSeen,
+  springSoft,
   springUi,
   staggerChips,
   staggerContainer,
   staggerFast,
+  storyTitle,
   tweenFast,
 } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -87,13 +89,11 @@ export function RevealItem({
 /** Hero orchestrated entrance — once per session. */
 export function HeroIntro({ children, className }: { children: React.ReactNode; className?: string }) {
   const reduce = useReducedMotion();
-  const [skip, setSkip] = useState(true);
+  const [skip] = useState(() => hasSeenIntro() || !!reduce);
 
   useEffect(() => {
-    const seen = hasSeenIntro();
-    setSkip(seen || !!reduce);
-    if (!seen) markIntroSeen();
-  }, [reduce]);
+    if (!hasSeenIntro()) markIntroSeen();
+  }, []);
 
   if (skip || reduce) {
     return <div className={className}>{children}</div>;
@@ -140,7 +140,59 @@ export function PageEnter({ children, className }: { children: React.ReactNode; 
   );
 }
 
-/** Interactive card with press + hover lift (gated for fine pointers via CSS). */
+/** Spoken section title, with a quiet category tag above. */
+export function StoryHeading({
+  children,
+  tag,
+  className,
+}: {
+  children: React.ReactNode;
+  tag?: string;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+  return (
+    <header className={cn("story-head", className)}>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.4 }}
+        variants={reduce ? fadeOnly : storyTitle}
+      >
+        {tag ? <p className="story-tag">{tag}</p> : null}
+        <h2 className="story-heading">{children}</h2>
+      </motion.div>
+    </header>
+  );
+}
+
+/** One story beat — the in-view item stays sharp; neighbors recede. Opacity only. */
+export function StoryEntry({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+  const inView = useInView(ref, { amount: 0.2, margin: "0px 0px -22% 0px" });
+
+  return (
+    <motion.article
+      ref={ref}
+      className={cn("story-entry", className)}
+      initial={false}
+      animate={reduce ? { opacity: 1 } : { opacity: inView ? 1 : 0.4 }}
+      transition={springSoft}
+      style={{ transform: "none" }}
+    >
+      {children}
+    </motion.article>
+  );
+}
+
+/** Press feedback only — no hover lift. */
 export function MotionCard({
   children,
   className,
@@ -150,8 +202,7 @@ export function MotionCard({
   return (
     <motion.div
       className={className}
-      whileHover={reduce ? undefined : { y: -2 }}
-      whileTap={reduce ? undefined : { scale: 0.985 }}
+      whileTap={reduce ? undefined : { scale: 0.96 }}
       transition={springUi}
       {...props}
     >

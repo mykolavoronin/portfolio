@@ -1,14 +1,22 @@
-export type Education = {
+import politecnicsIcon from "@/assets/brands/politecnics.png";
+import itAcademyIcon from "@/assets/brands/it-academy.png";
+import scrimbaIcon from "@/assets/brands/scrimba.png";
+import animationsIcon from "@/assets/brands/animations-dev.png";
+import mriyaIcon from "@/assets/brands/mriya.png";
+import reginaIcon from "@/assets/brands/regina-carmeli.png";
+import { laneFromRange, type TimeLane } from "@/lib/timeline";
+
+export type StudyItem = {
+  title: string;
   period: string;
-  school: string;
-  program: string;
-  location?: string;
-  href?: string;
-  /** Internal portfolio page (takes precedence over external href for school link) */
-  pagePath?: string;
-  notes?: string[];
+  /** ISO YYYY-MM-DD — drives whether this is upcoming, current, or done. */
+  start?: string;
+  end?: string;
+  /** On hold: stays in data, not shown as studying or finished. */
+  hold?: boolean;
   status?: string;
-  /** Expand last acronym on hover (e.g. CASIX → full Catalan title) */
+  href?: string;
+  notes?: string[];
   programExpand?: {
     prefix: string;
     short: string;
@@ -16,65 +24,208 @@ export type Education = {
   };
 };
 
-export const education: Education[] = [
+export type StudyGroup = {
+  id: string;
+  name: string;
+  location?: string;
+  href?: string;
+  pagePath?: string;
+  icon: string;
+  /** Keep in data, leave off the public plan until a start date is set. */
+  hidden?: boolean;
+  /** In data, but never named on the public site. */
+  private?: boolean;
+  items: StudyItem[];
+};
+
+export type StudyPhase = TimeLane | "hold" | "hidden";
+
+export function itemPhase(item: StudyItem, now: Date = new Date()): StudyPhase {
+  if (item.hold) return "hold";
+  if (item.start || item.end) {
+    const lane = laneFromRange(item.start, item.end, now);
+    if (item.status === "Issued" || item.status === "Completed") {
+      return lane === "upcoming" ? "upcoming" : "completed";
+    }
+    return lane;
+  }
+  if (item.status === "Upcoming") return "upcoming";
+  if (item.status === "In progress") return "current";
+  if (item.status === "Issued" || item.status === "Completed") return "completed";
+  return "upcoming";
+}
+
+export function visibleItems(group: StudyGroup, now: Date = new Date()): StudyItem[] {
+  if (group.hidden || group.private) return [];
+  return group.items.filter((item) => itemPhase(item, now) === "completed");
+}
+
+export function groupLane(
+  group: StudyGroup,
+  now: Date = new Date(),
+): "studying" | "studied" | null {
+  const items = visibleItems(group, now);
+  if (items.length === 0) return null;
+  if (items.some((item) => itemPhase(item, now) === "current")) return "studying";
+  return "studied";
+}
+
+export type Education = {
+  period: string;
+  school: string;
+  program: string;
+  location?: string;
+  href?: string;
+  pagePath?: string;
+  notes?: string[];
+  status?: string;
+  programExpand?: StudyItem["programExpand"];
+};
+
+/** Institution groups — add another Scrimba / Politècnics item here, not as a new section. */
+export const studyGroups: StudyGroup[] = [
   {
-    period: "Sep 2026 — Jul 2028",
-    school: "Politècnics Barcelona",
-    program: "CFGS CASIX",
-    location: "Barcelona, Spain",
+    id: "politecnics",
+    name: "Politècnics Barcelona",
+    location: "Barcelona",
     href: "https://politecnics.barcelona/",
-    status: "Upcoming",
-    programExpand: {
-      prefix: "CFGS ",
-      short: "CASIX",
-      full: "Administració de Sistemes Informàtics en Xarxa — Ciberseguretat",
-    },
+    icon: politecnicsIcon,
+    private: true,
+    items: [
+      {
+        title: "CFGS CASIX",
+        period: "Sep 2026 — Jul 2028",
+        start: "2026-09-01",
+        end: "2028-07-31",
+        status: "Upcoming",
+        programExpand: {
+          prefix: "CFGS ",
+          short: "CASIX",
+          full: "Administració de Sistemes Informàtics en Xarxa — Ciberseguretat",
+        },
+      },
+    ],
   },
   {
-    period: "2026",
-    school: "IT Academy · Barcelona Activa",
-    program: "Certified Cybersecurity Analyst Itinerary",
-    location: "Barcelona, Spain",
+    id: "it-academy",
+    name: "IT Academy · Barcelona Activa",
+    location: "Barcelona",
     href: "https://cibernarium.barcelonactiva.cat/",
     pagePath: "/education/it-academy",
-    status: "Upcoming",
-    notes: [
-      "Itinerari certificat d'Analista en Ciberseguretat",
-      "Fundamentals, SOC / CCNA Cybersecurity, Network Security, Ethical Hacker",
-      "Cisco CCST & CCNA pathways · official certificate on completion",
+    icon: itAcademyIcon,
+    hidden: true,
+    items: [
+      {
+        title: "Certified Cybersecurity Analyst Itinerary",
+        period: "2026",
+        status: "Upcoming",
+        href: "/education/it-academy",
+        notes: [
+          "Itinerari certificat d'Analista en Ciberseguretat",
+          "Fundamentals, SOC / CCNA Cybersecurity, Network Security, Ethical Hacker",
+          "Cisco CCST & CCNA pathways · official certificate on completion",
+        ],
+      },
     ],
   },
   {
-    period: "Feb 2025 — Feb 2026",
-    school: "Scrimba",
-    program: "Full Stack Developer Diploma",
+    id: "scrimba",
+    name: "Scrimba",
+    location: "Online",
     href: "https://scrimba.com/",
-    status: "In progress",
-    notes: [
-      "HTML, CSS, and modern JavaScript fundamentals",
-      "React and full-stack application architecture",
-      "SQL and database design fundamentals",
-      "Shipping real projects alongside coursework",
+    icon: scrimbaIcon,
+    items: [
+      {
+        title: "Full Stack Developer Diploma",
+        period: "Feb 2025 — Feb 2026",
+        start: "2025-02-01",
+        hold: true,
+        status: "In progress",
+        href: "https://scrimba.com/",
+        notes: [
+          "HTML, CSS, and modern JavaScript fundamentals",
+          "React and full-stack application architecture",
+          "SQL and database design fundamentals",
+          "Shipping real projects alongside coursework",
+        ],
+      },
     ],
   },
   {
-    period: "Sep 2024 — 2026",
-    school: "Mriya Barcelona School",
-    program: "High School Diploma · Batxillerat (General Studies)",
-    location: "Barcelona, Spain",
-    status: "Completed",
-    notes: [
-      "Mathematics and applied sciences",
-      "Language and literature (Spanish, Catalan, English)",
-      "History, philosophy, technology, and design",
+    id: "animations-dev",
+    name: "animations.dev",
+    location: "Online",
+    href: "https://animations.dev/",
+    icon: animationsIcon,
+    items: [
+      {
+        title: "Animations on the Web",
+        period: "2026",
+        start: "2026-01-01",
+        end: "2026-08-01",
+        status: "Issued",
+        href: "https://animations.dev/certificate/2139bcb6-d432-4cd0-ad20-7ac447ad1def",
+        notes: [
+          "Motion systems, easing, and production animation craft.",
+          "Certificate from Emil Kowalski’s course.",
+        ],
+      },
     ],
   },
   {
-    period: "Sep 2020 — Jun 2024",
-    school: "Col·legi Regina Carmeli Rubí",
-    program: "Secondary Education (ESO)",
-    location: "Rubí, Barcelona",
-    status: "Completed",
-    notes: ["Technology and computing fundamentals", "Multilingual academic environment"],
+    id: "mriya",
+    name: "Mriya Barcelona School",
+    location: "Barcelona",
+    icon: mriyaIcon,
+    items: [
+      {
+        title: "High School Diploma · Batxillerat (General Studies)",
+        period: "Sep 2024 — 2026",
+        start: "2024-09-01",
+        end: "2026-06-30",
+        status: "Completed",
+        notes: [
+          "Mathematics and applied sciences",
+          "Language and literature (Spanish, Catalan, English)",
+          "History, philosophy, technology, and design",
+        ],
+      },
+    ],
+  },
+  {
+    id: "regina-carmeli",
+    name: "Col·legi Regina Carmeli Rubí",
+    location: "Rubí",
+    href: "https://reginacarmeli.com/",
+    icon: reginaIcon,
+    items: [
+      {
+        title: "Secondary Education (ESO)",
+        period: "Sep 2020 — Jun 2024",
+        start: "2020-09-01",
+        end: "2024-06-30",
+        status: "Completed",
+        notes: ["Technology and computing fundamentals", "Multilingual academic environment"],
+      },
+    ],
   },
 ];
+
+export const education: Education[] = studyGroups.flatMap((group) => {
+  const items = visibleItems(group);
+  if (items.length === 0) return [];
+  const item = items[0];
+  return [
+    {
+      period: item.period,
+      school: group.name,
+      program: item.title,
+      location: group.location,
+      href: group.href,
+      pagePath: group.pagePath,
+      notes: item.notes,
+      status: item.status,
+      programExpand: item.programExpand,
+    },
+  ];
+});

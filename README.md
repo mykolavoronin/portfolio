@@ -1,6 +1,8 @@
 # Mykola Voronin — Portfolio
 
-Personal portfolio: **React**, **TypeScript**, **Vite**, **Tailwind CSS**, **Motion / Motion+**.
+Personal portfolio: **React**, **TypeScript**, **Vite**, **Tailwind CSS**, **Motion**.
+
+One editorial visual system. Tokens in `src/index.css`. Content in `src/data/*`.
 
 ## Quick start
 
@@ -21,6 +23,20 @@ npm run dev
 | `npm run screenshots` | Capture project site screenshots |
 | `npm run og:render` | Rebuild card OG PNGs from SVG |
 
+## Agent skills
+
+Design-engineering skills live in `.agents/skills` (shared by Grok, Codex,
+and Antigravity). Claude Code uses `.claude/skills` — it does not read
+`.agents`. See `AGENTS.md` and `skills-lock.json`.
+
+Refresh / add:
+
+```bash
+npx skills add jakubkrehel/skills -y --copy -a grok -a claude-code
+npx @animationsdev/install --token=<token> --project -y
+npx @aiforui/install --token=<token> --project -y
+```
+
 ## Layout
 
 ```
@@ -31,7 +47,7 @@ src/
   components/           Layout, motion, SEO, UI primitives
   data/                 Content SSOT (projects, site, education, …)
   hooks/                Small shared hooks
-  lib/                  Utils (cn, haptics, vcard, motion tokens)
+  lib/                  Utils (cn, haptics, vcard, motion)
   pages/                Route screens
   App.tsx               Router
   index.css             Design tokens + components

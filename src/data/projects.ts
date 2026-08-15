@@ -5,10 +5,12 @@ import {
   MapPin,
   type LucideIcon,
 } from "lucide-react";
-import kucherov from "@/assets/projects/kucherov.png";
-import ekabalance from "@/assets/projects/ekabalance.png";
-import agenyz from "@/assets/projects/agenyz.png";
-import masaje from "@/assets/projects/masaje.png";
+import kucherov from "@/assets/projects/kucherov.webp";
+import ekabalance from "@/assets/projects/ekabalance.webp";
+import agenyz from "@/assets/projects/agenyz.webp";
+import masaje from "@/assets/projects/masaje.webp";
+import kucherovIcon from "@/assets/brands/kucherov.png";
+import ekaIcon from "@/assets/brands/eka-favicon.png";
 
 export type Project = {
   slug: string;
@@ -47,6 +49,7 @@ export type ClientGroup = {
   href: string;
   location: string;
   period: string;
+  icon: string;
 };
 
 export const clientGroups: ClientGroup[] = [
@@ -57,6 +60,7 @@ export const clientGroups: ClientGroup[] = [
     href: "https://kucherov.studio/",
     location: "Remote",
     period: "2025 — Present",
+    icon: kucherovIcon,
   },
   {
     id: "eka-balance",
@@ -65,6 +69,7 @@ export const clientGroups: ClientGroup[] = [
     href: "https://ekabalance.com/",
     location: "Barcelona",
     period: "2021 — Present",
+    icon: ekaIcon,
   },
 ];
 

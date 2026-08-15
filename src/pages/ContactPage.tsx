@@ -24,18 +24,18 @@ const methods = [
 
 export default function ContactPage() {
   return (
-    <PageEnter className="site-shell pt-8 pb-16">
+    <PageEnter className="site-shell page-pad">
       <Seo
-        title={`Contact — ${site.name}, Software Engineer in Barcelona`}
+        title={`Contact — ${site.name}`}
         description={`Connect with ${site.name} on LinkedIn or GitHub. Digital business card with QR and save to contacts.`}
         path="/contact"
       />
       <div>
         <header className="page-header">
-          <p className="section-label">Contact</p>
+          <p className="story-tag">Contact</p>
           <h1 className="text-fluid-3xl font-semibold tracking-tight">
             Find me{" "}
-            <span className="font-serif-italic font-normal text-muted-foreground">online.</span>
+            <span className="font-serif-italic font-normal text-muted-foreground">here.</span>
           </h1>
           <p className="mt-4 text-fluid-base text-muted-foreground leading-relaxed max-w-xl">
             Best places to reach me are LinkedIn and GitHub. Prefer a scan-friendly card? Open the digital
@@ -48,7 +48,7 @@ export default function ContactPage() {
           </p>
         </header>
 
-        <Reveal className="mb-6 flex flex-wrap gap-2">
+        <Reveal className="mb-8 flex flex-wrap gap-2">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-2.5 py-1.5 text-xs text-muted-foreground shadow-sm">
             <MapPin className="h-3 w-3" strokeWidth={1.75} />
             {site.location}
@@ -58,10 +58,10 @@ export default function ContactPage() {
           </span>
         </Reveal>
 
-        <Reveal className="mb-8">
+        <Reveal className="mb-10">
           <Link
             to="/card"
-            className="pressable pressable-soft group relative flex flex-col sm:flex-row sm:items-center gap-4 overflow-hidden rounded-2xl border border-border/65 bg-card p-5 sm:p-6 shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-foreground/12 hover:shadow-md"
+            className="pressable pressable-soft group relative flex flex-col sm:flex-row sm:items-center gap-4 overflow-hidden surface p-5 sm:p-6 transition-[border-color] duration-150 hover:border-foreground/12"
           >
             <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-border/60 bg-muted/40">
               <QrCode className="h-5 w-5 text-foreground/80" strokeWidth={1.5} />
@@ -74,20 +74,20 @@ export default function ContactPage() {
             </div>
             <span className="inline-flex items-center gap-1 text-xs font-medium text-foreground/80 group-hover:text-foreground">
               Open card
-              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+              <ArrowRight className="h-3.5 w-3.5" />
             </span>
           </Link>
         </Reveal>
 
-        <Reveal className="mb-8 flex flex-wrap gap-2.5">
+        <Reveal className="mb-10 flex flex-wrap gap-2.5">
           <Button asChild>
-            <a href={site.linkedin} target="_blank" rel="noreferrer">
+            <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
               <Linkedin className="h-4 w-4" />
               LinkedIn
             </a>
           </Button>
           <Button variant="outline" asChild>
-            <a href={site.github} target="_blank" rel="noreferrer">
+            <a href={site.github} target="_blank" rel="noopener noreferrer">
               <Github className="h-4 w-4" />
               GitHub
             </a>
@@ -101,7 +101,7 @@ export default function ContactPage() {
         </Reveal>
 
         <Stagger
-          className="rounded-2xl border border-border/65 bg-card shadow-sm divide-y divide-border/50 overflow-hidden"
+          className="surface divide-y divide-border/50 overflow-hidden"
           fast
         >
           {methods.map((m) => {
@@ -112,7 +112,7 @@ export default function ContactPage() {
                   <a
                     href={m.href}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="group flex min-w-0 flex-1 items-center gap-3"
                   >
                     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-border/60 bg-muted/30 shadow-sm">

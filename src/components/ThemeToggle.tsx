@@ -1,27 +1,38 @@
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ThemeProvider";
+import { cn } from "@/lib/utils";
 
-export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+const iconSpring = { type: "spring" as const, duration: 0.3, bounce: 0 };
 
-  const toggleTheme = () => {
-    const root = document.documentElement;
-    const isDark =
-      theme === "dark" || (theme === "system" && root.classList.contains("dark"));
-    setTheme(isDark ? "light" : "dark");
-  };
+export function ThemeToggle({ className }: { className?: string }) {
+  const { resolvedTheme, setTheme } = useTheme();
+  const reduce = useReducedMotion();
+  const isDark = resolvedTheme === "dark";
 
   return (
     <Button
       variant="ghost"
       size="icon"
-      onClick={toggleTheme}
-      className="relative h-9 w-9 min-h-9 min-w-9 rounded-full"
-      aria-label="Toggle theme"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className={cn("relative h-9 w-9 min-h-9 min-w-9 rounded-full", className)}
+      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
     >
-      <Sun className="h-4 w-4 rotate-0 scale-100 transition-[transform,opacity] duration-200 ease-out dark:-rotate-90 dark:scale-0 dark:opacity-0" />
-      <Moon className="absolute h-4 w-4 rotate-90 scale-0 opacity-0 transition-[transform,opacity] duration-200 ease-out dark:rotate-0 dark:scale-100 dark:opacity-100" />
+      <span className="relative block h-4 w-4">
+        <AnimatePresence initial={false}>
+          <motion.span
+            key={isDark ? "moon" : "sun"}
+            className="absolute inset-0 inline-flex items-center justify-center"
+            initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+            animate={reduce ? { opacity: 1 } : { opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+            transition={iconSpring}
+          >
+            {isDark ? <Moon className="h-4 w-4" strokeWidth={1.75} /> : <Sun className="h-4 w-4" strokeWidth={1.75} />}
+          </motion.span>
+        </AnimatePresence>
+      </span>
     </Button>
   );
 }

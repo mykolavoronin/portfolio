@@ -13,9 +13,9 @@ const badgeVariants = cva(
         muted: "border-transparent bg-muted text-muted-foreground",
         soft: "border-border/50 bg-card/80 text-foreground/85 shadow-sm",
         success:
-          "border-emerald-500/20 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300",
-        warn: "border-amber-500/20 bg-amber-500/10 text-amber-900 dark:text-amber-300",
-        info: "border-sky-500/20 bg-sky-500/10 text-sky-900 dark:text-sky-300",
+          "border-[hsl(var(--status-success)/0.22)] bg-[hsl(var(--status-success)/0.12)] text-[hsl(var(--status-success-fg))]",
+        warn: "border-[hsl(var(--status-warn)/0.22)] bg-[hsl(var(--status-warn)/0.12)] text-[hsl(var(--status-warn-fg))]",
+        info: "border-[hsl(var(--status-info)/0.22)] bg-[hsl(var(--status-info)/0.12)] text-[hsl(var(--status-info-fg))]",
       },
     },
     defaultVariants: {

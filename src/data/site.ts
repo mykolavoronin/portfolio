@@ -2,8 +2,9 @@
 
 export const site = {
   name: "Mykola Voronin",
-  role: "Software Engineer",
+  role: "Student",
   location: "Barcelona, Spain",
+  born: "2008-10-13",
   timezone: "GMT+1",
   email: "mykola@mykolavoronin.com",
   siteUrl: "https://mykolavoronin.com",
@@ -17,10 +18,9 @@ export const site = {
     label: "Not taking projects",
     detail: "Focused on school and existing work — open to conversations.",
   },
-  tagline: "Calm, high-performance web products.",
-  shortBio: "Software engineer in Barcelona. React, Next.js, TypeScript.",
-  seoDescription:
-    "Mykola Voronin — software engineer in Barcelona. Clean, fast web with React, Next.js and TypeScript.",
+  tagline: "",
+  shortBio: "Student in Barcelona.",
+  seoDescription: "Mykola Voronin — student in Barcelona.",
 } as const;
 
 export const principles = [
@@ -32,7 +32,22 @@ export const principles = [
 ] as const;
 
 export const aboutParagraphs = [
-  "Software engineer in Barcelona. I build calm, fast web products and care about the details.",
-  "Client work: Kucherov Studio and EKA Balance (hub, Agenyz, masaje.barcelona).",
-  "Studying systems and cybersecurity — Scrimba full-stack, CFGS CASIX at Politècnics, IT Academy analyst path.",
+  "Student in Barcelona. I work with Kucherov Studio and EKA Balance, and I care about the details.",
+  "Day to day I work with Kucherov Studio and EKA Balance — the studio site, the wellness hub, and the smaller properties around it.",
+  "I like understanding how things are put together: phones, software, the quiet craft in a well-made object.",
+] as const;
+
+export const hobbies = [
+  {
+    title: "Reading",
+    detail: "Books and long essays over feeds. Design, how systems work, and anything that stays with you.",
+  },
+  {
+    title: "Technology",
+    detail: "Phones, Apple hardware, and the tools I use every day. I like objects that feel finished.",
+  },
+  {
+    title: "Not games",
+    detail: "Video games aren’t my thing. I’d rather read, tinker, or walk the city.",
+  },
 ] as const;

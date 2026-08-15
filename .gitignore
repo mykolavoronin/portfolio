@@ -17,6 +17,8 @@ lerna-debug.log*
 .env
 .env.*
 !.env.example
+.mcp.json
+.mcp.local.json
 
 # Local archives / leftover nests
 _archive/
@@ -26,6 +28,13 @@ portfolio/
 
 # Vercel
 .vercel
+
+# Local agent / editor workspaces
+.agents/
+.claude/
+.copilot/
+.cursor/
+.grok/
 
 # Editor
 .vscode/*

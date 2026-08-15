@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { Seo } from "@/components/Seo";
 import { books, tools, writers, places } from "@/data/recommendations";
 import { site } from "@/data/site";
-import { PageEnter, Reveal } from "@/components/Motion";
+import { PageEnter, Reveal, StoryHeading } from "@/components/Motion";
 import { Button } from "@/components/ui/button";
 
 export default function RecommendationsPage() {
   return (
-    <PageEnter className="site-shell pt-8 pb-16">
+    <PageEnter className="site-shell page-pad">
       <Seo
         title={`Recommendations — Books, tools & writers · ${site.name}`}
         description="Books, tools and writers that shape how Mykola Voronin designs and builds software."
@@ -16,7 +16,7 @@ export default function RecommendationsPage() {
       />
       <div>
         <header className="page-header">
-          <p className="section-label">Recommendations</p>
+          <p className="story-tag">Recommendations</p>
           <h1 className="text-fluid-3xl font-semibold tracking-tight">
             Things worth your{" "}
             <span className="font-serif-italic font-normal text-muted-foreground">attention.</span>
@@ -27,19 +27,21 @@ export default function RecommendationsPage() {
         </header>
 
         <Reveal className="mb-10 sm:mb-12">
-          <h2 className="section-label">Books</h2>
+          <StoryHeading tag="Books" className="story-head-static">
+            Worth reading.
+          </StoryHeading>
           <ul className="space-y-2.5">
             {books.map((b) => (
               <li
                 key={b.title}
-                className="rounded-2xl border border-border/65 bg-card p-4 sm:p-5 shadow-sm"
+                className="surface p-4 sm:p-5"
               >
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="text-sm font-semibold text-foreground">
                     <a
                       href={b.href}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 transition-colors hover:text-foreground/75"
                     >
                       {b.title}
@@ -55,8 +57,10 @@ export default function RecommendationsPage() {
         </Reveal>
 
         <Reveal className="mb-10 sm:mb-12">
-          <h2 className="section-label">Tools</h2>
-          <ul className="rounded-2xl border border-border/65 bg-card shadow-sm divide-y divide-border/50 overflow-hidden">
+          <StoryHeading tag="Tools" className="story-head-static">
+            What I use.
+          </StoryHeading>
+          <ul className="surface divide-y divide-border/50 overflow-hidden">
             {tools.map((t) => (
               <li key={t.name} className="px-4 sm:px-5 py-3.5 flex items-baseline justify-between gap-4">
                 <span className="text-sm font-medium text-foreground">{t.name}</span>
@@ -67,15 +71,17 @@ export default function RecommendationsPage() {
         </Reveal>
 
         <Reveal className="mb-10 sm:mb-12">
-          <h2 className="section-label">Writers I follow</h2>
+          <StoryHeading tag="Writers" className="story-head-static">
+            People I read.
+          </StoryHeading>
           <ul className="flex flex-wrap gap-2">
             {writers.map((r) => (
               <li key={r.name}>
                 <a
                   href={r.href}
                   target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 rounded-full border border-border/65 bg-card px-3 py-1.5 text-xs font-medium text-foreground shadow-sm transition-colors hover:border-foreground/15"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 min-h-10 rounded-full border border-border/65 bg-card px-3 text-xs font-medium text-foreground shadow-sm transition-colors hover:border-foreground/15"
                 >
                   {r.name}
                   <ArrowUpRight className="h-3 w-3 text-muted-foreground" />
@@ -86,17 +92,19 @@ export default function RecommendationsPage() {
         </Reveal>
 
         <Reveal>
-          <h2 className="section-label">If you&apos;re in Barcelona</h2>
+          <StoryHeading tag="Barcelona" className="story-head-static">
+            If you&apos;re here.
+          </StoryHeading>
           <ul className="space-y-2.5">
             {places.map((p) => (
               <li
                 key={p.name}
-                className="rounded-2xl border border-border/65 bg-card p-4 sm:p-5 shadow-sm"
+                className="surface p-4 sm:p-5"
               >
                 <a
                   href={p.href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-sm font-semibold text-foreground transition-colors hover:text-foreground/75"
                 >
                   {p.name}

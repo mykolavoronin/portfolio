@@ -1,3 +1,5 @@
+import { itemPhase, studyGroups, visibleItems } from "@/data/education";
+
 export type Certification = {
   title: string;
   issuer: string;
@@ -7,20 +9,19 @@ export type Certification = {
   href?: string;
 };
 
-export const certifications: Certification[] = [
-  {
-    title: "Animations on the Web",
-    issuer: "animations.dev · Emil Kowalski",
-    period: "2026",
-    status: "Issued",
-    credentialId: "2139bcb6-d432-4cd0-ad20-7ac447ad1def",
-    href: "https://animations.dev/certificate/2139bcb6-d432-4cd0-ad20-7ac447ad1def",
-  },
-  {
-    title: "Full Stack Developer Program",
-    issuer: "Scrimba",
-    period: "Feb 2025 — Feb 2026",
-    status: "In progress",
-    href: "https://scrimba.com/",
-  },
-];
+const COURSE_GROUPS = new Set(["scrimba", "animations-dev"]);
+
+/** Derived from studyGroups so extra Scrimba / course certs stay in one place. */
+export const certifications: Certification[] = studyGroups
+  .filter((group) => COURSE_GROUPS.has(group.id))
+  .flatMap((group) =>
+    visibleItems(group)
+      .filter((item) => itemPhase(item) === "completed")
+      .map((item) => ({
+        title: item.title,
+        issuer: group.name,
+        period: item.period,
+        status: item.status,
+        href: item.href,
+      })),
+  );

@@ -4,31 +4,32 @@ import { Seo } from "@/components/Seo";
 import { PageEnter } from "@/components/Motion";
 import { Button } from "@/components/ui/button";
 import { site } from "@/data/site";
+import { showSkills } from "@/data/skills";
 
 const shortcuts = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
-  { to: "/skills", label: "Skills" },
+  ...(showSkills ? [{ to: "/skills", label: "Skills" }] : []),
   { to: "/contact", label: "Contact" },
   { to: "/card", label: "Digital card" },
-] as const;
+];
 
 export default function NotFound() {
   const location = useLocation();
   const path = location.pathname;
 
   return (
-    <PageEnter className="site-shell pt-10 sm:pt-16 pb-20">
+    <PageEnter className="site-shell page-pad">
       <Seo
         title={`Page not found — ${site.name}`}
-        description="This page doesn't exist. Head back home or jump to About, Skills, or Contact."
+        description="This page doesn't exist. Head back home or jump to About or Contact."
         path={path}
       />
 
       <div className="mx-auto max-w-lg">
-        <p className="section-label">Error 404</p>
+        <p className="story-tag">404</p>
 
-        <div className="rounded-2xl border border-border/65 bg-card p-6 sm:p-8 shadow-sm">
+        <div className="surface p-6 sm:p-8">
           <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
             Not found
           </p>

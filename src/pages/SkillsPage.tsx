@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 export default function SkillsPage() {
   return (
-    <PageEnter className="site-shell pt-8 pb-16">
+    <PageEnter className="site-shell page-pad">
       <Seo
         title={`Skills — ${site.name}`}
         description="Languages, frameworks, tools."
@@ -16,7 +16,7 @@ export default function SkillsPage() {
       />
       <div>
         <header className="page-header">
-          <p className="section-label">Skills</p>
+          <p className="story-tag">Skills</p>
           <h1 className="text-fluid-3xl font-semibold tracking-tight">
             Tools of the{" "}
             <span className="font-serif-italic font-normal text-muted-foreground">trade.</span>
@@ -26,8 +26,8 @@ export default function SkillsPage() {
         <div className="space-y-6">
           {skillGroups.map((g) => (
             <Reveal key={g.title}>
-              <div className="rounded-2xl border border-border/65 bg-card p-4 shadow-sm">
-                <h2 className="section-label mb-3">{g.title}</h2>
+              <div className="surface p-4">
+                <h2 className="mb-3 text-sm font-semibold tracking-tight">{g.title}</h2>
                 <Stagger className="flex flex-wrap gap-1.5" chips>
                   {g.items.map((it) => (
                     <RevealItem key={it} as="span" chip>
@@ -40,12 +40,13 @@ export default function SkillsPage() {
           ))}
 
           <Reveal>
-            <div className="rounded-2xl border border-border/65 bg-card p-4 shadow-sm">
-              <h2 className="section-label mb-3">Spoken</h2>
+            <div className="surface p-4">
+              <h2 className="mb-3 text-sm font-semibold tracking-tight">Spoken</h2>
               <Stagger className="flex flex-wrap gap-1.5" chips>
                 {spokenLanguages.map((l) => (
                   <RevealItem key={l.name} as="span" chip>
                     <Badge variant="outline">
+                      <img src={l.flag} alt="" width={16} height={11} className="lang-flag" />
                       {l.name}
                       <span className="text-muted-foreground/50">·</span>
                       <span className="text-muted-foreground">{l.level}</span>
