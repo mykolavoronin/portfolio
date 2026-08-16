@@ -4,117 +4,41 @@ import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { useVisitorGeo } from "@/hooks/useVisitorGeo";
 import { occasionFromSearch, showOccasions, type DressKind } from "@/lib/occasion";
+import partyHatSrc from "@/assets/dress/party-hat.webp";
+import bunnySrc from "@/assets/dress/bunny.webp";
+import crownSrc from "@/assets/dress/crown.webp";
+import roseSrc from "@/assets/dress/rose.webp";
+import starSrc from "@/assets/dress/star.webp";
+import sparkSrc from "@/assets/dress/spark.webp";
+import sunSrc from "@/assets/dress/sun.webp";
+import heartSrc from "@/assets/dress/heart.webp";
+import senyeraSrc from "@/assets/dress/senyera.webp";
+import cockadeSrc from "@/assets/dress/cockade.webp";
+import chestnutSrc from "@/assets/dress/chestnut.webp";
+import candleSrc from "@/assets/dress/candle.webp";
+import cavaSrc from "@/assets/dress/cava.webp";
+import ribbonSrc from "@/assets/dress/ribbon.webp";
 
-function PartyHat({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 64 58" className={className} aria-hidden>
-      <path d="M32 6.5 56 49.5H8Z" fill="#b83232" />
-      <path d="M32 6.5 38 49.5H26Z" fill="#fff" opacity="0.12" />
-      <path d="M10 46h44" stroke="#e8c56b" strokeWidth="3.2" strokeLinecap="round" />
-      <circle cx="32" cy="7" r="4.4" fill="#e8c56b" />
-    </svg>
-  );
-}
-
-function BunnyEars({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 72 50" className={className} aria-hidden>
-      <ellipse cx="23" cy="23" rx="8" ry="21" fill="#f3eee7" transform="rotate(-14 23 23)" />
-      <ellipse cx="23" cy="25" rx="3.4" ry="13" fill="#efc4c8" transform="rotate(-14 23 25)" />
-      <ellipse cx="49" cy="23" rx="8" ry="21" fill="#f3eee7" transform="rotate(14 49 23)" />
-      <ellipse cx="49" cy="25" rx="3.4" ry="13" fill="#efc4c8" transform="rotate(14 49 25)" />
-    </svg>
-  );
-}
-
-function Crown({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 72 34" className={className} aria-hidden>
-      <path d="M8 27 15 11l13 10L36 7l8 14 13-10 7 16Z" fill="#e2bc4e" />
-      <rect x="8" y="25" width="56" height="5" rx="1.2" fill="#c9a43a" />
-    </svg>
-  );
-}
-
-function Rose({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 36 34" className={className} aria-hidden>
-      <rect x="18" y="18" width="14" height="12" rx="1.4" fill="#f4efe6" stroke="#1f1b16" strokeWidth="0.8" />
-      <path d="M20 21h10M20 24h8" stroke="#1f1b16" strokeWidth="0.8" opacity="0.35" />
-      <path d="M12 26v5" stroke="#3d6a3a" strokeWidth="1.8" strokeLinecap="round" />
-      <circle cx="12" cy="14" r="7" fill="#b4232a" />
-      <circle cx="12" cy="14" r="3.4" fill="#d24a4a" />
-    </svg>
-  );
-}
-
-function Star({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 32 32" className={className} aria-hidden>
-      <path d="M16 3.2 18.6 12h9l-7.3 5.3 2.8 8.7L16 20.8l-7.1 5.2 2.8-8.7L4.4 12h9Z" fill="#e2bc4e" />
-    </svg>
-  );
-}
-
-function Spark({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 32 32" className={className} aria-hidden>
-      <path d="M16 4v8M16 20v8M4 16h8M20 16h8" stroke="#e2bc4e" strokeWidth="2" strokeLinecap="round" />
-      <circle cx="16" cy="16" r="2.2" fill="#b83232" />
-    </svg>
-  );
-}
-
-function Sun({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 32 32" className={className} aria-hidden>
-      <circle cx="16" cy="16" r="6" fill="#e2bc4e" />
-      <path d="M16 3.5v4M16 24.5v4M3.5 16h4M24.5 16h4M7.2 7.2l2.8 2.8M22 22l2.8 2.8M7.2 24.8 10 22M22 10l2.8-2.8" stroke="#e2bc4e" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function Heart({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 28 26" className={className} aria-hidden>
-      <path d="M14 23S3 15.4 3 9.2C3 5.8 5.6 3.5 8.7 3.5c1.9 0 3.6 1 4.3 2.5.7-1.5 2.4-2.5 4.3-2.5 3.1 0 5.7 2.3 5.7 5.7C23 15.4 14 23 14 23Z" fill="#b4232a" />
-    </svg>
-  );
-}
-
-function Senyera({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 32 22" className={className} aria-hidden>
-      <rect width="32" height="22" rx="2" fill="#f5d000" />
-      <rect y="4.4" width="32" height="3.3" fill="#da121a" />
-      <rect y="11" width="32" height="3.3" fill="#da121a" />
-      <rect y="17.6" width="32" height="3.3" fill="#da121a" />
-    </svg>
-  );
-}
-
-function Cockade({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 28 28" className={className} aria-hidden>
-      <circle cx="14" cy="14" r="12" fill="#0055a4" />
-      <circle cx="14" cy="14" r="8" fill="#f5f5f5" />
-      <circle cx="14" cy="14" r="4" fill="#ef4135" />
-    </svg>
-  );
+function DressCutout({ src, className }: { src: string; className?: string }) {
+  return <img src={src} alt="" draggable={false} className={cn("season-dress-cutout", className)} />;
 }
 
 const Dress = {
-  "party-hat": PartyHat,
-  bunny: BunnyEars,
-  crown: Crown,
-  rose: Rose,
-  star: Star,
-  spark: Spark,
-  sun: Sun,
-  heart: Heart,
-  senyera: Senyera,
-  cockade: Cockade,
-} satisfies Record<DressKind, typeof PartyHat>;
+  "party-hat": (p: { className?: string }) => <DressCutout src={partyHatSrc} {...p} />,
+  bunny: (p: { className?: string }) => <DressCutout src={bunnySrc} {...p} />,
+  crown: (p: { className?: string }) => <DressCutout src={crownSrc} {...p} />,
+  rose: (p: { className?: string }) => <DressCutout src={roseSrc} {...p} />,
+  star: (p: { className?: string }) => <DressCutout src={starSrc} {...p} />,
+  spark: (p: { className?: string }) => <DressCutout src={sparkSrc} {...p} />,
+  sun: (p: { className?: string }) => <DressCutout src={sunSrc} {...p} />,
+  heart: (p: { className?: string }) => <DressCutout src={heartSrc} {...p} />,
+  senyera: (p: { className?: string }) => <DressCutout src={senyeraSrc} {...p} />,
+  cockade: (p: { className?: string }) => <DressCutout src={cockadeSrc} {...p} />,
+  chestnut: (p: { className?: string }) => <DressCutout src={chestnutSrc} {...p} />,
+  candle: (p: { className?: string }) => <DressCutout src={candleSrc} {...p} />,
+  cava: (p: { className?: string }) => <DressCutout src={cavaSrc} {...p} />,
+  ribbon: (p: { className?: string }) => <DressCutout src={ribbonSrc} {...p} />,
+} satisfies Record<DressKind, typeof DressCutout>;
 
 export function SeasonalDress({
   kind,
