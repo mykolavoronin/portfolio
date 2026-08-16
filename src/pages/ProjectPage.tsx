@@ -186,7 +186,7 @@ export default function ProjectPage() {
           </Reveal>
         )}
 
-        <section className="site-shell pt-6">
+        <Reveal className="site-shell pt-6">
           <Link
             to={`/projects/${next.slug}`}
             className="pressable pressable-soft group flex items-center justify-between gap-4 surface p-4 hover:border-foreground/12 transition-colors"
@@ -200,7 +200,7 @@ export default function ProjectPage() {
             </div>
             <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
           </Link>
-        </section>
+        </Reveal>
       </article>
     </PageEnter>
   );

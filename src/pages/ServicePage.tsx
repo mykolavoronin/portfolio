@@ -100,7 +100,7 @@ export default function ServicePage() {
           </Reveal>
         )}
 
-        <div className="flex flex-wrap items-center gap-2.5 mb-10">
+        <Reveal className="flex flex-wrap items-center gap-2.5 mb-10">
           <Button variant="outline" asChild>
             <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
               LinkedIn
@@ -109,18 +109,20 @@ export default function ServicePage() {
           <Button variant="outline" asChild>
             <Link to="/contact">Contact</Link>
           </Button>
-        </div>
+        </Reveal>
 
-        <Link
-          to={`/services/${next.slug}`}
-          className="pressable pressable-soft group flex items-center justify-between gap-4 surface p-5 transition-colors hover:border-foreground/12"
-        >
-          <div className="min-w-0">
-            <p className="text-xs text-muted-foreground">Next service</p>
-            <p className="mt-1 text-sm font-semibold text-foreground truncate">{next.title}</p>
-          </div>
-          <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
-        </Link>
+        <Reveal>
+          <Link
+            to={`/services/${next.slug}`}
+            className="pressable pressable-soft group flex items-center justify-between gap-4 surface p-5 transition-colors hover:border-foreground/12"
+          >
+            <div className="min-w-0">
+              <p className="text-xs text-muted-foreground">Next service</p>
+              <p className="mt-1 text-sm font-semibold text-foreground truncate">{next.title}</p>
+            </div>
+            <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
+          </Link>
+        </Reveal>
       </div>
     </PageEnter>
   );

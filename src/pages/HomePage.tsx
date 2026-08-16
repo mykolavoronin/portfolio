@@ -155,9 +155,9 @@ export default function HomePage() {
           </HeroItem>
 
           <HeroItem className="hero-scroll-cue" as="p">
-            <a href="#working" aria-label="Scroll to see experience and education">
-              <span>Scroll to see more</span>
-              <ChevronDown className="h-3.5 w-3.5" strokeWidth={1.75} aria-hidden />
+            <a href="#working" aria-label="Scroll to see my work and experience">
+              <span>Scroll to see more about my work and experience</span>
+              <ChevronDown className="h-4 w-4" strokeWidth={1.75} aria-hidden />
             </a>
           </HeroItem>
         </HeroIntro>

@@ -346,22 +346,33 @@
   }
 
   .hero-scroll-cue {
-    margin: 1.75rem 0 0;
+    margin: 2rem 0 0;
+    text-align: center;
   }
 
   @media (min-width: 640px) {
     .hero-scroll-cue {
-      margin-top: 2.5rem;
+      margin-top: 3rem;
     }
   }
 
   .hero-scroll-cue a {
     display: inline-flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.45rem;
+    max-width: 15rem;
+    margin-inline: auto;
     font-size: 0.75rem;
+    line-height: 1.35;
     color: hsl(var(--muted-foreground));
     transition: color var(--duration-hover) ease;
+  }
+
+  @media (min-width: 640px) {
+    .hero-scroll-cue a {
+      max-width: none;
+    }
   }
 
   .hero-scroll-cue a:hover {
