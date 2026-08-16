@@ -129,13 +129,9 @@ export default function HomePage() {
             <div className="min-w-0">
               <h1 className="hero-id-name">{site.name}</h1>
               <p className="hero-id-meta">
-                <span>{site.role}</span>
-                <span className="hero-id-dot" aria-hidden>
-                  ·
-                </span>
                 <span className="inline-flex items-center gap-1">
                   <MapPin className="h-3.5 w-3.5" strokeWidth={1.75} />
-                  Barcelona
+                  Studying in Barcelona
                 </span>
                 <span className="hero-id-dot" aria-hidden>
                   ·

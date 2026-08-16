@@ -50,4 +50,9 @@ export const hobbies = [
     title: "Taekwondo",
     detail: "Orange belt and still training. A good way to stay disciplined outside the desk.",
   },
+  {
+    title: "Colour",
+    detail:
+      "Yellow's my favourite, but marine blue is what I actually wear — phone, clothes, nearly all of it. Look for the guy in navy.",
+  },
 ] as const;
