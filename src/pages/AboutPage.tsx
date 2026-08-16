@@ -70,14 +70,14 @@ export default function AboutPage() {
           <StoryHeading tag="Life" className="story-head-static">
             Outside the work.
           </StoryHeading>
-          <ul className="space-y-2.5">
+          <Stagger as="ul" className="space-y-2.5" fast>
             {hobbies.map((h) => (
-              <li key={h.title} className="surface p-4 sm:p-5">
+              <RevealItem key={h.title} as="li" className="surface p-4 sm:p-5">
                 <p className="text-sm font-semibold tracking-tight">{h.title}</p>
                 <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{h.detail}</p>
-              </li>
+              </RevealItem>
             ))}
-          </ul>
+          </Stagger>
         </Reveal>
 
         <Reveal className="mt-16 sm:mt-20">

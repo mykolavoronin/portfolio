@@ -18,6 +18,7 @@ import { cardUrl, downloadVCard } from "@/lib/vcard";
 import { haptic } from "@/lib/haptics";
 import avatar from "@/assets/avatar.webp";
 import { Portrait } from "@/components/Portrait";
+import { PageEnter } from "@/components/Motion";
 import { cn } from "@/lib/utils";
 
 /**
@@ -76,7 +77,7 @@ export default function CardPage() {
       />
 
       <div className="card-stage">
-        <article className="card-sheet surface">
+        <PageEnter as="article" className="card-sheet surface">
           <div className="card-id">
             <Portrait
               src={avatar}
@@ -112,6 +113,7 @@ export default function CardPage() {
                 title={`QR code linking to ${site.name}'s digital card`}
               />
             </div>
+            <p className="card-qr-caption">Scan this QR to see this page on your device.</p>
           </div>
 
           <div className="card-actions">
@@ -224,7 +226,7 @@ export default function CardPage() {
               );
             })}
           </ul>
-        </article>
+        </PageEnter>
       </div>
     </div>
   );

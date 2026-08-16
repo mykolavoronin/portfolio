@@ -46,11 +46,13 @@ export function Stagger({
   className,
   fast = false,
   chips = false,
+  as: Tag = "div",
   ...props
-}: HTMLMotionProps<"div"> & { fast?: boolean; chips?: boolean }) {
+}: HTMLMotionProps<"div"> & { fast?: boolean; chips?: boolean; as?: "div" | "ul" }) {
   const variants = chips ? staggerChips : fast ? staggerFast : staggerContainer;
+  const Component = motion[Tag];
   return (
-    <motion.div
+    <Component
       className={className}
       initial="hidden"
       whileInView="visible"
@@ -59,7 +61,7 @@ export function Stagger({
       {...props}
     >
       {children}
-    </motion.div>
+    </Component>
   );
 }
 
@@ -126,17 +128,26 @@ export function HeroItem({
 }
 
 /** Route-level enter — soft, fast, no bounce. */
-export function PageEnter({ children, className }: { children: React.ReactNode; className?: string }) {
+export function PageEnter({
+  children,
+  className,
+  as: Tag = "div",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  as?: "div" | "article";
+}) {
   const reduce = useReducedMotion();
+  const Component = motion[Tag];
   return (
-    <motion.div
+    <Component
       className={cn(className)}
       initial={reduce ? { opacity: 0 } : { opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={reduce ? { duration: 0.18 } : springUi}
     >
       {children}
-    </motion.div>
+    </Component>
   );
 }
 

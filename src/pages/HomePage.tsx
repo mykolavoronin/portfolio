@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, Github, Linkedin, MapPin, QrCode } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Github, Linkedin, MapPin, QrCode } from "lucide-react";
 import { Link } from "react-router-dom";
 import avatar from "@/assets/avatar.webp";
 import { LocalTime } from "@/components/LocalTime";
@@ -54,7 +54,6 @@ function StudyBeat({ group }: { group: StudyGroup }) {
 
       <ul className="org-items">
         {items.map((item) => {
-          const highlights = item.notes?.slice(0, 2) ?? [];
           const extraHref = item.href && item.href !== group.href && item.href !== group.pagePath;
           return (
             <li key={`${group.id}-${item.title}`}>
@@ -70,13 +69,6 @@ function StudyBeat({ group }: { group: StudyGroup }) {
                   item.title
                 )}
               </div>
-              {highlights.length > 0 ? (
-                <ul className="story-highlights">
-                  {highlights.map((line) => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
-              ) : null}
               <div className="story-links">
                 <span className="inline-flex items-center text-xs text-muted-foreground tabular-nums">
                   {item.period}
@@ -137,13 +129,9 @@ export default function HomePage() {
             <div className="min-w-0">
               <h1 className="hero-id-name">{site.name}</h1>
               <p className="hero-id-meta">
-                <span>{site.role}</span>
-                <span className="hero-id-dot" aria-hidden>
-                  ·
-                </span>
                 <span className="inline-flex items-center gap-1">
                   <MapPin className="h-3.5 w-3.5" strokeWidth={1.75} />
-                  Barcelona
+                  Studying in Barcelona
                 </span>
                 <span className="hero-id-dot" aria-hidden>
                   ·
@@ -151,6 +139,22 @@ export default function HomePage() {
                 <LocalTime showIcon={false} showCity={false} />
               </p>
             </div>
+          </HeroItem>
+
+          <HeroItem className="hero-actions">
+            <Button variant="hero" asChild>
+              <Link to="/about">About me</Link>
+            </Button>
+            <Button variant="hero-outline" asChild>
+              <a href="#working">Experience &amp; education</a>
+            </Button>
+          </HeroItem>
+
+          <HeroItem className="hero-scroll-cue" as="p">
+            <a href="#working" aria-label="Scroll to see my work and experience">
+              <span>Scroll to see more about my work and experience</span>
+              <ChevronDown className="h-4 w-4" strokeWidth={1.75} aria-hidden />
+            </a>
           </HeroItem>
         </HeroIntro>
       </section>

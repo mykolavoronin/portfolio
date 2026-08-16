@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Seo } from "@/components/Seo";
 import { books, tools, writers, places } from "@/data/recommendations";
 import { site } from "@/data/site";
-import { PageEnter, Reveal, StoryHeading } from "@/components/Motion";
+import { PageEnter, Reveal, Stagger, RevealItem, StoryHeading } from "@/components/Motion";
 import { Button } from "@/components/ui/button";
 
 export default function RecommendationsPage() {
@@ -30,12 +30,9 @@ export default function RecommendationsPage() {
           <StoryHeading tag="Books" className="story-head-static">
             Worth reading.
           </StoryHeading>
-          <ul className="space-y-2.5">
+          <Stagger as="ul" className="space-y-2.5" fast>
             {books.map((b) => (
-              <li
-                key={b.title}
-                className="surface p-4 sm:p-5"
-              >
+              <RevealItem key={b.title} as="li" className="surface p-4 sm:p-5">
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="text-sm font-semibold text-foreground">
                     <a
@@ -51,32 +48,36 @@ export default function RecommendationsPage() {
                   <span className="text-xs text-muted-foreground shrink-0">{b.author}</span>
                 </div>
                 <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{b.note}</p>
-              </li>
+              </RevealItem>
             ))}
-          </ul>
+          </Stagger>
         </Reveal>
 
         <Reveal className="mb-10 sm:mb-12">
           <StoryHeading tag="Tools" className="story-head-static">
             What I use.
           </StoryHeading>
-          <ul className="surface divide-y divide-border/50 overflow-hidden">
+          <Stagger as="ul" className="surface divide-y divide-border/50 overflow-hidden" fast>
             {tools.map((t) => (
-              <li key={t.name} className="px-4 sm:px-5 py-3.5 flex items-baseline justify-between gap-4">
+              <RevealItem
+                key={t.name}
+                as="li"
+                className="px-4 sm:px-5 py-3.5 flex items-baseline justify-between gap-4"
+              >
                 <span className="text-sm font-medium text-foreground">{t.name}</span>
                 <span className="text-xs text-muted-foreground text-right">{t.note}</span>
-              </li>
+              </RevealItem>
             ))}
-          </ul>
+          </Stagger>
         </Reveal>
 
         <Reveal className="mb-10 sm:mb-12">
           <StoryHeading tag="Writers" className="story-head-static">
             People I read.
           </StoryHeading>
-          <ul className="flex flex-wrap gap-2">
+          <Stagger as="ul" className="flex flex-wrap gap-2" chips>
             {writers.map((r) => (
-              <li key={r.name}>
+              <RevealItem key={r.name} as="li" chip>
                 <a
                   href={r.href}
                   target="_blank"
@@ -86,21 +87,18 @@ export default function RecommendationsPage() {
                   {r.name}
                   <ArrowUpRight className="h-3 w-3 text-muted-foreground" />
                 </a>
-              </li>
+              </RevealItem>
             ))}
-          </ul>
+          </Stagger>
         </Reveal>
 
         <Reveal>
           <StoryHeading tag="Barcelona" className="story-head-static">
             If you&apos;re here.
           </StoryHeading>
-          <ul className="space-y-2.5">
+          <Stagger as="ul" className="space-y-2.5" fast>
             {places.map((p) => (
-              <li
-                key={p.name}
-                className="surface p-4 sm:p-5"
-              >
+              <RevealItem key={p.name} as="li" className="surface p-4 sm:p-5">
                 <a
                   href={p.href}
                   target="_blank"
@@ -112,9 +110,9 @@ export default function RecommendationsPage() {
                 </a>
                 <p className="text-xs text-muted-foreground mt-0.5">{p.location}</p>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.note}</p>
-              </li>
+              </RevealItem>
             ))}
-          </ul>
+          </Stagger>
         </Reveal>
 
         <Reveal className="mt-10">

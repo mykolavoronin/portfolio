@@ -16,7 +16,6 @@ export type StudyItem = {
   hold?: boolean;
   status?: string;
   href?: string;
-  notes?: string[];
   programExpand?: {
     prefix: string;
     short: string;
@@ -70,18 +69,6 @@ export function groupLane(
   return "studied";
 }
 
-export type Education = {
-  period: string;
-  school: string;
-  program: string;
-  location?: string;
-  href?: string;
-  pagePath?: string;
-  notes?: string[];
-  status?: string;
-  programExpand?: StudyItem["programExpand"];
-};
-
 /** Institution groups — add another Scrimba / Politècnics item here, not as a new section. */
 export const studyGroups: StudyGroup[] = [
   {
@@ -120,11 +107,6 @@ export const studyGroups: StudyGroup[] = [
         period: "2026",
         status: "Upcoming",
         href: "/education/it-academy",
-        notes: [
-          "Itinerari certificat d'Analista en Ciberseguretat",
-          "Fundamentals, SOC / CCNA Cybersecurity, Network Security, Ethical Hacker",
-          "Cisco CCST & CCNA pathways · official certificate on completion",
-        ],
       },
     ],
   },
@@ -142,12 +124,6 @@ export const studyGroups: StudyGroup[] = [
         hold: true,
         status: "In progress",
         href: "https://scrimba.com/",
-        notes: [
-          "HTML, CSS, and modern JavaScript fundamentals",
-          "React and full-stack application architecture",
-          "SQL and database design fundamentals",
-          "Shipping real projects alongside coursework",
-        ],
       },
     ],
   },
@@ -165,10 +141,6 @@ export const studyGroups: StudyGroup[] = [
         end: "2026-08-01",
         status: "Issued",
         href: "https://animations.dev/certificate/2139bcb6-d432-4cd0-ad20-7ac447ad1def",
-        notes: [
-          "Motion systems, easing, and production animation craft.",
-          "Certificate from Emil Kowalski’s course.",
-        ],
       },
     ],
   },
@@ -184,11 +156,6 @@ export const studyGroups: StudyGroup[] = [
         start: "2024-09-01",
         end: "2026-06-30",
         status: "Completed",
-        notes: [
-          "Mathematics and applied sciences",
-          "Language and literature (Spanish, Catalan, English)",
-          "History, philosophy, technology, and design",
-        ],
       },
     ],
   },
@@ -205,27 +172,7 @@ export const studyGroups: StudyGroup[] = [
         start: "2020-09-01",
         end: "2024-06-30",
         status: "Completed",
-        notes: ["Technology and computing fundamentals", "Multilingual academic environment"],
       },
     ],
   },
 ];
-
-export const education: Education[] = studyGroups.flatMap((group) => {
-  const items = visibleItems(group);
-  if (items.length === 0) return [];
-  const item = items[0];
-  return [
-    {
-      period: item.period,
-      school: group.name,
-      program: item.title,
-      location: group.location,
-      href: group.href,
-      pagePath: group.pagePath,
-      notes: item.notes,
-      status: item.status,
-      programExpand: item.programExpand,
-    },
-  ];
-});
