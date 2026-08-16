@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, Github, Linkedin, MapPin, QrCode } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Github, Linkedin, MapPin, QrCode } from "lucide-react";
 import { Link } from "react-router-dom";
 import avatar from "@/assets/avatar.webp";
 import { LocalTime } from "@/components/LocalTime";
@@ -143,6 +143,22 @@ export default function HomePage() {
                 <LocalTime showIcon={false} showCity={false} />
               </p>
             </div>
+          </HeroItem>
+
+          <HeroItem className="hero-actions">
+            <Button variant="hero" asChild>
+              <Link to="/about">About me</Link>
+            </Button>
+            <Button variant="hero-outline" asChild>
+              <a href="#working">Experience &amp; education</a>
+            </Button>
+          </HeroItem>
+
+          <HeroItem className="hero-scroll-cue" as="p">
+            <a href="#working" aria-label="Scroll to see experience and education">
+              <span>Scroll to see more</span>
+              <ChevronDown className="h-3.5 w-3.5" strokeWidth={1.75} aria-hidden />
+            </a>
           </HeroItem>
         </HeroIntro>
       </section>

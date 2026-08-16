@@ -332,6 +332,62 @@
     color: hsl(var(--border));
   }
 
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin-top: 1.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .hero-actions {
+      margin-top: 2.25rem;
+    }
+  }
+
+  .hero-scroll-cue {
+    margin: 1.75rem 0 0;
+  }
+
+  @media (min-width: 640px) {
+    .hero-scroll-cue {
+      margin-top: 2.5rem;
+    }
+  }
+
+  .hero-scroll-cue a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    color: hsl(var(--muted-foreground));
+    transition: color var(--duration-hover) ease;
+  }
+
+  .hero-scroll-cue a:hover {
+    color: hsl(var(--foreground));
+  }
+
+  .hero-scroll-cue svg {
+    animation: hero-scroll-bounce 1.8s ease-in-out infinite;
+  }
+
+  @keyframes hero-scroll-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(3px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-scroll-cue svg {
+      animation: none;
+    }
+  }
+
   /* Site footer — one column edge, tight crop on the signature canvas */
   .site-footer {
     margin-top: auto;
