@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { ogImages } from "@/data/portraits";
+import { useOccasion } from "@/components/SeasonalDress";
 
 const SITE_URL = "https://mykolavoronin.com";
 
@@ -81,14 +83,19 @@ export function Seo({
   imageLight,
   imageDark,
   imageTheme = "auto",
-  imageAlt,
+  imageAlt = "Mykola Voronin — Student in Barcelona",
   imageWidth = 1200,
   imageHeight = 630,
   type = "website",
   jsonLd,
 }: SeoProps) {
   const location = useLocation();
+  const occasion = useOccasion();
   const url = SITE_URL + (path ?? location.pathname);
+  const hasCustom = Boolean(image || (imageLight && imageDark));
+  const resolvedLight = imageLight ?? (hasCustom ? undefined : occasion ? ogImages.occasion(occasion.dress) : ogImages.light);
+  const resolvedDark = imageDark ?? (hasCustom ? undefined : ogImages.dark);
+  const resolvedFallback = image ?? (hasCustom ? image : resolvedLight);
 
   useEffect(() => {
     document.title = title;
@@ -102,7 +109,12 @@ export function Seo({
     setMeta('meta[name="twitter:description"]', "content", description);
     setMeta('meta[name="twitter:card"]', "content", "summary_large_image");
 
-    const absoluteImage = resolveThemeImage(image, imageLight, imageDark, imageTheme);
+    const absoluteImage = resolveThemeImage(
+      resolvedFallback,
+      resolvedLight,
+      resolvedDark,
+      imageTheme,
+    );
 
     if (absoluteImage) {
       setMeta('meta[property="og:image"]', "content", absoluteImage);
@@ -122,9 +134,9 @@ export function Seo({
     // Alternate theme image (some unfurlers pick the first; we keep both)
     const altId = "seo-og-image-alt-theme";
     let altMeta = document.getElementById(altId) as HTMLMetaElement | null;
-    if (imageLight && imageDark && absoluteImage) {
-      const lightAbs = toAbsolute(imageLight);
-      const darkAbs = toAbsolute(imageDark);
+    if (resolvedLight && resolvedDark && absoluteImage) {
+      const lightAbs = toAbsolute(resolvedLight);
+      const darkAbs = toAbsolute(resolvedDark);
       const secondary = absoluteImage === lightAbs ? darkAbs : lightAbs;
       if (!altMeta) {
         altMeta = document.createElement("meta");
@@ -154,8 +166,8 @@ export function Seo({
     // Re-resolve when user toggles theme
     const root = document.documentElement;
     const observer = new MutationObserver(() => {
-      if (imageTheme !== "auto" || !imageLight || !imageDark) return;
-      const next = resolveThemeImage(image, imageLight, imageDark, "auto");
+      if (imageTheme !== "auto" || !resolvedLight || !resolvedDark) return;
+      const next = resolveThemeImage(resolvedFallback, resolvedLight, resolvedDark, "auto");
       if (!next) return;
       setMeta('meta[property="og:image"]', "content", next);
       setMeta('meta[property="og:image:secure_url"]', "content", next);
@@ -169,8 +181,9 @@ export function Seo({
     description,
     url,
     image,
-    imageLight,
-    imageDark,
+    resolvedFallback,
+    resolvedLight,
+    resolvedDark,
     imageTheme,
     imageAlt,
     imageWidth,

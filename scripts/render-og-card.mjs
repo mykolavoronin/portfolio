@@ -1,6 +1,6 @@
 /**
+ * @deprecated Use `scripts/render-og.mjs` (`npm run og:render`).
  * Rasterize theme-aware card OG SVGs → PNG (1200×630).
- * Run: npm run og:render
  */
 import sharp from "sharp";
 import { readFileSync } from "node:fs";

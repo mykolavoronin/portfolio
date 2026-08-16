@@ -16,7 +16,6 @@ import { Pressable } from "@/components/Pressable";
 import { site } from "@/data/site";
 import { cardUrl, downloadVCard } from "@/lib/vcard";
 import { haptic } from "@/lib/haptics";
-import avatar from "@/assets/avatar.webp";
 import { Portrait } from "@/components/Portrait";
 import { PageEnter } from "@/components/Motion";
 import { cn } from "@/lib/utils";
@@ -66,7 +65,7 @@ export default function CardPage() {
           jobTitle: site.role,
           url: site.siteUrl,
           email: site.email,
-          image: `${site.siteUrl}/og-card-light.png`,
+          image: `${site.siteUrl}/og-image-light.png`,
           address: {
             "@type": "PostalAddress",
             addressLocality: "Barcelona",
@@ -80,10 +79,9 @@ export default function CardPage() {
         <PageEnter as="article" className="card-sheet surface">
           <div className="card-id">
             <Portrait
-              src={avatar}
               alt={site.name}
               size="sm"
-              imgClassName="card-id-photo rounded-full"
+              imgClassName="card-id-photo"
             />
             <div className="card-id-copy">
               <h1 className="card-id-name">{site.name}</h1>

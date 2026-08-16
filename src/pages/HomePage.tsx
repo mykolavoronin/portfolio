@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, ChevronDown, Github, Linkedin, MapPin, QrCode } from "lucide-react";
 import { Link } from "react-router-dom";
-import avatar from "@/assets/avatar.webp";
 import { LocalTime } from "@/components/LocalTime";
 import { clientGroups, getProjectsByClient } from "@/data/projects";
 import { experience } from "@/data/experience";
@@ -9,6 +8,7 @@ import { groupLane, studyGroups, visibleItems, type StudyGroup } from "@/data/ed
 import { site } from "@/data/site";
 import { Seo } from "@/components/Seo";
 import { Portrait } from "@/components/Portrait";
+import { OccasionNote } from "@/components/SeasonalDress";
 import { HeroIntro, HeroItem, StoryEntry, StoryHeading } from "@/components/Motion";
 import { ExpandableAcronym } from "@/components/ExpandableAcronym";
 
@@ -112,6 +112,7 @@ export default function HomePage() {
             name: site.name,
             url: site.siteUrl,
             jobTitle: site.role,
+            image: `${site.siteUrl}/og-image-light.png`,
             address: {
               "@type": "PostalAddress",
               addressLocality: "Barcelona",
@@ -125,7 +126,7 @@ export default function HomePage() {
       <section className="site-shell hero-stage">
         <HeroIntro>
           <HeroItem className="hero-id">
-            <Portrait src={avatar} alt={site.name} size="md" />
+            <Portrait alt={site.name} size="md" />
             <div className="min-w-0">
               <h1 className="hero-id-name">{site.name}</h1>
               <p className="hero-id-meta">
@@ -138,6 +139,7 @@ export default function HomePage() {
                 </span>
                 <LocalTime showIcon={false} showCity={false} />
               </p>
+              <OccasionNote />
             </div>
           </HeroItem>
 

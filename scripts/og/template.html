@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: "Instrument Serif";
+        font-style: italic;
+        font-weight: 400;
+        src: url("../fonts/face-1.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 600;
+        src: url("../fonts/face-2.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 400;
+        src: url("../fonts/face-3.ttf") format("truetype");
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Inter, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      body[data-kind="site"],
+      body[data-kind="card"] {
+        width: 1200px;
+        height: 630px;
+      }
+      body[data-kind="square"],
+      body[data-kind="icon"] {
+        width: 1200px;
+        height: 1200px;
+      }
+      body[data-kind="icon"] {
+        width: 512px;
+        height: 512px;
+      }
+      .stage {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background:
+          radial-gradient(80% 70% at 50% -10%, var(--glow), transparent 58%),
+          var(--bg);
+      }
+      .site {
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        align-items: center;
+        height: 100%;
+        padding: 0 88px 0 56px;
+        box-sizing: border-box;
+      }
+      .site-photo {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        height: 500px;
+        padding-top: 18px;
+        box-sizing: border-box;
+      }
+      .site-photo img {
+        height: 482px;
+        width: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 18px 28px var(--shadow));
+      }
+      .site-copy {
+        padding-left: 12px;
+      }
+      .mark {
+        margin: 0 0 18px;
+        font-family: "Instrument Serif", Georgia, serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 118px;
+        line-height: 0.82;
+        letter-spacing: -0.04em;
+        color: var(--ink);
+      }
+      .name {
+        margin: 0;
+        font-size: 44px;
+        font-weight: 600;
+        letter-spacing: -0.035em;
+        line-height: 1.05;
+      }
+      .meta {
+        margin: 14px 0 0;
+        font-size: 22px;
+        font-weight: 400;
+        color: var(--muted);
+        letter-spacing: -0.01em;
+      }
+      .url {
+        margin: 28px 0 0;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        text-transform: lowercase;
+        color: var(--faint);
+      }
+      .card-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      .card {
+        width: 640px;
+        height: 474px;
+        border-radius: 36px;
+        background: var(--card);
+        border: 1.5px solid var(--line);
+        box-shadow: 0 22px 48px var(--shadow);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        padding: 36px 40px 32px;
+      }
+      .card-photo {
+        width: 112px;
+        height: 128px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      }
+      .card-photo img {
+        height: 128px;
+        width: auto;
+        filter: drop-shadow(0 8px 14px var(--shadow));
+      }
+      .card .name {
+        margin-top: 18px;
+        font-size: 36px;
+        text-align: center;
+      }
+      .card .meta {
+        margin-top: 8px;
+        font-size: 20px;
+        text-align: center;
+      }
+      .card .url {
+        margin-top: 22px;
+        text-align: center;
+      }
+      .square {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 80px 80px 96px;
+        box-sizing: border-box;
+      }
+      .square img {
+        height: 720px;
+        width: auto;
+        filter: drop-shadow(0 22px 36px var(--shadow));
+      }
+      .square .name {
+        margin-top: 36px;
+        font-size: 56px;
+        text-align: center;
+      }
+      .square .meta {
+        margin-top: 12px;
+        font-size: 26px;
+        text-align: center;
+      }
+      .icon {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        height: 100%;
+        padding: 18px 10px 0;
+        box-sizing: border-box;
+      }
+      .icon img {
+        height: 470px;
+        width: auto;
+      }
+    </style>
+  </head>
+  <body data-kind="__KIND__" data-theme="__THEME__">
+    <div class="stage">__BODY__</div>
+    <script>
+      const theme = document.body.dataset.theme;
+      const root = document.documentElement;
+      if (theme === "dark") {
+        root.style.setProperty("--bg", "#111110");
+        root.style.setProperty("--ink", "#f4f1ec");
+        root.style.setProperty("--muted", "#a39e97");
+        root.style.setProperty("--faint", "#7a756e");
+        root.style.setProperty("--card", "#1a1917");
+        root.style.setProperty("--line", "#2e2c29");
+        root.style.setProperty("--glow", "rgba(247,245,242,0.08)");
+        root.style.setProperty("--shadow", "rgba(0,0,0,0.5)");
+      } else {
+        root.style.setProperty("--bg", "#f7f5f2");
+        root.style.setProperty("--ink", "#1a1816");
+        root.style.setProperty("--muted", "#6b6560");
+        root.style.setProperty("--faint", "#8a847c");
+        root.style.setProperty("--card", "#fffefc");
+        root.style.setProperty("--line", "#e8e4de");
+        root.style.setProperty("--glow", "rgba(26,24,22,0.05)");
+        root.style.setProperty("--shadow", "rgba(26,24,22,0.14)");
+      }
+    </script>
+  </body>
+</html>

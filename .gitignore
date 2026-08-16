@@ -50,3 +50,7 @@ portfolio/
 # OS / temp
 Thumbs.db
 *.tsbuildinfo
+scripts/og/.tmp/
+scripts/__pycache__/
+__pycache__/
+*.pyc

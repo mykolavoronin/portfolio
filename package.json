@@ -13,7 +13,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "repo:check": "node scripts/repository-check.mjs",
-    "og:render": "node scripts/render-og-card.mjs",
+    "og:render": "node scripts/render-og.mjs",
+    "portraits:process": "python scripts/process-portraits.py",
+    "details:process": "python scripts/process-details.py",
     "screenshots": "node scripts/capture-screenshots.mjs"
   },
   "dependencies": {
