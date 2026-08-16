@@ -72,9 +72,14 @@ export default function AboutPage() {
           </StoryHeading>
           <Stagger as="ul" className="space-y-2.5" fast>
             {hobbies.map((h) => (
-              <RevealItem key={h.title} as="li" className="surface p-4 sm:p-5">
-                <p className="text-sm font-semibold tracking-tight">{h.title}</p>
-                <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{h.detail}</p>
+              <RevealItem key={h.title} as="li" className="surface life-card">
+                {"image" in h && h.image ? (
+                  <img src={h.image} alt="" width={72} height={72} className="life-mark" />
+                ) : null}
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold tracking-tight">{h.title}</p>
+                  <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{h.detail}</p>
+                </div>
               </RevealItem>
             ))}
           </Stagger>
