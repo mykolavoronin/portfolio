@@ -113,6 +113,7 @@ export default function CardPage() {
                 title={`QR code linking to ${site.name}'s digital card`}
               />
             </div>
+            <p className="card-qr-caption">Scan this QR to see this page on your device.</p>
           </div>
 
           <div className="card-actions">
