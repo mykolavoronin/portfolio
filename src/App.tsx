@@ -12,10 +12,10 @@ const AboutPage = lazy(() => import("./pages/AboutPage"));
 const SkillsPage = lazy(() => import("./pages/SkillsPage"));
 const RecommendationsPage = lazy(() => import("./pages/RecommendationsPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
-const ProjectPage = lazy(() => import("./pages/ProjectPage"));
 const CardPage = lazy(() => import("./pages/CardPage"));
 const ServicesPage = lazy(() => import("./pages/ServicesPage"));
 const ServicePage = lazy(() => import("./pages/ServicePage"));
+const ItAcademyPage = lazy(() => import("./pages/ItAcademyPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const App = () => (
@@ -29,12 +29,11 @@ const App = () => (
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
               {showSkills ? <Route path="/skills" element={<SkillsPage />} /> : null}
-              <Route path="/recommendations" element={<RecommendationsPage />} />
               <Route path="/contact" element={<ContactPage />} />
-              <Route path="/projects/:slug" element={<ProjectPage />} />
               <Route path="/card" element={<CardPage />} />
               {showServices ? <Route path="/services" element={<ServicesPage />} /> : null}
               {showServices ? <Route path="/services/:slug" element={<ServicePage />} /> : null}
+              <Route path="/education/it-academy" element={<ItAcademyPage />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

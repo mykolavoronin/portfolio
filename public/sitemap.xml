@@ -2,11 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://mykolavoronin.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://mykolavoronin.com/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://mykolavoronin.com/recommendations</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://mykolavoronin.com/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mykolavoronin.com/card</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://mykolavoronin.com/projects/kucherov-studio</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://mykolavoronin.com/projects/eka-balance</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://mykolavoronin.com/projects/agenyz</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://mykolavoronin.com/projects/masaje-barcelona</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
