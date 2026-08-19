@@ -6,13 +6,11 @@
 
 - [Home](/): Overview, current work and contact.
 - [About](/about): Short story — background and how Mykola works.
-- [Recommendations](/recommendations): Books, tools and writers.
 - [Contact](/contact): LinkedIn, GitHub, and digital business card.
 - [Digital card](/card): Mobile business card with QR, save to contacts, and share.
 
 ## Projects
-
-- [Kucherov Studio](/projects/kucherov-studio): Web infrastructure and client work for Kucherov Studio.
-- [EKA Balance](/projects/eka-balance): Primary hub for EKA Balance.
-- [Agenyz](/projects/agenyz): Supplement storefront for EKA Balance.
-- [masaje.barcelona](/projects/masaje-barcelona): Local massage micro-site for EKA Balance.
+- Kucherov Studio (https://kucherov.studio): Architecture studio site.
+- EKA Balance (https://ekabalance.com): Barcelona wellness hub.
+- Agenyz (https://agenyz.es): Supplement storefront for EKA Balance.
+- masaje.barcelona (https://masaje.barcelona): Barcelona massage page.

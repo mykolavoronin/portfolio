@@ -1,16 +1,11 @@
-import {
-  Sparkles,
-  Leaf,
-  Search,
-  MapPin,
-  type LucideIcon,
-} from "lucide-react";
 import kucherov from "@/assets/projects/kucherov.webp";
 import ekabalance from "@/assets/projects/ekabalance.webp";
 import agenyz from "@/assets/projects/agenyz.webp";
 import masaje from "@/assets/projects/masaje.webp";
 import kucherovIcon from "@/assets/brands/kucherov.png";
 import ekaIcon from "@/assets/brands/eka-favicon.png";
+import agenyzIcon from "@/assets/brands/agenyz.png";
+import masajeIcon from "@/assets/brands/masaje.png";
 
 export type Project = {
   slug: string;
@@ -18,7 +13,7 @@ export type Project = {
   tagline: string;
   description: string;
   href: string;
-  icon: LucideIcon;
+  icon: string;
   cover: string;
   year: string;
   role: string;
@@ -78,9 +73,9 @@ export const projects: Project[] = [
     slug: "kucherov-studio",
     title: "Kucherov Studio",
     tagline: "Precision architecture. Immersive visualization.",
-    description: "Architecture studio site — craft, motion, performance.",
+    description: "I work with Kucherov Studio on the architecture site.",
     href: "https://kucherov.studio/",
-    icon: Sparkles,
+    icon: kucherovIcon,
     cover: kucherov,
     year: "2025 — Present",
     role: "Full Stack Engineer",
@@ -126,9 +121,9 @@ export const projects: Project[] = [
     slug: "eka-balance",
     title: "EKA Balance",
     tagline: "Live pain-free again.",
-    description: "Primary hub — booking, i18n, local SEO.",
+    description: "I work with EKA Balance on the Barcelona wellness hub.",
     href: "https://ekabalance.com/",
-    icon: Leaf,
+    icon: ekaIcon,
     cover: ekabalance,
     year: "2021 — Present",
     role: "IT Specialist · Business Development · Web",
@@ -172,12 +167,12 @@ export const projects: Project[] = [
       {
         name: "Agenyz",
         url: "https://agenyz.es",
-        description: "Specialist supplement storefront with guided product discovery.",
+        description: "Supplement storefront with guided discovery.",
       },
       {
         name: "masaje.barcelona",
         url: "https://masaje.barcelona",
-        description: "Single-CTA micro-site for local massage intent.",
+        description: "Local massage page with one booking path.",
       },
     ],
   },
@@ -185,9 +180,9 @@ export const projects: Project[] = [
     slug: "agenyz",
     title: "Agenyz",
     tagline: "Cellular nutrition. For every body.",
-    description: "Supplement storefront — guided product discovery.",
+    description: "I work with EKA Balance on the Agenyz storefront.",
     href: "https://agenyz.es/",
-    icon: Search,
+    icon: agenyzIcon,
     cover: agenyz,
     year: "2024 — Present",
     role: "Engineer · Product",
@@ -224,9 +219,9 @@ export const projects: Project[] = [
     slug: "masaje-barcelona",
     title: "masaje.barcelona",
     tagline: "Professional Massage. 100% tailored to you.",
-    description: "Local massage micro-site — SEO and one CTA.",
+    description: "I work with EKA Balance on the Barcelona massage page.",
     href: "https://masaje.barcelona/",
-    icon: MapPin,
+    icon: masajeIcon,
     cover: masaje,
     year: "2024",
     role: "Engineer · SEO",
@@ -262,6 +257,8 @@ export const projects: Project[] = [
 ];
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
+
+export const workHref = (slug: string) => `/#${slug}`;
 
 export const getProjectsByClient = (clientId: ClientGroup["id"]) =>
   projects.filter((p) => p.clientId === clientId);
