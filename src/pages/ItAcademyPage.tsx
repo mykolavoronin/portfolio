@@ -1,18 +1,11 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, Check, MapPin } from "lucide-react";
 import { Seo } from "@/components/Seo";
-import { PageEnter, Reveal, Stagger, RevealItem } from "@/components/Motion";
+import { PageEnter, Reveal, Stagger, RevealItem, StoryHeading } from "@/components/Motion";
 import itAcademyIcon from "@/assets/brands/it-academy.png";
 import { itAcademy } from "@/data/itAcademy";
 import { site } from "@/data/site";
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground mb-4">
-      {children}
-    </h2>
-  );
-}
+import { Button } from "@/components/ui/button";
 
 export default function ItAcademyPage() {
   const a = itAcademy;
@@ -108,33 +101,36 @@ export default function ItAcademyPage() {
           <p className="mt-3 text-[11px] text-muted-foreground/80 leading-relaxed">{a.statsNote}</p>
         </Reveal>
 
-        {/* What is IT Academy */}
-        <Reveal className="mb-12">
-          <SectionLabel>What is IT Academy?</SectionLabel>
-          <div className="mt-4 space-y-4 text-sm sm:text-[15px] text-foreground/90 leading-relaxed">
+        <Reveal className="mb-16 sm:mb-20">
+          <StoryHeading tag="Programme" className="story-head-static">
+            What it is.
+          </StoryHeading>
+          <div className="surface p-5 sm:p-6 space-y-3 text-sm sm:text-[15px] text-foreground/90 leading-relaxed">
             {a.about.map((p) => (
               <p key={p}>{p}</p>
             ))}
           </div>
         </Reveal>
 
-        {/* Why */}
-        <Reveal className="mb-12">
-          <SectionLabel>Why IT Academy</SectionLabel>
-          <ul className="mt-4 space-y-3">
+        <Reveal className="mb-16 sm:mb-20">
+          <StoryHeading tag="Why" className="story-head-static">
+            Why I chose it.
+          </StoryHeading>
+          <ul className="surface divide-y divide-border/50 overflow-hidden">
             {a.why.map((item) => (
-              <li key={item} className="flex gap-3 text-sm text-foreground/90 leading-relaxed">
-                <Check className="h-4 w-4 text-foreground/60 shrink-0 mt-0.5" strokeWidth={2} />
+              <li key={item} className="flex gap-3 px-4 sm:px-5 py-3 text-sm text-foreground/90 leading-relaxed">
+                <Check className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" strokeWidth={1.75} />
                 <span>{item}</span>
               </li>
             ))}
           </ul>
         </Reveal>
 
-        {/* Itinerary intro */}
         <Reveal className="mb-8">
-          <SectionLabel>The itinerary</SectionLabel>
-          <p className="mt-4 text-sm sm:text-[15px] text-foreground/90 leading-relaxed">{a.programIntro}</p>
+          <StoryHeading tag="Itinerary" className="story-head-static">
+            How it unfolds.
+          </StoryHeading>
+          <p className="text-sm sm:text-[15px] text-foreground/90 leading-relaxed">{a.programIntro}</p>
           <div className="mt-5 flex flex-wrap gap-2">
             <span className="rounded-full border border-border/70 bg-card px-3 py-1 text-xs text-muted-foreground">
               Fundamentals {a.phaseTotals.fundamentals}
@@ -210,10 +206,12 @@ export default function ItAcademyPage() {
         </Stagger>
 
         {/* Competencies + careers */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-12 mb-16 sm:mb-20">
           <Reveal>
-            <SectionLabel>Competencies</SectionLabel>
-            <ul className="mt-4 space-y-2.5">
+            <StoryHeading tag="Competencies" className="story-head-static">
+              What I take from it.
+            </StoryHeading>
+            <ul className="space-y-2.5">
               {a.competencies.map((c) => (
                 <li key={c} className="flex gap-2.5 text-sm text-foreground/90 leading-relaxed">
                   <span
@@ -226,8 +224,10 @@ export default function ItAcademyPage() {
             </ul>
           </Reveal>
           <Reveal>
-            <SectionLabel>Career outcomes</SectionLabel>
-            <ul className="mt-4 space-y-2.5">
+            <StoryHeading tag="Outcomes" className="story-head-static">
+              Where it leads.
+            </StoryHeading>
+            <ul className="space-y-2.5">
               {a.careers.map((c) => (
                 <li key={c} className="flex gap-2.5 text-sm text-foreground/90 leading-relaxed">
                   <span
@@ -242,8 +242,10 @@ export default function ItAcademyPage() {
         </div>
 
         {/* Support */}
-        <Reveal className="mb-12">
-          <SectionLabel>Student accompaniment</SectionLabel>
+        <Reveal className="mb-16 sm:mb-20">
+          <StoryHeading tag="Support" className="story-head-static">
+            Who walks with you.
+          </StoryHeading>
           <Stagger className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3" fast>
             {a.support.map((s) => (
               <RevealItem key={s.title}>
@@ -266,24 +268,18 @@ export default function ItAcademyPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-2 shrink-0">
-              <a
-                href={a.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 rounded-full bg-foreground text-background px-4 py-2 text-xs font-medium hover:opacity-90 transition-opacity min-h-10"
-              >
-                Cibernarium
-                <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
-              <a
-                href={a.academyHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 rounded-full border border-border/70 bg-background px-4 py-2 text-xs font-medium text-foreground hover:bg-muted/50 transition-colors min-h-10"
-              >
-                Barcelona Activa
-                <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
+              <Button asChild>
+                <a href={a.href} target="_blank" rel="noopener noreferrer">
+                  Cibernarium
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              </Button>
+              <Button variant="outline" asChild>
+                <a href={a.academyHref} target="_blank" rel="noopener noreferrer">
+                  Barcelona Activa
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              </Button>
             </div>
           </div>
         </Reveal>
