@@ -74,7 +74,7 @@ export function Layout() {
           </Link>
           <ThemeToggle />
         </header>
-        <main id="main" className="flex min-h-0 flex-1 flex-col overflow-hidden">
+        <main id="main" className="flex h-full min-h-0 flex-1 flex-col overflow-hidden">
           <Outlet />
         </main>
       </div>
@@ -89,15 +89,15 @@ export function Layout() {
       </a>
 
       {/*
-        Pill header:
-        - Top: slightly wider than the column, light outline
-        - Scroll: compresses horizontally into a floating chip
+        Thin peel:
+        - Rests wider than the column, close to the edges
+        - Scroll: stays wide, loses height so the page keeps more room
       */}
       <header className={cn("site-header sticky top-0 pointer-events-none", scrolled && "is-scrolled")}>
         <div className="header-bar">
           <div
             className={cn(
-              "header-pill pointer-events-auto flex w-full items-center gap-1 sm:gap-1.5 rounded-full",
+              "header-pill pointer-events-auto flex w-full items-center gap-0.5 sm:gap-1 rounded-full",
               scrolled && "header-pill-scrolled",
             )}
           >
@@ -105,14 +105,14 @@ export function Layout() {
               to={withOccasion("/", occasion?.id)}
               className={cn(
                 "relative shrink-0 flex items-center justify-center rounded-full",
-                "h-9 w-9",
+                "h-8 w-8",
                 "active:scale-[0.96] transition-transform duration-150 ease-out",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
               )}
               aria-label={`${site.name} — Home`}
             >
               <span className="relative inline-flex">
-                <Logo className="h-7 w-7" />
+                <Logo className="h-6 w-6" />
                 {occasion ? <SeasonalDress kind={occasion.dress} size="sm" /> : null}
               </span>
             </Link>
@@ -134,8 +134,8 @@ export function Layout() {
               ))}
             </nav>
 
-            <div className="shrink-0 pl-0.5">
-              <ThemeToggle />
+            <div className="shrink-0">
+              <ThemeToggle className="h-8 w-8 min-h-8 min-w-8" />
             </div>
           </div>
         </div>
@@ -145,22 +145,26 @@ export function Layout() {
         <Outlet />
       </main>
 
-      <footer className="site-footer">
-        <div className="site-shell site-footer-inner">
-          <p className="site-footer-copy">
+      <footer className="mt-auto border-t border-border/40 safe-pb">
+        <div className="site-shell py-4 sm:py-5 flex flex-row items-center justify-between gap-4">
+          {/* Copyright — single line */}
+          <p className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">
             <span className="tabular-nums">© {new Date().getFullYear()}</span>
             <span className="mx-1.5 text-border" aria-hidden>
               ·
             </span>
             <span>{site.name}</span>
           </p>
-          <div className="site-signature">
+
+          {/* Signature — compact single-line height */}
+          <div className="flex shrink-0 items-center justify-end">
             <img
               src={signature}
               alt=""
               loading="lazy"
               width={1536}
               height={1024}
+              className="h-6 sm:h-7 w-auto max-w-[7.5rem] sm:max-w-[9rem] object-contain object-right select-none pointer-events-none opacity-70 dark:invert dark:opacity-80"
               draggable={false}
               aria-hidden
             />
