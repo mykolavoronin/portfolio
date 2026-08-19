@@ -25,10 +25,13 @@ export function downloadVCard() {
   const a = document.createElement("a");
   a.href = url;
   a.download = "mykola-voronin.vcf";
+  a.rel = "noopener";
   document.body.appendChild(a);
   a.click();
   a.remove();
-  URL.revokeObjectURL(url);
+  // iOS often ignores `download` and opens the file instead — keep the blob
+  // alive long enough for Contacts to read it.
+  window.setTimeout(() => URL.revokeObjectURL(url), 4000);
 }
 
 export const cardUrl = `${site.siteUrl}/card`;
