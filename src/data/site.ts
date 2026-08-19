@@ -2,6 +2,8 @@
 
 import belt from "@/assets/details/belt.webp";
 import book from "@/assets/details/book.webp";
+import colour from "@/assets/details/colour.webp";
+import stance from "@/assets/details/stance.webp";
 import tech from "@/assets/details/tech.webp";
 
 export const site = {
@@ -22,9 +24,9 @@ export const site = {
     label: "Not taking projects",
     detail: "Focused on school and existing work — open to conversations.",
   },
-  tagline: "",
+  tagline: "Student in Barcelona · Building calm, high-performance web systems.",
   shortBio: "Student in Barcelona.",
-  seoDescription: "Mykola Voronin — student in Barcelona.",
+  seoDescription: "Mykola Voronin — student in Barcelona. Engineering calm, high-performance web systems.",
 } as const;
 
 export const principles = [
@@ -49,17 +51,21 @@ export const hobbies = [
   {
     title: "Technology",
     detail:
-      "Phones, Apple hardware, and the tools I use every day — currently an iPhone 17 Pro Max. I like objects that feel finished, and yes, I love Liquid Glass.",
+      "Phones, Apple hardware, and the tools I use every day. I like objects that feel finished, and yes, I love Liquid Glass.",
     image: tech,
+    owned: "I own an iPhone 17 Pro",
+    swatch: { tone: "navy", label: "Navy blue" },
   },
   {
     title: "Taekwondo",
-    detail: "Orange belt and still training. A good way to stay disciplined outside the desk.",
-    image: belt,
+    detail: "Still training. A good way to stay disciplined outside the desk.",
+    image: stance,
+    badge: { src: belt, label: "Orange belt" },
   },
   {
     title: "Colour",
     detail:
       "Yellow's my favourite, but marine blue is what I actually wear — phone, clothes, nearly all of it. Look for the guy in navy.",
+    image: colour,
   },
 ] as const;

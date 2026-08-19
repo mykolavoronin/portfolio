@@ -17,8 +17,8 @@ export const experience: Experience[] = [
     projectSlug: "kucherov-studio",
     externalHref: "https://kucherov.studio/",
     points: [
-      "Studio site — Next.js, TypeScript, Motion.",
-      "The public face of the practice, and the release path behind it.",
+      "Studio site in Next.js, TypeScript, and Motion.",
+      "The public face of the practice and the release path behind it.",
     ],
   },
   {
@@ -29,8 +29,8 @@ export const experience: Experience[] = [
     projectSlug: "eka-balance",
     externalHref: "https://ekabalance.com/",
     points: [
-      "The hub and the smaller properties around it — Agenyz, masaje.barcelona.",
-      "Booking, SEO, i18n, and the day-to-day of keeping it all up.",
+      "The hub plus Agenyz and masaje.barcelona.",
+      "Booking, SEO, i18n, and keeping it all up.",
     ],
   },
 ];
