@@ -99,12 +99,11 @@ export function Layout() {
         Skip to content
       </a>
 
-      {/* Compact peel: hugs the nav, stays low, keeps air from the top. */}
       <header className={cn("site-header sticky top-0 pointer-events-none", scrolled && "is-scrolled")}>
         <div className="header-bar">
           <div
             className={cn(
-              "header-pill pointer-events-auto flex items-center gap-0.5 rounded-full",
+              "header-pill pointer-events-auto flex w-full items-center gap-1 sm:gap-1.5 rounded-full",
               scrolled && "header-pill-scrolled",
             )}
           >
@@ -112,14 +111,14 @@ export function Layout() {
               to={withOccasion("/", occasion?.id)}
               className={cn(
                 "relative shrink-0 flex items-center justify-center rounded-full",
-                "h-7 w-7",
+                "h-9 w-9",
                 "active:scale-[0.96] transition-transform duration-150 ease-out",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
               )}
               aria-label={`${site.name} — Home`}
             >
               <span className="relative inline-flex">
-                <Logo className="h-5 w-5" />
+                <Logo className="h-7 w-7" />
                 {occasion ? (
                   <SeasonalDress kind={occasion.dress} size="sm" />
                 ) : look ? (
@@ -128,10 +127,10 @@ export function Layout() {
               </span>
             </Link>
 
-            <span className="hidden sm:block h-3.5 w-px shrink-0 bg-border/60" aria-hidden />
+            <span className="hidden sm:block h-4 w-px shrink-0 bg-border/60" aria-hidden />
 
             <nav
-              className="flex items-center gap-0.5 min-w-0 overflow-x-auto scrollbar-hide"
+              className="flex flex-1 items-center gap-0.5 min-w-0 overflow-x-auto scrollbar-hide"
               aria-label="Primary"
             >
               {navLinks.map((link) => (
@@ -146,7 +145,7 @@ export function Layout() {
             </nav>
 
             <div className="shrink-0">
-              <ThemeToggle className="h-7 w-7 min-h-7 min-w-7" />
+              <ThemeToggle className="h-9 w-9 min-h-9 min-w-9" />
             </div>
           </div>
         </div>
