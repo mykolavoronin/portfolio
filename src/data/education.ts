@@ -6,6 +6,8 @@ import mriyaIcon from "@/assets/brands/mriya.png";
 import reginaIcon from "@/assets/brands/regina-carmeli.png";
 import { laneFromRange, type TimeLane } from "@/lib/timeline";
 
+export type StudyStage = "primary" | "secondary" | "high-school";
+
 export type StudyItem = {
   title: string;
   period: string;
@@ -16,6 +18,8 @@ export type StudyItem = {
   hold?: boolean;
   status?: string;
   href?: string;
+  /** School stage. Folded on the education section. */
+  stage?: StudyStage;
   programExpand?: {
     prefix: string;
     short: string;
@@ -56,7 +60,10 @@ export function itemPhase(item: StudyItem, now: Date = new Date()): StudyPhase {
 
 export function visibleItems(group: StudyGroup, now: Date = new Date()): StudyItem[] {
   if (group.hidden || group.private) return [];
-  return group.items.filter((item) => itemPhase(item, now) === "completed");
+  return group.items.filter((item) => {
+    const phase = itemPhase(item, now);
+    return phase === "completed" || phase === "current";
+  });
 }
 
 export function groupLane(
@@ -69,6 +76,26 @@ export function groupLane(
   return "studied";
 }
 
+export const schoolStages: { id: StudyStage; label: string }[] = [
+  { id: "high-school", label: "High school education" },
+  { id: "secondary", label: "Secondary education" },
+  { id: "primary", label: "Primary education" },
+];
+
+export function isSchoolItem(item: StudyItem) {
+  return item.stage === "primary" || item.stage === "secondary" || item.stage === "high-school";
+}
+
+export function schoolStageEntries(stage: StudyStage, now: Date = new Date()) {
+  const entries: { group: StudyGroup; item: StudyItem }[] = [];
+  for (const group of studyGroups) {
+    for (const item of visibleItems(group, now)) {
+      if (item.stage === stage) entries.push({ group, item });
+    }
+  }
+  return entries;
+}
+
 /** Institution groups — add another Scrimba / Politècnics item here, not as a new section. */
 export const studyGroups: StudyGroup[] = [
   {
@@ -77,13 +104,12 @@ export const studyGroups: StudyGroup[] = [
     location: "Barcelona",
     href: "https://politecnics.barcelona/",
     icon: politecnicsIcon,
-    private: true,
     items: [
       {
         title: "CFGS CASIX",
-        period: "Sep 2026 — Jul 2028",
+        period: "Sep 2026 — Jun 2028",
         start: "2026-09-01",
-        end: "2028-07-31",
+        end: "2028-06-30",
         status: "Upcoming",
         programExpand: {
           prefix: "CFGS ",
@@ -156,6 +182,7 @@ export const studyGroups: StudyGroup[] = [
         start: "2024-09-01",
         end: "2026-06-30",
         status: "Completed",
+        stage: "high-school",
       },
     ],
   },
@@ -172,6 +199,15 @@ export const studyGroups: StudyGroup[] = [
         start: "2020-09-01",
         end: "2024-06-30",
         status: "Completed",
+        stage: "secondary",
+      },
+      {
+        title: "Primary Education",
+        period: "Sep 2014 — Jun 2020",
+        start: "2014-09-01",
+        end: "2020-06-30",
+        status: "Completed",
+        stage: "primary",
       },
     ],
   },

@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { ExpandableAcronym } from "@/components/ExpandableAcronym";
-import { studyGroups, visibleItems, type StudyGroup, type StudyItem } from "@/data/education";
+import {
+  isSchoolItem,
+  schoolStageEntries,
+  schoolStages,
+  studyGroups,
+  visibleItems,
+  type StudyGroup,
+  type StudyItem,
+} from "@/data/education";
+import { StudyFold } from "@/components/StudyFold";
 import { cn } from "@/lib/utils";
 
 function statusVariant(status?: string): "success" | "warn" | "info" | "muted" {
@@ -71,10 +80,14 @@ function ItemTitle({ item }: { item: StudyItem }) {
 }
 
 export function StudyGroups({ variant = "plain" }: { variant?: "plain" | "surface" }) {
+  const earlier = schoolStages
+    .map((stage) => ({ ...stage, entries: schoolStageEntries(stage.id) }))
+    .filter((stage) => stage.entries.length > 0);
+
   return (
     <div className="space-y-6 sm:space-y-7">
       {studyGroups.map((group) => {
-        const items = visibleItems(group);
+        const items = visibleItems(group).filter((item) => !isSchoolItem(item));
         if (items.length === 0) return null;
         return (
         <article key={group.id} className={cn(variant === "surface" && "surface p-4")}>
@@ -114,6 +127,13 @@ export function StudyGroups({ variant = "plain" }: { variant?: "plain" | "surfac
         </article>
         );
       })}
+      {earlier.length > 0 ? (
+        <div className={cn(variant === "surface" && "surface px-4 py-1")}>
+          {earlier.map((stage) => (
+            <StudyFold key={stage.id} label={stage.label} entries={stage.entries} />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }
