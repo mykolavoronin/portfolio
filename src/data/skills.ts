@@ -49,9 +49,9 @@ export const homeStack = [
   "React",
   "TypeScript",
   "Tailwind CSS",
-  "UI / UX Design",
-  "Deployment & CI/CD",
-  "System Administration",
+  "shadcn/ui",
+  "Motion",
+  "Vercel",
 ] as const;
 
 export const spokenLanguages = [
