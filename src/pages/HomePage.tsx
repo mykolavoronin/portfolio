@@ -1,13 +1,26 @@
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, ChevronDown, Github, Linkedin, MapPin, QrCode } from "lucide-react";
+import { ChevronDown, Github, Linkedin, MapPin, QrCode } from "lucide-react";
 import { Link } from "react-router-dom";
 import { LocalTime } from "@/components/LocalTime";
-import { clientGroups, getProjectsByClient } from "@/data/projects";
+import {
+  clientGroups,
+  getProjectsByClient,
+  getSiblingProjects,
+  projects,
+  workHref,
+} from "@/data/projects";
 import { experience } from "@/data/experience";
-import { groupLane, studyGroups, visibleItems, type StudyGroup } from "@/data/education";
+import {
+  groupLane,
+  schoolStageEntries,
+  schoolStages,
+  studyGroups,
+  visibleItems,
+  type StudyGroup,
+} from "@/data/education";
+import { StudyFold } from "@/components/StudyFold";
 import { site } from "@/data/site";
 import { Seo } from "@/components/Seo";
-import { Portrait } from "@/components/Portrait";
 import { OccasionNote } from "@/components/SeasonalDress";
 import { HeroIntro, HeroItem, StoryEntry, StoryHeading } from "@/components/Motion";
 import { ExpandableAcronym } from "@/components/ExpandableAcronym";
@@ -75,14 +88,10 @@ function StudyBeat({ group }: { group: StudyGroup }) {
                 </span>
                 {extraHref ? (
                   item.href!.startsWith("/") ? (
-                    <Link to={item.href!}>
-                      Open
-                      <ArrowUpRight className="h-3 w-3" />
-                    </Link>
+                    <Link to={item.href!}>Open</Link>
                   ) : (
                     <a href={item.href} target="_blank" rel="noopener noreferrer">
                       Certificate
-                      <ArrowUpRight className="h-3 w-3" />
                     </a>
                   )
                 ) : null}
@@ -97,7 +106,10 @@ function StudyBeat({ group }: { group: StudyGroup }) {
 
 export default function HomePage() {
   const working = experience;
-  const studied = studyGroups.filter((g) => groupLane(g) === "studied");
+  const studying = studyGroups.filter((g) => groupLane(g) === "studying");
+  const earlier = schoolStages
+    .map((stage) => ({ ...stage, entries: schoolStageEntries(stage.id) }))
+    .filter((stage) => stage.entries.length > 0);
 
   return (
     <div className="relative">
@@ -126,7 +138,6 @@ export default function HomePage() {
       <section className="site-shell hero-stage">
         <HeroIntro>
           <HeroItem className="hero-id">
-            <Portrait alt={site.name} size="md" />
             <div className="min-w-0">
               <h1 className="hero-id-name">{site.name}</h1>
               <p className="hero-id-meta">
@@ -148,12 +159,12 @@ export default function HomePage() {
               <Link to="/about">About me</Link>
             </Button>
             <Button variant="hero-outline" asChild>
-              <a href="#working">Experience &amp; education</a>
+              <a href="#work">Selected work</a>
             </Button>
           </HeroItem>
 
           <HeroItem className="hero-scroll-cue" as="p">
-            <a href="#working" aria-label="Scroll to see my work and experience">
+            <a href="#work" aria-label="Scroll to see my work and experience">
               <span>Scroll to see more about my work and experience</span>
               <ChevronDown className="h-4 w-4" strokeWidth={1.75} aria-hidden />
             </a>
@@ -161,11 +172,78 @@ export default function HomePage() {
         </HeroIntro>
       </section>
 
+      {/* Selected Work section */}
+      <section id="work" className="site-shell story-section">
+        <StoryHeading tag="Selected Work">Things I've built.</StoryHeading>
+        <div className="space-y-6 sm:space-y-8">
+          {projects.map((project) => {
+            const siblings = getSiblingProjects(project.slug);
+            return (
+              <StoryEntry key={project.slug}>
+                <article id={project.slug} className="work-card">
+                  <div className="work-card-copy">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <img
+                          src={project.icon}
+                          alt=""
+                          width={20}
+                          height={20}
+                          className="h-5 w-5 rounded-md object-contain border border-border/60 bg-card p-0.5 shrink-0 shadow-sm"
+                        />
+                        <h3 className="text-base font-semibold tracking-tight text-foreground">
+                          {project.title}
+                        </h3>
+                      </div>
+                      <span className="text-xs text-muted-foreground tabular-nums shrink-0">
+                        {project.year}
+                      </span>
+                    </div>
+
+                    <p className="mt-2 text-sm text-muted-foreground leading-snug text-pretty">
+                      {project.description}
+                    </p>
+
+                    {siblings.length > 0 ? (
+                      <div className="work-tags">
+                        {siblings.map((sibling) => (
+                          <Link key={sibling.slug} to={workHref(sibling.slug)}>
+                            {sibling.title}
+                          </Link>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="work-card-site pressable"
+                    aria-label={`Open ${project.title}`}
+                  >
+                    <img
+                      src={project.cover}
+                      alt=""
+                      width={1200}
+                      height={750}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+                </article>
+              </StoryEntry>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Experience section */}
       <section id="working" className="site-shell story-section">
-        <StoryHeading tag="Work">I'm working here.</StoryHeading>
+        <StoryHeading tag="Experience">I'm working with.</StoryHeading>
         {working.map((job) => {
           const brand = brandFor(job.projectSlug);
-          const projects = job.projectSlug ? getProjectsByClient(job.projectSlug) : [];
+          const projectList = job.projectSlug ? getProjectsByClient(job.projectSlug) : [];
           return (
             <StoryEntry key={job.company}>
               <div className="org-head">
@@ -174,16 +252,7 @@ export default function HomePage() {
                 ) : null}
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
-                    {job.projectSlug ? (
-                      <Link
-                        to={`/projects/${job.projectSlug}`}
-                        className="text-[15px] font-semibold tracking-tight hover:text-foreground/75 transition-colors"
-                      >
-                        {job.company}
-                      </Link>
-                    ) : (
-                      <p className="text-[15px] font-semibold tracking-tight">{job.company}</p>
-                    )}
+                    <p className="text-[15px] font-semibold tracking-tight">{job.company}</p>
                     <span className="text-xs text-muted-foreground tabular-nums">{job.period}</span>
                   </div>
                   <p className="mt-0.5 text-sm text-muted-foreground">
@@ -200,20 +269,13 @@ export default function HomePage() {
                   <li key={pt}>{pt}</li>
                 ))}
               </ul>
-              {projects.length > 0 ? (
+              {projectList.length > 0 ? (
                 <div className="story-links">
-                  {projects.map((project) => (
-                    <Link key={project.slug} to={`/projects/${project.slug}`}>
+                  {projectList.map((project) => (
+                    <Link key={project.slug} to={workHref(project.slug)}>
                       {project.title}
-                      <ArrowUpRight className="h-3 w-3" />
                     </Link>
                   ))}
-                  {job.externalHref ? (
-                    <a href={job.externalHref} target="_blank" rel="noopener noreferrer">
-                      Visit
-                      <ArrowUpRight className="h-3 w-3" />
-                    </a>
-                  ) : null}
                 </div>
               ) : null}
             </StoryEntry>
@@ -221,13 +283,28 @@ export default function HomePage() {
         })}
       </section>
 
-      <section id="studied" className="site-shell story-section">
-        <StoryHeading tag="Education">I've studied here.</StoryHeading>
-        {studied.map((group) => (
-          <StudyBeat key={group.id} group={group} />
-        ))}
-      </section>
+      {studying.length > 0 || earlier.length > 0 ? (
+        <section id="education" className="site-shell story-section">
+          <StoryHeading tag="Education">
+            {studying.length > 0 ? "Currently studying." : "I've studied here."}
+          </StoryHeading>
+          {studying.map((group) => (
+            <StudyBeat key={group.id} group={group} />
+          ))}
+          {earlier.length > 0 ? (
+            <StoryEntry>
+              {studying.length > 0 ? <p className="story-tag">Earlier</p> : null}
+              <div className={studying.length > 0 ? "mt-1" : undefined}>
+                {earlier.map((stage) => (
+                  <StudyFold key={stage.id} label={stage.label} entries={stage.entries} />
+                ))}
+              </div>
+            </StoryEntry>
+          ) : null}
+        </section>
+      ) : null}
 
+      {/* Contact & Bridge section */}
       <section id="contact" className="site-shell story-close">
         <StoryHeading tag="Contact" className="story-head-center">
           Find me.
