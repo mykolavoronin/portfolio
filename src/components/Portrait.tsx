@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { portraits } from "@/data/portraits";
 import { SeasonalDress, useOccasion } from "@/components/SeasonalDress";
+import { DailyLook, useDailyLook } from "@/components/DailyLook";
 
 export function Portrait({
   src,
@@ -16,6 +17,7 @@ export function Portrait({
   imgClassName?: string;
 }) {
   const occasion = useOccasion();
+  const look = useDailyLook();
   const resolved = src ?? portraits.default;
   const dims = size === "lg" ? 104 : size === "md" ? 80 : 56;
 
@@ -31,7 +33,11 @@ export function Portrait({
         decoding="async"
         className={cn("portrait-img", imgClassName)}
       />
-      {occasion ? <SeasonalDress kind={occasion.dress} size={size} /> : null}
+      {occasion ? (
+        <SeasonalDress kind={occasion.dress} size={size} />
+      ) : look ? (
+        <DailyLook look={look} size={size} />
+      ) : null}
     </span>
   );
 }

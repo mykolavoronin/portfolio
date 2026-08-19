@@ -16,6 +16,7 @@
     "og:render": "node scripts/render-og.mjs",
     "portraits:process": "python scripts/process-portraits.py",
     "details:process": "python scripts/process-details.py",
+    "looks:process": "python scripts/process-looks.py",
     "screenshots": "node scripts/capture-screenshots.mjs"
   },
   "dependencies": {

@@ -4,6 +4,7 @@ import { site } from "@/data/site";
 /**
  * Master switch. Off for now — assets and geo rules stay wired.
  * When flipped on, only visitors who celebrate that day see it.
+ * Festivities override the daily looks in `src/lib/looks.ts`.
  */
 export const showOccasions = false;
 
