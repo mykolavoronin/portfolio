@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Seo } from "@/components/Seo";
 import { getService, services } from "@/data/services";
 import { site } from "@/data/site";
-import { PageEnter, Reveal } from "@/components/Motion";
+import { PageEnter, Reveal, StoryHeading } from "@/components/Motion";
 
 export default function ServicePage() {
   const { slug } = useParams();
@@ -58,15 +58,14 @@ export default function ServicePage() {
         )}
 
         {service.features && service.features.length > 0 && (
-          <Reveal className="mb-10">
-            <h2 className="story-tag mb-4">Included</h2>
-            <ul className="space-y-2.5">
+          <Reveal className="mb-16 sm:mb-20">
+            <StoryHeading tag="Included" className="story-head-static">
+              What you get.
+            </StoryHeading>
+            <ul className="surface divide-y divide-border/50 overflow-hidden">
               {service.features.map((f) => (
-                <li
-                  key={f}
-                  className="flex gap-3 rounded-xl border border-border/50 bg-card/60 px-3.5 py-3 text-sm text-foreground/90 leading-relaxed shadow-sm"
-                >
-                  <Check className="h-4 w-4 text-foreground/70 shrink-0 mt-0.5" strokeWidth={2} />
+                <li key={f} className="flex gap-3 px-4 sm:px-5 py-3 text-sm text-foreground/90 leading-relaxed">
+                  <Check className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" strokeWidth={1.75} />
                   <span>{f}</span>
                 </li>
               ))}
@@ -75,8 +74,10 @@ export default function ServicePage() {
         )}
 
         {service.tiers && service.tiers.length > 0 && (
-          <Reveal className="mb-10">
-            <h2 className="story-tag mb-4">Tiers</h2>
+          <Reveal className="mb-16 sm:mb-20">
+            <StoryHeading tag="Tiers" className="story-head-static">
+              How it can go.
+            </StoryHeading>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
               {service.tiers.map((tier) => (
                 <div

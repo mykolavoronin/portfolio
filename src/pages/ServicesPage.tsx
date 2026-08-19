@@ -18,7 +18,8 @@ export default function ServicesPage() {
         <header className="page-header">
           <p className="story-tag">Services</p>
           <h1 className="text-fluid-3xl font-semibold tracking-tight">
-            Services
+            Work I can{" "}
+            <span className="font-serif-italic font-normal text-muted-foreground">take on.</span>
           </h1>
           <div className="mt-3 flex flex-wrap gap-1.5">
             <Badge variant="muted">{site.availability.label}</Badge>

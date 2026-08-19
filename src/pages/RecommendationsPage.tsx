@@ -26,7 +26,7 @@ export default function RecommendationsPage() {
           </p>
         </header>
 
-        <Reveal className="mb-10 sm:mb-12">
+        <Reveal>
           <StoryHeading tag="Books" className="story-head-static">
             Worth reading.
           </StoryHeading>
@@ -53,7 +53,7 @@ export default function RecommendationsPage() {
           </Stagger>
         </Reveal>
 
-        <Reveal className="mb-10 sm:mb-12">
+        <Reveal className="page-section">
           <StoryHeading tag="Tools" className="story-head-static">
             What I use.
           </StoryHeading>
@@ -71,7 +71,7 @@ export default function RecommendationsPage() {
           </Stagger>
         </Reveal>
 
-        <Reveal className="mb-10 sm:mb-12">
+        <Reveal className="page-section">
           <StoryHeading tag="Writers" className="story-head-static">
             People I read.
           </StoryHeading>
@@ -92,7 +92,7 @@ export default function RecommendationsPage() {
           </Stagger>
         </Reveal>
 
-        <Reveal>
+        <Reveal className="page-section">
           <StoryHeading tag="Barcelona" className="story-head-static">
             If you&apos;re here.
           </StoryHeading>
