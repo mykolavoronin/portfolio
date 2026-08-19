@@ -19,6 +19,8 @@ JOBS = [
     (SRC / "_belt-paint.jpg", "belt", 640, SRC),
     (SRC / "_book-paint.jpg", "book", 640, SRC),
     (SRC / "_tech-paint.jpg", "tech", 640, SRC),
+    (SRC / "_stance-paint.jpg", "stance", 640, SRC),
+    (SRC / "_colour-paint.jpg", "colour", 640, SRC),
     (DRESS / "_party-hat-paint.jpg", "party-hat", 384, DRESS),
     (DRESS / "_bunny-paint.jpg", "bunny", 384, DRESS),
     (DRESS / "_crown-paint.jpg", "crown", 384, DRESS),
