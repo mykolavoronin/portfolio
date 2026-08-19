@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowUpRight, ArrowRight, MapPin, Layers } from "lucide-react";
+import { ArrowUpRight, ArrowRight, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,8 +9,8 @@ import {
   projects,
 } from "@/data/projects";
 import { Seo } from "@/components/Seo";
+import { StackMark } from "@/components/StackMark";
 import { PageEnter, Reveal, Stagger, RevealItem, StoryHeading } from "@/components/Motion";
-import { cn } from "@/lib/utils";
 import NotFound from "@/pages/NotFound";
 
 export default function ProjectPage() {
@@ -19,15 +19,15 @@ export default function ProjectPage() {
 
   if (!project) return <NotFound />;
 
-  const Icon = project.icon;
   const client = getClientGroup(project.clientId);
   const siblings = getSiblingProjects(project.slug);
   const currentIdx = projects.findIndex((p) => p.slug === project.slug);
   const next = projects[(currentIdx + 1) % projects.length];
+  const host = project.href.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
   return (
-    <PageEnter>
-      <article className="pb-20 sm:pb-28">
+    <PageEnter className="site-shell page-pad">
+      <article>
         <Seo
           title={`${project.title} — ${project.client} · Mykola Voronin`}
           description={project.description}
@@ -36,10 +36,23 @@ export default function ProjectPage() {
           type="article"
         />
 
-        <section className="site-shell pt-10 sm:pt-14 pb-8">
-          <div className="flex flex-wrap items-center gap-1.5 mb-4">
+        <header className="page-header">
+          <p className="story-tag">Work</p>
+          <h1 className="text-fluid-3xl font-semibold tracking-tight leading-[1.1]">
+            {project.title}
+          </h1>
+          <p className="mt-2 font-serif-italic text-[1.05rem] sm:text-xl text-muted-foreground leading-snug">
+            {project.tagline}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-1.5">
             <Badge variant="soft">
-              <Icon className="h-3 w-3" strokeWidth={1.75} />
+              <img
+                src={project.icon}
+                alt=""
+                width={14}
+                height={14}
+                className="h-3.5 w-3.5 rounded-sm object-contain"
+              />
               {project.client}
             </Badge>
             <Badge variant="muted" className="tabular-nums">
@@ -47,18 +60,9 @@ export default function ProjectPage() {
             </Badge>
             <Badge variant="outline">{project.industry}</Badge>
           </div>
-
-          <h1 className="text-fluid-3xl font-semibold tracking-tight leading-[1.1]">
-            {project.title}
-          </h1>
-          <p className="mt-2 font-serif-italic text-[1.05rem] sm:text-xl text-muted-foreground leading-snug">
-            {project.tagline}
-          </p>
-
-          <p className="mt-3 text-sm sm:text-[15px] text-muted-foreground max-w-lg leading-relaxed">
+          <p className="mt-4 text-sm sm:text-[15px] text-muted-foreground max-w-xl leading-relaxed">
             {project.description}
           </p>
-
           <div className="mt-5 flex flex-wrap items-center gap-2">
             <Button asChild>
               <a href={project.href} target="_blank" rel="noopener noreferrer">
@@ -72,28 +76,26 @@ export default function ProjectPage() {
             </Badge>
             <Badge variant="muted">{project.role}</Badge>
           </div>
-        </section>
+        </header>
 
-        <Reveal className="site-shell pb-8">
+        <Reveal>
           <a
             href={project.href}
             target="_blank"
             rel="noopener noreferrer"
-            className={cn(
-              "group relative block overflow-hidden rounded-2xl border border-border/70 bg-muted/30 shadow-md",
-            )}
+            className="group relative block overflow-hidden surface"
           >
-            <div className="flex items-center gap-1.5 border-b border-border/50 bg-card/90 backdrop-blur px-3 py-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
-              <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
-              <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
-              <span className="ml-3 truncate text-[11px] text-muted-foreground tabular-nums">
-                {project.href.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+            <div className="flex items-center gap-1.5 border-b border-border/50 bg-card px-3 py-2">
+              <span className="h-2 w-2 rounded-full bg-muted-foreground/25" />
+              <span className="h-2 w-2 rounded-full bg-muted-foreground/25" />
+              <span className="h-2 w-2 rounded-full bg-muted-foreground/25" />
+              <span className="ml-2.5 truncate text-[11px] text-muted-foreground tabular-nums">
+                {host}
               </span>
             </div>
             <img
               src={project.cover}
-              alt={`${project.title} screenshot`}
+              alt={`${project.title} website`}
               width={1440}
               height={900}
               loading="lazy"
@@ -103,54 +105,101 @@ export default function ProjectPage() {
           </a>
         </Reveal>
 
-        <Reveal className="site-shell py-8">
-          <StoryHeading tag="Highlights" className="story-head-static">
-            What matters.
+        {project.highlights && project.highlights.length > 0 ? (
+          <Reveal className="page-section">
+            <StoryHeading tag="Impact" className="story-head-static">
+              Key highlights &amp; metrics.
+            </StoryHeading>
+            <ul className="surface divide-y divide-border/50 overflow-hidden">
+              {project.highlights.map((h) => (
+                <li key={h} className="flex items-baseline gap-3 px-4 sm:px-5 py-3 text-sm text-foreground/90 leading-relaxed">
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-foreground/60 shrink-0 mt-0.5" aria-hidden />
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        ) : null}
+
+        <Reveal className="page-section">
+          <StoryHeading tag="Overview" className="story-head-static">
+            The story.
           </StoryHeading>
-          <ul className="space-y-2">
-            {project.highlights.map((h) => (
-              <li
-                key={h}
-                className="flex gap-2.5 text-sm text-foreground/90 leading-relaxed rounded-xl border border-border/50 bg-card/50 px-3.5 py-2.5 shadow-sm"
-              >
-                <span className="mt-2 h-1 w-1 rounded-full bg-muted-foreground/45 shrink-0" aria-hidden />
-                <span>{h}</span>
+          <div className="surface p-5 sm:p-6 space-y-3 text-sm sm:text-[15px] text-foreground/90 leading-relaxed">
+            {project.overview.slice(0, 2).map((p) => (
+              <p key={p}>{p}</p>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal className="page-section">
+          <StoryHeading tag="The brief" className="story-head-static">
+            What it had to do.
+          </StoryHeading>
+          <p className="text-sm sm:text-[15px] text-foreground/90 leading-relaxed">
+            {project.challenge}
+          </p>
+        </Reveal>
+
+        <Reveal className="page-section">
+          <StoryHeading tag="Approach" className="story-head-static">
+            How I built it.
+          </StoryHeading>
+          <ul className="surface divide-y divide-border/50 overflow-hidden">
+            {project.approach.map((line) => (
+              <li key={line} className="px-4 sm:px-5 py-3 text-sm text-foreground/90 leading-relaxed">
+                {line}
               </li>
             ))}
           </ul>
         </Reveal>
 
-        <Reveal className="site-shell py-8">
-          <StoryHeading tag="Overview" className="story-head-static">
-            The story.
+        <Reveal className="page-section">
+          <StoryHeading tag="Outcome" className="story-head-static">
+            What changed.
           </StoryHeading>
-          <div className="space-y-3">
-            {project.overview.slice(0, 2).map((p) => (
-              <p key={p} className="text-sm sm:text-[15px] text-foreground/90 leading-relaxed">
-                {p}
-              </p>
+          <ul className="surface divide-y divide-border/50 overflow-hidden">
+            {project.outcome.map((line) => (
+              <li key={line} className="px-4 sm:px-5 py-3 text-sm text-foreground/90 leading-relaxed">
+                {line}
+              </li>
             ))}
-          </div>
+          </ul>
         </Reveal>
 
-        <Reveal className="site-shell py-8">
+        {project.technical && project.technical.length > 0 ? (
+          <Reveal className="page-section">
+            <StoryHeading tag="Notes" className="story-head-static">
+              Under the hood.
+            </StoryHeading>
+            <ul className="surface divide-y divide-border/50 overflow-hidden">
+              {project.technical.map((line) => (
+                <li key={line} className="px-4 sm:px-5 py-3 text-sm text-muted-foreground leading-relaxed">
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        ) : null}
+
+        <Reveal className="page-section">
           <StoryHeading tag="Stack" className="story-head-static">
             Built with.
           </StoryHeading>
           <Stagger className="flex flex-wrap gap-1.5" chips>
             {project.stack.map((s) => (
               <RevealItem key={s} as="span" chip>
-                <Badge variant="soft">
-                  <Layers className="h-2.5 w-2.5 text-muted-foreground" strokeWidth={2} />
+                <span className="stack-chip">
+                  <StackMark name={s} />
                   {s}
-                </Badge>
+                </span>
               </RevealItem>
             ))}
           </Stagger>
         </Reveal>
 
-        {siblings.length > 0 && (
-          <Reveal className="site-shell py-8">
+        {siblings.length > 0 ? (
+          <Reveal className="page-section">
             <StoryHeading tag="Related" className="story-head-static">
               Also for {project.client}.
             </StoryHeading>
@@ -184,19 +233,17 @@ export default function ProjectPage() {
               ))}
             </ul>
           </Reveal>
-        )}
+        ) : null}
 
-        <Reveal className="site-shell pt-6">
+        <Reveal className="page-section">
           <Link
             to={`/projects/${next.slug}`}
             className="pressable pressable-soft group flex items-center justify-between gap-4 surface p-4 hover:border-foreground/12 transition-colors"
           >
             <div className="min-w-0">
-              <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">Next</p>
+              <p className="story-tag mb-0">Next</p>
               <p className="mt-0.5 text-sm font-semibold truncate">{next.title}</p>
-              <div className="mt-1 flex flex-wrap gap-1">
-                <Badge variant="muted">{next.client}</Badge>
-              </div>
+              <p className="mt-0.5 text-xs text-muted-foreground">{next.client}</p>
             </div>
             <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
           </Link>

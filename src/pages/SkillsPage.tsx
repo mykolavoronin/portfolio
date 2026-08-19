@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { Seo } from "@/components/Seo";
 import { skillGroups, spokenLanguages } from "@/data/skills";
 import { site } from "@/data/site";
-import { PageEnter, Reveal, Stagger, RevealItem } from "@/components/Motion";
-import { Badge } from "@/components/ui/badge";
+import { PageEnter, Reveal, Stagger, RevealItem, StoryHeading } from "@/components/Motion";
 import { Button } from "@/components/ui/button";
+import { StackMark } from "@/components/StackMark";
 
 export default function SkillsPage() {
   return (
@@ -23,44 +23,54 @@ export default function SkillsPage() {
           </h1>
         </header>
 
-        <div className="space-y-6">
+        <div className="space-y-16 sm:space-y-20">
           {skillGroups.map((g) => (
             <Reveal key={g.title}>
-              <div className="surface p-4">
-                <h2 className="mb-3 text-sm font-semibold tracking-tight">{g.title}</h2>
-                <Stagger className="flex flex-wrap gap-1.5" chips>
-                  {g.items.map((it) => (
-                    <RevealItem key={it} as="span" chip>
-                      <Badge variant="soft">{it}</Badge>
-                    </RevealItem>
-                  ))}
-                </Stagger>
-              </div>
+              <StoryHeading tag={g.title} className="story-head-static">
+                {g.title === "Languages"
+                  ? "I write in these."
+                  : g.title === "Frameworks"
+                    ? "I build with these."
+                    : g.title === "Tooling"
+                      ? "Day to day."
+                      : g.title === "Practice"
+                        ? "How I work."
+                        : "Keeping things up."}
+              </StoryHeading>
+              <Stagger className="flex flex-wrap gap-1.5" chips>
+                {g.items.map((it) => (
+                  <RevealItem key={it} as="span" chip>
+                    <span className="stack-chip">
+                      <StackMark name={it} />
+                      {it}
+                    </span>
+                  </RevealItem>
+                ))}
+              </Stagger>
             </Reveal>
           ))}
 
           <Reveal>
-            <div className="surface p-4">
-              <h2 className="mb-3 text-sm font-semibold tracking-tight">Spoken</h2>
-              <Stagger className="flex flex-wrap gap-1.5" chips>
-                {spokenLanguages.map((l) => (
-                  <RevealItem key={l.name} as="span" chip>
-                    <Badge variant="outline">
-                      <img src={l.flag} alt="" width={16} height={11} className="lang-flag" />
-                      {l.name}
-                      <span className="text-muted-foreground/50">·</span>
-                      <span className="text-muted-foreground">{l.level}</span>
-                    </Badge>
-                  </RevealItem>
-                ))}
-              </Stagger>
-            </div>
+            <StoryHeading tag="Spoken" className="story-head-static">
+              I speak these.
+            </StoryHeading>
+            <ul className="surface divide-y divide-border/50 overflow-hidden">
+              {spokenLanguages.map((l) => (
+                <li key={l.name} className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3">
+                  <span className="inline-flex items-center gap-2.5 min-w-0">
+                    <img src={l.flag} alt="" width={20} height={14} className="lang-flag" />
+                    <span className="text-sm font-medium text-foreground">{l.name}</span>
+                  </span>
+                  <span className="text-xs text-muted-foreground shrink-0">{l.level}</span>
+                </li>
+              ))}
+            </ul>
           </Reveal>
         </div>
 
         <Reveal className="mt-10">
           <Button variant="outline" asChild>
-            <Link to="/">Home</Link>
+            <Link to="/">Back home</Link>
           </Button>
         </Reveal>
       </div>
