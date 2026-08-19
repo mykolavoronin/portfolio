@@ -187,38 +187,19 @@ export function StoryEntry({
 }) {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
-  const inView = useInView(ref, { amount: 0.2, margin: "0px 0px -22% 0px" });
+  const inView = useInView(ref, { amount: 0.1, margin: "0px 0px -12% 0px" });
 
   return (
     <motion.article
       ref={ref}
       className={cn("story-entry", className)}
       initial={false}
-      animate={reduce ? { opacity: 1 } : { opacity: inView ? 1 : 0.4 }}
+      animate={reduce ? { opacity: 1 } : { opacity: inView ? 1 : 0.65 }}
       transition={springSoft}
       style={{ transform: "none" }}
     >
       {children}
     </motion.article>
-  );
-}
-
-/** Press feedback only — no hover lift. */
-export function MotionCard({
-  children,
-  className,
-  ...props
-}: HTMLMotionProps<"div">) {
-  const reduce = useReducedMotion();
-  return (
-    <motion.div
-      className={className}
-      whileTap={reduce ? undefined : { scale: 0.96 }}
-      transition={springUi}
-      {...props}
-    >
-      {children}
-    </motion.div>
   );
 }
 

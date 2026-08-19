@@ -23,11 +23,11 @@ const buttonVariants = cva(
         link:
           "text-secondary underline-offset-4 hover:underline !transform-none",
         hero:
-          "bg-primary text-primary-foreground font-semibold shadow-lg hover:shadow-xl hover:bg-primary/90 pressable-firm",
+          "bg-primary text-primary-foreground font-semibold shadow-lg hover:bg-primary/90 pressable-firm",
         "hero-outline":
           "border border-foreground/25 bg-transparent text-foreground font-medium hover:bg-foreground/5 hover:border-foreground/40",
         accent:
-          "bg-secondary text-secondary-foreground font-semibold shadow-lg hover:shadow-xl hover:bg-secondary/90 pressable-firm",
+          "bg-secondary text-secondary-foreground font-semibold shadow-lg hover:bg-secondary/90 pressable-firm",
       },
       size: {
         default: "h-10 min-h-10 px-5 py-2",
