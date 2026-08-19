@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { Github, Linkedin, MapPin, ArrowRight, QrCode } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Seo } from "@/components/Seo";
 import { LocalTime } from "@/components/LocalTime";
 import { CopyButton } from "@/components/CopyButton";
 import { site } from "@/data/site";
-import { PageEnter, Reveal, Stagger, RevealItem } from "@/components/Motion";
+import { Badge } from "@/components/ui/badge";
+import { PageEnter, Reveal, Stagger, RevealItem, StoryHeading } from "@/components/Motion";
 
 const methods = [
   {
@@ -27,7 +27,7 @@ export default function ContactPage() {
     <PageEnter className="site-shell page-pad">
       <Seo
         title={`Contact — ${site.name}`}
-        description={`Connect with ${site.name} on LinkedIn or GitHub. Digital business card with QR and save to contacts.`}
+        description={`Connect with ${site.name} on LinkedIn or GitHub. Digital card: save a contact, or scan to open this page on another phone.`}
         path="/contact"
       />
       <div>
@@ -38,60 +38,48 @@ export default function ContactPage() {
             <span className="font-serif-italic font-normal text-muted-foreground">here.</span>
           </h1>
           <p className="mt-4 text-fluid-base text-muted-foreground leading-relaxed max-w-xl">
-            LinkedIn or GitHub. The card is there if you want a QR or a contact file.
+            LinkedIn or GitHub. The card has a contact file, and a code that opens this page on another phone.
           </p>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            <Badge variant="outline">
+              <MapPin className="h-3 w-3" strokeWidth={1.75} />
+              {site.location}
+            </Badge>
+            <Badge variant="muted">
+              <LocalTime showIcon={false} showCity={false} />
+            </Badge>
+          </div>
         </header>
 
-        <Reveal className="mb-8 flex flex-wrap gap-2">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-2.5 py-1.5 text-xs text-muted-foreground shadow-sm">
-            <MapPin className="h-3 w-3" strokeWidth={1.75} />
-            {site.location}
-          </span>
-          <span className="inline-flex items-center rounded-full border border-border/70 bg-card px-2.5 py-1.5 text-xs text-muted-foreground shadow-sm">
-            <LocalTime />
-          </span>
-        </Reveal>
-
-        <Reveal className="mb-10">
+        <Reveal>
+          <StoryHeading tag="Card" className="story-head-static">
+            The short version.
+          </StoryHeading>
           <Link
             to="/card"
-            className="pressable pressable-soft group relative flex flex-col sm:flex-row sm:items-center gap-4 overflow-hidden surface p-5 sm:p-6 transition-[border-color] duration-150 hover:border-foreground/12"
+            className="pressable pressable-soft group relative flex flex-col sm:flex-row sm:items-center gap-4 overflow-hidden surface p-5 sm:p-6 transition-colors hover:border-foreground/12"
           >
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-border/60 bg-muted/40">
-              <QrCode className="h-5 w-5 text-foreground/80" strokeWidth={1.5} />
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border/60 bg-muted/30 shadow-sm">
+              <QrCode className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
             </span>
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold tracking-tight text-foreground">Digital business card</p>
               <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-                Full-page mobile card with QR, save to contacts, and share.
+                Save a contact file, or scan the code to open this page on another phone.
               </p>
             </div>
-            <span className="inline-flex items-center gap-1 text-xs font-medium text-foreground/80 group-hover:text-foreground">
+            <span className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors">
               Open card
               <ArrowRight className="h-3.5 w-3.5" />
             </span>
           </Link>
         </Reveal>
 
-        <Reveal className="mb-10 flex flex-wrap gap-2.5">
-          <Button asChild>
-            <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
-              <Linkedin className="h-4 w-4" />
-              LinkedIn
-            </a>
-          </Button>
-          <Button variant="outline" asChild>
-            <a href={site.github} target="_blank" rel="noopener noreferrer">
-              <Github className="h-4 w-4" />
-              GitHub
-            </a>
-          </Button>
-        </Reveal>
-
-        <Stagger
-          className="surface divide-y divide-border/50 overflow-hidden"
-          fast
-        >
+        <Reveal className="page-section">
+          <StoryHeading tag="Direct" className="story-head-static">
+            Write or look me up.
+          </StoryHeading>
+          <Stagger className="surface divide-y divide-border/50 overflow-hidden" fast>
           {methods.map((m) => {
             const Icon = m.icon;
             return (
@@ -116,7 +104,8 @@ export default function ContactPage() {
               </RevealItem>
             );
           })}
-        </Stagger>
+          </Stagger>
+        </Reveal>
       </div>
     </PageEnter>
   );
