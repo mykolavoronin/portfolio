@@ -9,7 +9,7 @@ import tech from "@/assets/details/tech.webp";
 export const site = {
   name: "Mykola Voronin",
   role: "Student",
-  subtitle: "Aspiring developer & cybersecurity specialist",
+  subtitle: "Aspiring full-stack developer and cybersecurity engineer",
   location: "Barcelona, Spain",
   born: "2008-10-13",
   timezone: "GMT+1",
