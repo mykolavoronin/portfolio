@@ -4,7 +4,6 @@ import belt from "@/assets/details/belt.webp";
 import book from "@/assets/details/book.webp";
 import colour from "@/assets/details/colour.webp";
 import stance from "@/assets/details/stance.webp";
-import tech from "@/assets/details/tech.webp";
 
 export const site = {
   name: "Mykola Voronin",
@@ -48,14 +47,6 @@ export const hobbies = [
     title: "Reading",
     detail: "Books and long essays over feeds. Design, how systems work, and anything that stays with you.",
     image: book,
-  },
-  {
-    title: "Technology",
-    detail:
-      "Phones, Apple hardware, and the tools I use every day. I like objects that feel finished, and yes, I love Liquid Glass.",
-    image: tech,
-    owned: "I own an iPhone 17 Pro",
-    swatch: { tone: "navy", label: "Navy blue" },
   },
   {
     title: "Taekwondo",
