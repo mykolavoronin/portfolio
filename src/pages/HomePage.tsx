@@ -11,9 +11,9 @@ import {
 } from "@/data/projects";
 import { experience } from "@/data/experience";
 import {
+  basicEducationEntries,
+  basicEducationLabel,
   groupLane,
-  schoolStageEntries,
-  schoolStages,
   studyGroups,
   visibleItems,
   type StudyGroup,
@@ -107,9 +107,7 @@ function StudyBeat({ group }: { group: StudyGroup }) {
 export default function HomePage() {
   const working = experience;
   const studying = studyGroups.filter((g) => groupLane(g) === "studying");
-  const earlier = schoolStages
-    .map((stage) => ({ ...stage, entries: schoolStageEntries(stage.id) }))
-    .filter((stage) => stage.entries.length > 0);
+  const earlier = basicEducationEntries();
 
   return (
     <div className="relative">
@@ -295,9 +293,7 @@ export default function HomePage() {
             <StoryEntry>
               {studying.length > 0 ? <p className="story-tag">Earlier</p> : null}
               <div className={studying.length > 0 ? "mt-1" : undefined}>
-                {earlier.map((stage) => (
-                  <StudyFold key={stage.id} label={stage.label} entries={stage.entries} />
-                ))}
+                <StudyFold label={basicEducationLabel} entries={earlier} />
               </div>
             </StoryEntry>
           ) : null}

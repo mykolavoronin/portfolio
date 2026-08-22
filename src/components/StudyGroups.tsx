@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { ExpandableAcronym } from "@/components/ExpandableAcronym";
 import {
+  basicEducationEntries,
+  basicEducationLabel,
   isSchoolItem,
-  schoolStageEntries,
-  schoolStages,
   studyGroups,
   visibleItems,
   type StudyGroup,
@@ -80,9 +80,7 @@ function ItemTitle({ item }: { item: StudyItem }) {
 }
 
 export function StudyGroups({ variant = "plain" }: { variant?: "plain" | "surface" }) {
-  const earlier = schoolStages
-    .map((stage) => ({ ...stage, entries: schoolStageEntries(stage.id) }))
-    .filter((stage) => stage.entries.length > 0);
+  const earlier = basicEducationEntries();
 
   return (
     <div className="space-y-6 sm:space-y-7">
@@ -129,9 +127,7 @@ export function StudyGroups({ variant = "plain" }: { variant?: "plain" | "surfac
       })}
       {earlier.length > 0 ? (
         <div className={cn(variant === "surface" && "surface px-4 py-1")}>
-          {earlier.map((stage) => (
-            <StudyFold key={stage.id} label={stage.label} entries={stage.entries} />
-          ))}
+          <StudyFold label={basicEducationLabel} entries={earlier} />
         </div>
       ) : null}
     </div>

@@ -76,21 +76,18 @@ export function groupLane(
   return "studied";
 }
 
-export const schoolStages: { id: StudyStage; label: string }[] = [
-  { id: "high-school", label: "High school education" },
-  { id: "secondary", label: "Secondary education" },
-  { id: "primary", label: "Primary education" },
-];
+export const basicEducationLabel = "Basic education";
 
 export function isSchoolItem(item: StudyItem) {
   return item.stage === "primary" || item.stage === "secondary" || item.stage === "high-school";
 }
 
-export function schoolStageEntries(stage: StudyStage, now: Date = new Date()) {
+/** Primary, secondary, and high school folded together as one "Basic education" entry. */
+export function basicEducationEntries(now: Date = new Date()) {
   const entries: { group: StudyGroup; item: StudyItem }[] = [];
   for (const group of studyGroups) {
     for (const item of visibleItems(group, now)) {
-      if (item.stage === stage) entries.push({ group, item });
+      if (isSchoolItem(item)) entries.push({ group, item });
     }
   }
   return entries;
