@@ -154,7 +154,6 @@ export const studyGroups: StudyGroup[] = [
         title: "Full Stack Developer Diploma",
         period: "Feb 2025 — Feb 2026",
         start: "2025-02-01",
-        hold: true,
         status: "In progress",
         href: "https://scrimba.com/",
       },

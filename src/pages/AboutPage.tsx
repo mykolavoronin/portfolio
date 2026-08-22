@@ -173,7 +173,7 @@ export default function AboutPage() {
 
         <Reveal className="page-section">
           <StoryHeading tag="Courses" className="story-head-static">
-            Learning, ongoing.
+            Courses.
           </StoryHeading>
           <CourseGroups variant="surface" />
         </Reveal>

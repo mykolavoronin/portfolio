@@ -271,7 +271,7 @@ export default function HomePage() {
 
       {courses.length > 0 ? (
         <section id="courses" className="site-shell story-section">
-          <StoryHeading tag="Courses">Learning, ongoing.</StoryHeading>
+          <StoryHeading tag="Courses">Courses.</StoryHeading>
           {courses.map(({ group, items }) => (
             <StudyBeat key={group.id} group={group} items={items} />
           ))}
