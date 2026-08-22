@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Github, Linkedin, MapPin, QrCode } from "lucide-react";
 import { Link } from "react-router-dom";
-import { LocalTime } from "@/components/LocalTime";
 import {
   clientGroups,
   getProjectsByClient,
@@ -126,15 +125,12 @@ export default function HomePage() {
           <HeroItem className="hero-id">
             <div className="min-w-0">
               <h1 className="hero-id-name">{site.name}</h1>
+              <p className="hero-id-subtitle">{site.subtitle}</p>
               <p className="hero-id-meta">
                 <span className="inline-flex items-center gap-1">
                   <MapPin className="h-3.5 w-3.5" strokeWidth={1.75} />
                   Studying in Barcelona
                 </span>
-                <span className="hero-id-dot" aria-hidden>
-                  ·
-                </span>
-                <LocalTime showIcon={false} showCity={false} />
               </p>
               <OccasionNote />
             </div>
