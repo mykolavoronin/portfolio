@@ -10,15 +10,7 @@ import {
   workHref,
 } from "@/data/projects";
 import { experience } from "@/data/experience";
-import {
-  basicEducationEntries,
-  basicEducationLabel,
-  groupLane,
-  studyGroups,
-  visibleItems,
-  type StudyGroup,
-} from "@/data/education";
-import { StudyFold } from "@/components/StudyFold";
+import { courseEntries, type StudyGroup, type StudyItem } from "@/data/education";
 import { site } from "@/data/site";
 import { Seo } from "@/components/Seo";
 import { OccasionNote } from "@/components/SeasonalDress";
@@ -29,10 +21,7 @@ function brandFor(slug?: string) {
   return clientGroups.find((g) => g.id === slug);
 }
 
-function StudyBeat({ group }: { group: StudyGroup }) {
-  const items = visibleItems(group);
-  if (items.length === 0) return null;
-
+function StudyBeat({ group, items }: { group: StudyGroup; items: StudyItem[] }) {
   return (
     <StoryEntry>
       <div className="org-head">
@@ -106,8 +95,7 @@ function StudyBeat({ group }: { group: StudyGroup }) {
 
 export default function HomePage() {
   const working = experience;
-  const studying = studyGroups.filter((g) => groupLane(g) === "studying");
-  const earlier = basicEducationEntries();
+  const courses = courseEntries();
 
   return (
     <div className="relative">
@@ -281,22 +269,12 @@ export default function HomePage() {
         })}
       </section>
 
-      {studying.length > 0 || earlier.length > 0 ? (
-        <section id="education" className="site-shell story-section">
-          <StoryHeading tag="Education">
-            {studying.length > 0 ? "Currently studying." : "I've studied here."}
-          </StoryHeading>
-          {studying.map((group) => (
-            <StudyBeat key={group.id} group={group} />
+      {courses.length > 0 ? (
+        <section id="courses" className="site-shell story-section">
+          <StoryHeading tag="Courses">Learning, ongoing.</StoryHeading>
+          {courses.map(({ group, items }) => (
+            <StudyBeat key={group.id} group={group} items={items} />
           ))}
-          {earlier.length > 0 ? (
-            <StoryEntry>
-              {studying.length > 0 ? <p className="story-tag">Earlier</p> : null}
-              <div className={studying.length > 0 ? "mt-1" : undefined}>
-                <StudyFold label={basicEducationLabel} entries={earlier} />
-              </div>
-            </StoryEntry>
-          ) : null}
         </section>
       ) : null}
 

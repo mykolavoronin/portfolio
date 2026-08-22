@@ -93,6 +93,16 @@ export function basicEducationEntries(now: Date = new Date()) {
   return entries;
 }
 
+/** Courses / non-degree study, grouped by institution — everything that isn't basic education. */
+export function courseEntries(now: Date = new Date()): { group: StudyGroup; items: StudyItem[] }[] {
+  return studyGroups
+    .map((group) => ({
+      group,
+      items: visibleItems(group, now).filter((item) => !isSchoolItem(item)),
+    }))
+    .filter((entry) => entry.items.length > 0);
+}
+
 /** Institution groups — add another Scrimba / Politècnics item here, not as a new section. */
 export const studyGroups: StudyGroup[] = [
   {
@@ -197,14 +207,6 @@ export const studyGroups: StudyGroup[] = [
         end: "2024-06-30",
         status: "Completed",
         stage: "secondary",
-      },
-      {
-        title: "Primary Education",
-        period: "Sep 2014 — Jun 2020",
-        start: "2014-09-01",
-        end: "2020-06-30",
-        status: "Completed",
-        stage: "primary",
       },
     ],
   },

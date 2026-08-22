@@ -6,7 +6,7 @@ import { aboutParagraphs, hobbies, site } from "@/data/site";
 import { experience } from "@/data/experience";
 import { clientGroups, getProjectsByClient, workHref } from "@/data/projects";
 import { homeStack, spokenLanguages } from "@/data/skills";
-import { StudyGroups } from "@/components/StudyGroups";
+import { CourseGroups, BasicEducationFold } from "@/components/StudyGroups";
 import { PageEnter, Reveal, Stagger, RevealItem, StoryHeading } from "@/components/Motion";
 import { StackMark } from "@/components/StackMark";
 import { Badge } from "@/components/ui/badge";
@@ -172,10 +172,17 @@ export default function AboutPage() {
         </Reveal>
 
         <Reveal className="page-section">
+          <StoryHeading tag="Courses" className="story-head-static">
+            Learning, ongoing.
+          </StoryHeading>
+          <CourseGroups variant="surface" />
+        </Reveal>
+
+        <Reveal className="page-section">
           <StoryHeading tag="Education" className="story-head-static">
             I've studied here.
           </StoryHeading>
-          <StudyGroups variant="surface" />
+          <BasicEducationFold variant="surface" />
         </Reveal>
 
         <Reveal className="page-section flex flex-wrap gap-2">
