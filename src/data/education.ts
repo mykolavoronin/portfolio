@@ -76,24 +76,31 @@ export function groupLane(
   return "studied";
 }
 
-export const schoolStages: { id: StudyStage; label: string }[] = [
-  { id: "high-school", label: "High school education" },
-  { id: "secondary", label: "Secondary education" },
-  { id: "primary", label: "Primary education" },
-];
+export const basicEducationLabel = "Basic education";
 
 export function isSchoolItem(item: StudyItem) {
   return item.stage === "primary" || item.stage === "secondary" || item.stage === "high-school";
 }
 
-export function schoolStageEntries(stage: StudyStage, now: Date = new Date()) {
+/** Primary, secondary, and high school folded together as one "Basic education" entry. */
+export function basicEducationEntries(now: Date = new Date()) {
   const entries: { group: StudyGroup; item: StudyItem }[] = [];
   for (const group of studyGroups) {
     for (const item of visibleItems(group, now)) {
-      if (item.stage === stage) entries.push({ group, item });
+      if (isSchoolItem(item)) entries.push({ group, item });
     }
   }
   return entries;
+}
+
+/** Courses / non-degree study, grouped by institution — everything that isn't basic education. */
+export function courseEntries(now: Date = new Date()): { group: StudyGroup; items: StudyItem[] }[] {
+  return studyGroups
+    .map((group) => ({
+      group,
+      items: visibleItems(group, now).filter((item) => !isSchoolItem(item)),
+    }))
+    .filter((entry) => entry.items.length > 0);
 }
 
 /** Institution groups — add another Scrimba / Politècnics item here, not as a new section. */
@@ -145,9 +152,8 @@ export const studyGroups: StudyGroup[] = [
     items: [
       {
         title: "Full Stack Developer Diploma",
-        period: "Feb 2025 — Feb 2026",
+        period: "Feb 2025 — Present",
         start: "2025-02-01",
-        hold: true,
         status: "In progress",
         href: "https://scrimba.com/",
       },
@@ -200,14 +206,6 @@ export const studyGroups: StudyGroup[] = [
         end: "2024-06-30",
         status: "Completed",
         stage: "secondary",
-      },
-      {
-        title: "Primary Education",
-        period: "Sep 2014 — Jun 2020",
-        start: "2014-09-01",
-        end: "2020-06-30",
-        status: "Completed",
-        stage: "primary",
       },
     ],
   },

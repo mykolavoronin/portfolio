@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Github, Linkedin, MapPin, QrCode } from "lucide-react";
 import { Link } from "react-router-dom";
-import { LocalTime } from "@/components/LocalTime";
 import {
   clientGroups,
   getProjectsByClient,
@@ -10,15 +9,7 @@ import {
   workHref,
 } from "@/data/projects";
 import { experience } from "@/data/experience";
-import {
-  groupLane,
-  schoolStageEntries,
-  schoolStages,
-  studyGroups,
-  visibleItems,
-  type StudyGroup,
-} from "@/data/education";
-import { StudyFold } from "@/components/StudyFold";
+import { courseEntries, type StudyGroup, type StudyItem } from "@/data/education";
 import { site } from "@/data/site";
 import { Seo } from "@/components/Seo";
 import { OccasionNote } from "@/components/SeasonalDress";
@@ -29,10 +20,7 @@ function brandFor(slug?: string) {
   return clientGroups.find((g) => g.id === slug);
 }
 
-function StudyBeat({ group }: { group: StudyGroup }) {
-  const items = visibleItems(group);
-  if (items.length === 0) return null;
-
+function StudyBeat({ group, items }: { group: StudyGroup; items: StudyItem[] }) {
   return (
     <StoryEntry>
       <div className="org-head">
@@ -106,10 +94,7 @@ function StudyBeat({ group }: { group: StudyGroup }) {
 
 export default function HomePage() {
   const working = experience;
-  const studying = studyGroups.filter((g) => groupLane(g) === "studying");
-  const earlier = schoolStages
-    .map((stage) => ({ ...stage, entries: schoolStageEntries(stage.id) }))
-    .filter((stage) => stage.entries.length > 0);
+  const courses = courseEntries();
 
   return (
     <div className="relative">
@@ -140,15 +125,12 @@ export default function HomePage() {
           <HeroItem className="hero-id">
             <div className="min-w-0">
               <h1 className="hero-id-name">{site.name}</h1>
+              <p className="hero-id-subtitle">{site.subtitle}</p>
               <p className="hero-id-meta">
                 <span className="inline-flex items-center gap-1">
                   <MapPin className="h-3.5 w-3.5" strokeWidth={1.75} />
                   Studying in Barcelona
                 </span>
-                <span className="hero-id-dot" aria-hidden>
-                  ·
-                </span>
-                <LocalTime showIcon={false} showCity={false} />
               </p>
               <OccasionNote />
             </div>
@@ -283,24 +265,12 @@ export default function HomePage() {
         })}
       </section>
 
-      {studying.length > 0 || earlier.length > 0 ? (
-        <section id="education" className="site-shell story-section">
-          <StoryHeading tag="Education">
-            {studying.length > 0 ? "Currently studying." : "I've studied here."}
-          </StoryHeading>
-          {studying.map((group) => (
-            <StudyBeat key={group.id} group={group} />
+      {courses.length > 0 ? (
+        <section id="courses" className="site-shell story-section">
+          <StoryHeading tag="Courses">Courses.</StoryHeading>
+          {courses.map(({ group, items }) => (
+            <StudyBeat key={group.id} group={group} items={items} />
           ))}
-          {earlier.length > 0 ? (
-            <StoryEntry>
-              {studying.length > 0 ? <p className="story-tag">Earlier</p> : null}
-              <div className={studying.length > 0 ? "mt-1" : undefined}>
-                {earlier.map((stage) => (
-                  <StudyFold key={stage.id} label={stage.label} entries={stage.entries} />
-                ))}
-              </div>
-            </StoryEntry>
-          ) : null}
         </section>
       ) : null}
 

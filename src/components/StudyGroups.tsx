@@ -2,11 +2,9 @@ import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { ExpandableAcronym } from "@/components/ExpandableAcronym";
 import {
-  isSchoolItem,
-  schoolStageEntries,
-  schoolStages,
-  studyGroups,
-  visibleItems,
+  basicEducationEntries,
+  basicEducationLabel,
+  courseEntries,
   type StudyGroup,
   type StudyItem,
 } from "@/data/education";
@@ -79,17 +77,13 @@ function ItemTitle({ item }: { item: StudyItem }) {
   );
 }
 
-export function StudyGroups({ variant = "plain" }: { variant?: "plain" | "surface" }) {
-  const earlier = schoolStages
-    .map((stage) => ({ ...stage, entries: schoolStageEntries(stage.id) }))
-    .filter((stage) => stage.entries.length > 0);
+export function CourseGroups({ variant = "plain" }: { variant?: "plain" | "surface" }) {
+  const entries = courseEntries();
+  if (entries.length === 0) return null;
 
   return (
     <div className="space-y-6 sm:space-y-7">
-      {studyGroups.map((group) => {
-        const items = visibleItems(group).filter((item) => !isSchoolItem(item));
-        if (items.length === 0) return null;
-        return (
+      {entries.map(({ group, items }) => (
         <article key={group.id} className={cn(variant === "surface" && "surface p-4")}>
           <header className="org-head">
             <img
@@ -125,15 +119,18 @@ export function StudyGroups({ variant = "plain" }: { variant?: "plain" | "surfac
             ))}
           </ul>
         </article>
-        );
-      })}
-      {earlier.length > 0 ? (
-        <div className={cn(variant === "surface" && "surface px-4 py-1")}>
-          {earlier.map((stage) => (
-            <StudyFold key={stage.id} label={stage.label} entries={stage.entries} />
-          ))}
-        </div>
-      ) : null}
+      ))}
+    </div>
+  );
+}
+
+export function BasicEducationFold({ variant = "plain" }: { variant?: "plain" | "surface" }) {
+  const entries = basicEducationEntries();
+  if (entries.length === 0) return null;
+
+  return (
+    <div className={cn(variant === "surface" && "surface px-4 py-1")}>
+      <StudyFold label={basicEducationLabel} entries={entries} />
     </div>
   );
 }

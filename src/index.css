@@ -296,19 +296,22 @@
     text-wrap: balance;
   }
 
+  .hero-id-subtitle {
+    margin: 0.5rem 0 0;
+    font-size: clamp(1rem, 0.85rem + 0.6vw, 1.15rem);
+    font-weight: 500;
+    color: hsl(var(--foreground) / 0.75);
+  }
+
   .hero-id-meta {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 0.25rem 0.35rem;
-    margin-top: 0.55rem;
+    margin-top: 0.5rem;
     font-size: 0.875rem;
     line-height: 1.4;
     color: hsl(var(--muted-foreground));
-  }
-
-  .hero-id-dot {
-    color: hsl(var(--border));
   }
 
   .hero-actions {
